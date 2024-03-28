@@ -1,0 +1,60 @@
+.logo{
+    display: block;
+    margin:0 auto;
+}
+#container {
+    margin:0 auto;
+    width: 768px;
+    text-align: left;
+}
+header {
+    background-color: none;
+    padding: 2em;
+    text-align: center;
+}
+Header p{
+    background-color:rgba(240, 231, 142, 0.1);
+    padding: 20px;
+    height: 30px;
+    color:rgb(9, 105, 105) ;
+    border-top: 2px solid #f0e78e4d;  
+}
+main {padding: 20px;}
+
+main h1{
+    text-align: center;
+}
+footer {
+    background-color: none;
+    text-align: left;
+}
+footer p {
+    margin: 0;
+    line-height: 2em;
+}
+
+footer a {
+    color:rgb(9, 105, 105);
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
+    color: red;
+    background-color: #f0e78e4d;}
+
+h2{
+    font-size: larger;
+    border-bottom: 1px solid aquamarine;
+    height: 20px;
+    padding-bottom: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+h1 {font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+#featured{
+    border-left: 1px solid #ce9865;
+}
+
+#featuredd{
+    margin: 0 5px 0;
+
+}

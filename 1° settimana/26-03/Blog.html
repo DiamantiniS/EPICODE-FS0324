@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sviluppo di una pagina web - Blog Epicode</title>
+    <meta name="description" content="Primi passi operativi per creare un modello di pagina HTML per un post.">
+</head>
+<body>
+    <header id="header">
+        <img src="./img/logo.svg" alt="Logo Epicode">
+        <h1>Epicode - Il Blog dei Developers</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Articoli</a></li>
+            <li><a href="#">Lavora con noi</a></li>
+        </ul>
+    </nav>
+    <main id="main">
+        <fieldset>
+            <article>
+                <h2>Come creare un template per i post</h2>
+                <p>di Mario Rossi - pubblicato il 25 ottobre 2020</p>
+                
+            </article>
+            <br>
+            <p>La prima cosa da fare è suddividere in blocchi logici la pagina, identificando le parti comuni da applicare a tutte le pagine</p>
+            <br>
+            <p>La varie aree saranno quindi suddivise in:</p>
+            <ul>
+                <li><a href="#header">Contenuti di intestazione del tag </a></li>
+                <li><a href="#main">Contenuti centrali variabili del tag</a></li>
+                <li><a href="#footer">Contenuti di fine pagica comuni, da inrire nel tag</a></li>
+            </ul>
+            <br>
+            <p><b>Formattazione del codice</b></p>
+            <br>
+            <p>Il testo dell'articolo dovrà essere formattato per identificare tutte le parti da selezionare con i CSS. Perciò i passi saranno:</p>
+            <ol>
+                <li>Progettare il markup assegnando ad ogni specifico testo il tag appropriato</li>
+                <li>Scrivere l'HTML dei tag esterni a quelli interni e dall'altro verso il basso</li>
+                <li>Applòicare gli stili CSS</li>
+            </ol>
+            <br>
+            <p>L'applicazione di stili CSS è cresciuta negli anni fino a raggiungere la diffusione pressochè totale.</p>
+            <br>
+            <table>
+                <caption><b>Diffusione dei CSS</b></caption>
+                <tr>
+                    <th>Anno</th>
+                    <th>% di utilizzo</th>
+                    <th>Supporto browser</th>
+                </tr>
+                <tr>
+                    <td>2000</td>
+                    <td>20%</td>
+                    <td>17%</td>
+                </tr>
+                <tr>
+                    <td>2002</td>
+                    <td>35%</td>
+                    <td>22%</td>
+                </tr>
+                <tr>
+                    <td>2004</td>
+                    <td>45%</td>
+                    <td>42%</td>
+                </tr>
+                <tr>
+                    <td>2008</td>
+                    <td>80%</td>
+                    <td>51%</td>
+                </tr>
+                <tr>
+                    <td>2012</td>
+                    <td>100%</td>
+                    <td>76%</td>
+                </tr>
+            </table>
+            <p>Un test di valutazione potrà essere fatto tramite il tool <a href="https://www.w3.org/" target="_blank">online</a> dedicato allo scopo. Una volta ottimizato il tutto, avremo raggiiunto il nostro obiettivo ed essere stati dei vei developers come lui:</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/TxcJ2drr554?si=LZ3u3vwJz9aQ6l0Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    
+            
+        </fieldset>
+    </main>    <!-- Form per l'iscrizione alla newsletter -->
+    <div>
+        <h3>Vuoi rimanere aggiornato su altre novità del Blog? Iscriviti alla nostra newsletter:
+        <form action="#" method="post">
+            <fieldset>
+                <label for="email">Inserisci l'email:</label>
+                <input type="email" id="email" name="email" required>
+                <input type="submit" value="Iscriviti">
+            </fieldset>
+        </form>
+        
+    </div>    <!-- Area correlati -->
+    <section>
+        <fieldset>
+            <h3>Articoli correlati</h3>
+            <ul>
+                <li type="none"><a href="#">Validare il codice HTML</a></li>
+                <li type="none">Categoria:<a href="#">Develop</a></li>
+                <li type="none">Data:<a href="#">18-09-2020</a></li>
+            </ul>
+            <br>
+            <ul>
+                <li type="none"><a href="#">Correggere la sintassi</a></li>
+                <li type="none">Categoria:<a href="#">Develop</a></li>
+                <li type="none">Data:<a href="#">16-09-2020</a></li>
+            </ul>
+            <br>
+            <ul>
+                <li type="none"><a href="#">Meno Kb nella pagina</a></li>
+                <li type="none">Categoria:<a href="#">Ottimizzazione</a></li>
+                <li type="none">Data:<a href="#">30-09-2020</a></li>
+            </ul>
+        </fieldset>    
+    </section>
+   
+    <!-- Copyright e info -->
+    <footer id="footer">
+        <p>&copy; Blog Epicode 2023</p>
+        <p>Testata online di Mario Rossi, registrata con prot. n.213/2018 - via Luigi Einaudi 2 - Milano. P.IVA 00112233.</p>
+        <p>Per ulteriori informazioni, contattaci via email: <a href="mailto:info@epoicode.school">info@epoicode.school</a></p>
+    </footer>
+</body>
+</html>
