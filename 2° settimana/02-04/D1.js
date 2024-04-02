@@ -98,7 +98,7 @@ console.log("Il Nuovo Totale è:", NuovoTotale);
  
 var name1 = "john";
 var name2 = "John";
-var Diverso = name1 !== name2;
+var Diverso = name1 == name2;
 console.log("I due nomi sono diversi:", Diverso);
 var Uguali = name1 === name2.toLowerCase();
 console.log("I due nomi sono uguali:", Uguali);
