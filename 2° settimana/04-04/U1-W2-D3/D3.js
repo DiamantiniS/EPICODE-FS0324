@@ -116,6 +116,7 @@ var charactersNames = [];
 for (let i = 0; i < starWarsCharacters.length; i++) {
   charactersNames.push(starWarsCharacters[i].name);
 }
+console.log(charactersNames);
 
 /* ESERCIZIO 3
   Seguendo i passaggi precedenti crea un nuovo array chiamato "femaleCharacters" e inserisci al suo interno tutti gli oggetti femminili.
@@ -129,6 +130,7 @@ for (let i = 0; i < starWarsCharacters.length; i++) {
     }
 }
 
+console.log(femaleCharacters);
 
 /* ESERCIZIO 4
   Crea un oggetto "eyeColor" che abbia le seguenti proprietà: blue, yellow, brown, red, blue-gray.
