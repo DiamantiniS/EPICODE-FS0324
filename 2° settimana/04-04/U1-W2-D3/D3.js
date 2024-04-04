@@ -129,6 +129,7 @@ for (let i = 0; i < starWarsCharacters.length; i++) {
     }
 }
 
+
 /* ESERCIZIO 4
   Crea un oggetto "eyeColor" che abbia le seguenti proprietà: blue, yellow, brown, red, blue-gray.
   Ad ognuna di queste proprietà assegna come valore un array vuoto.
@@ -139,7 +140,7 @@ let eyeColor = {
   yellow: [],
   brown: [],
   red: [],
-  "blue-gray": []
+  "blue-gray": [],
 };
 
 /* ESERCIZIO 5
