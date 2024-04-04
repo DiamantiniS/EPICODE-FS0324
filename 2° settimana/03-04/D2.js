@@ -74,6 +74,7 @@ if (num3 === 8 || num4 === 8) {
 // let totalShoppingCart = 30;
 // const costiDiSpedizione = 10;
 
+
 // if (totalShoppingCart > 50) {
 //   console.log("totale carrello: " + totalShoppingCart + " costo spedizione: " + 0);
 // }else {
