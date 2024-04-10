@@ -10,11 +10,10 @@ window.onload = function () {
 }
     
 const aggiungi = function () {
-  let dati = document.querySelector('#dati')
-  let campoDati = document.querySelector('#inserimento input')
-  let nuovoDato = `<div class="dato"><span>${campoDati.value}</span><button class="cancella"><i class="far fa-trash-alt"></i></button></div>`
+  let dati = document.querySelectorall('dati')
+  let campoDati = document.querySelectorall('#inserimento input')
+  let nuovoDato = `<div class="dato"><span>${campoDati.value}</span><button><i class="far fa-trash-alt"></i></button></div>`
   dati.innerHTML += nuovoDato
-  campoDati.value = ''
 }
 
 const completato = function () {
@@ -27,7 +26,7 @@ const completato = function () {
 }
 
 const eliminato = function () {
-    let btnCancella = document.querySelectorAll('.cancella')
+    let btnCancella = document.querySelectorAll('span')
     for (let i = 0; i < btnCancella.length; i++) {
         btnCancella[i].addEventListener('click', function () {
         this.parentNode.remove()

@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 body {
-  height: 100vh;
   background-image:url(./printable-to-do-list-template-1-fefefe-010101.png);
   background-position: center;
   background-repeat: no-repeat;
@@ -47,7 +46,7 @@ body {
   font-weight: 500;
   font-size: 16px;
   background-color: black;
-  border: none;
+  border: 1px solid black;
   color: white;
   outline: none;
 }
