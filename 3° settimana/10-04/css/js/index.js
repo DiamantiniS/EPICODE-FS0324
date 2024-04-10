@@ -12,7 +12,7 @@ window.onload = function () {
 const aggiungi = function () {
   let dati = document.querySelectorall('dati')
   let campoDati = document.querySelectorall('#inserimento input')
-  let nuovoDato = `<div class="dato"><span>${campoDati.value}</span><button><i class="far fa-trash-alt"></i></button></div>`
+  let nuovoDato = `<div class="dato"><span>${campoDati.value}<button><i class="far fa-trash-alt"></i></button></span></div>`
   dati.innerHTML += nuovoDato
 }
 
