@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  background-image:url(./printable-to-do-list-template-1-fefefe-010101.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.container {
+  width: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background: white;
+}
+
+#inserimento {
+  position: relative;
+  padding: 30px 20px;
+}
+#inserimento input {
+  width: 75%;
+  height: 45px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  border: 3px solid black;
+  padding: 12px;
+  color: #111111;
+  font-weight: 500;
+  position: relative;
+}
+
+#inserimento button {
+  position: relative;
+  float: right;
+  width: 20%;
+  height: 45px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: black;
+  border: none;
+  color: white;
+  outline: none;
+}
+#dati {
+  background-color: #ffffff;
+  padding: 0px 20px;
+  width: 100%;
+  position: relative;
+}
+.dato {
+  background-color: white;
+  height: 50px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  
+}
+.dato button {
+  background-color: #e41414;
+  font-size: 1.1em;
+  color: #ffffff;
+  height: 35px;
+  width: 35px;
+  border: 1px solid black;
+  
+}
+
+.completato {
+  text-decoration: line-through;
+}
