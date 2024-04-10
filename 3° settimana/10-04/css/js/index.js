@@ -26,7 +26,7 @@ const completato = function () {
 }
 
 const eliminato = function () {
-    let btnCancella = document.querySelectorAll('span')
+    let btnCancella = document.querySelectorAll('.dato')
     for (let i = 0; i < btnCancella.length; i++) {
         btnCancella[i].addEventListener('click', function () {
         this.parentNode.remove()
