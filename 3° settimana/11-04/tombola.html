@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tombola</title>
+    <link rel="stylesheet" href="./css.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tombola</h1>
+        <div id="board" class="board"></div>
+            <form>
+                <button onclick="estraiNumero()">Estrai Numero</button>
+                <label for="numCartelle">Numero di Cartelle:</label>
+                <input type="number" id="numCartelle" name="numCartelle" min="1" value="1">
+                <button onclick="creaCartelle()">Crea Cartelle</button>
+            </form> 
+        <div id="cartelle" class="cartelle"></div>
+    </div>
+    <script src="./tombola.js"></script>
+</body>
+</html>
