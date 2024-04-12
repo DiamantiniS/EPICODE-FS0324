@@ -131,23 +131,18 @@ console.log(onlyLetters("io ho 2 gatti bellissimi"));
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
 function isThisAnEmail(email) {
-  let splitted = email.split("@");
-  if (splitted.length == 2) {
-    if (
-      splitted[0].length > 0 &&
-      splitted[1].length > 0 &&
-      splitted[1].includes(".")
-    ) {
-      let emailok = splitted.join("@");
-      console.log("true : " + emailok);
-      return true;
-    } else {
-      console.log("false");
-    }
-  } else {
+  const chiocciola = email.indexOf("@");
+  const punto = email.lastIndexOf(".");
+  
+  if (chiocciola < 1 || punto < chiocciola + 2 || punto === email.length - 1) {
     console.log("false");
+    return false;
   }
+  
+  console.log("true : " + email);
+  return true;
 }
+
 console.log('ese 6');
 console.log(isThisAnEmail("s.diamantini@gmail.com"));
 
