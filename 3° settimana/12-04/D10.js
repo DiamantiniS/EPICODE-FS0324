@@ -198,24 +198,25 @@ console.log(rollTheDices(3));
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
-function howManyDays(date) {
+function howManyDays(data) {
+  const myDate = new Date('01-04.2024');
   const giorno = new Date();
-  const annoCorrente = giorno.getFullYear();
-  const meseCorrente = giorno.getMonth();
   const giornoCorrente = giorno.getDate();
+  const meseCorrente = giorno.getMonth();
+  const annoCorrente = giorno.getFullYear();
 
-  const anni = date.getFullYear();
-  const mesi = date.getMonth();
-  const giorni = date.getDate();
+  const giorni = data.getDate();
+  const mesi = data.getMonth();
+  const anni = data.getFullYear();
 
-  const yearsDiff = annoCorrente - anni;
-  const monthsDiff = meseCorrente - mesi;
   const daysDiff = giornoCorrente - giorni;
+  const monthsDiff = meseCorrente - mesi;
+  const yearsDiff = annoCorrente - anni;
 
-  return yearsDiff * 365 + monthsDiff * 30 + daysDiff;
+  return daysDiff + monthsDiff * 30 +  + yearsDiff * 365;
 }
 console.log('ese 9');
-const myDate = new Date('2024-04-01'); 
+ 
 console.log(howManyDays(myDate)); 
 
 
