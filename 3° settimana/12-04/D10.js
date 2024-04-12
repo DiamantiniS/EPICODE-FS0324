@@ -601,13 +601,13 @@ console.log('ese 27');
   *****
 
 */
-function tree(numero){
+function tree(num){
   let div = document.getElementById("albero1");
   var spazi;
   var stelle;
-  for (let i = 1; i <= numero; i++) {
+  for (let i = 1; i <= num; i++) {
     for (let j = 1; j <= i; j++) {
-      spazi = " &nbsp;".repeat(numero - i); 
+      spazi = " &nbsp;".repeat(num - i); 
       stelle = "*".repeat(2 * i - 1); 
       
     }
@@ -624,22 +624,4 @@ console.log('ese 28');
   Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
 */
 
-function isItPrime(numero) {
 
- 
-  if(numero > 1){
-   for (let i = 2; i <= Math.sqrt(numero); i++) {
-     if (numero % i === 0) {
-       return false;
-     }else{
-       return true;
-     }
-   }
- 
-  }else{
-   return "non è primo!";
-  }   
- }
- console.log('ese 29');
- console.log(isItPrime(15));
- 
