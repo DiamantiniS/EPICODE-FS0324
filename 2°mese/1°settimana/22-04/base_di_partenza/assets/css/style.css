@@ -2,9 +2,9 @@
 html {font-size: 62.5%;}
 body { 
     font-family: Poppins, 'Helvetica Neue', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.7em;
     line-height: 1.5;
-    padding: 15px;
+    padding: 1.5em;
     background-image: url('../img/sfondo.png');
     background-position: center center;
 }
@@ -25,16 +25,22 @@ header {
 }
 header div img {
     margin-bottom: 20px;
+    max-width: 90%;
+    margin: 0 auto;
+    overflow-wrap: break-word;
 }
 header nav ul {
     margin: 0;
 }
 header nav li {
     list-style: none;
+    display: inline-block;
+    margin: 0 0.5em;
 }
 header nav li a {
     color: white;
     text-decoration: none;
+    
 }
 header nav li a:hover {
     color: red;
@@ -50,6 +56,24 @@ main {
     padding: 2em 1em;
     margin-bottom:1.5em ;
 }
+
+main article {  
+    overflow-wrap: break-word; 
+}
+
+
+#divImg{
+    border: 0.3em solid #a02371 ;
+    display:inline-block;
+}
+
+#divImg img{
+    display: block;
+    max-width: 100%;
+    border: 0.3em solid #00a0c6;
+    padding: 0.3em;
+}
+
 section { 
     background-color: #e3e3e3;
     padding: 1em;
@@ -62,11 +86,12 @@ section h2 {
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 1em;
+    background-color:#a8a8a8 ;
 }
 
 /* ELEMENTI NEL MAIN - ARTICLE */
 h1 {
-    font-size: 2.6rem;
+    font-size: 3em;
     font-weight: bold;
     letter-spacing: -0.03em;
     margin-bottom: 0.7em;
@@ -103,6 +128,8 @@ iframe {
 /* TABELLE */
 table {
     margin-bottom: 2em;
+    max-width: 100%; 
+    overflow-x: auto;
 }
 caption {
     font-weight: bold;
@@ -113,7 +140,7 @@ thead tr {
     color: #ffffff;
 }
 th, td {
-    padding: 12px 15px;
+    padding: 1.2em 1.5em;
     vertical-align: bottom;
     text-align: center;
 }
@@ -147,7 +174,7 @@ button {
 aside h2 {
     text-align: center;
     color: #333;
-    font-size: 2rem;
+    font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 1em;
@@ -158,9 +185,18 @@ aside div {
     margin-bottom: 1em;
     padding: 1em;
 }
+
+aside div a{
+    font-size: 1.5em;
+}
+
+aside div p{
+    font-size: 1em;
+}
+
 aside div p:last-child {
     margin-bottom: 0;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: right;
 }
 
@@ -171,10 +207,72 @@ footer {
     background: linear-gradient(0deg, rgba(53,53,53,1) 0%, rgba(5,85,103,1) 68%);
     box-shadow: 0 3px 3px #444;
     color: #f0f0f0;
-    padding: 1em;
+    padding: 2em;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.2em;
+    justify-content: center;
 }
 footer a {
     color: fuchsia;
+}
+
+address {
+    overflow-wrap: break-word;
+}
+
+/*                media query           */
+
+@media screen and (min-width: 767px) {
+    table{
+        margin:4em auto;
+        max-width: 100%;       
+    }
+}
+
+@media screen and (min-width: 1199px) {
+    /* Header */
+    header div {
+        width: auto; /* Imposta la larghezza automatica */
+        display:flex;
+        flex-direction: row;
+        align-items: left;
+        margin:0 0;
+    }
+
+    header p {
+        display: inline-block; 
+    }
+
+    header nav {
+        float: right; 
+    }
+
+    /* Main */
+    main article {
+        float: left; 
+        width: 100; 
+    }
+
+    main iframe {
+        float: left; 
+        width: 50%; 
+        margin-bottom: 0px;
+        height: 100%;
+    }
+
+    main section {
+        float: right; 
+        width: 50%; 
+        margin-top: 0; 
+        border-radius: 1em;
+
+    }
+
+    /* Aside */
+    aside div{
+        display: inline-block;
+        width: 33%;
+        margin-top: 0; 
+        box-sizing: border-box;
+    }
 }
