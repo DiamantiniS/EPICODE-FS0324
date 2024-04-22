@@ -233,24 +233,21 @@ address {
     /* Header */
     header div {
         width: auto; /* Imposta la larghezza automatica */
-        display:flex;
-        flex-direction: row;
-        align-items: left;
-        margin:0 0;
-    }
+    } 
 
-    header p {
-        display: inline-block; 
-    }
+    
 
     header nav {
         float: right; 
     }
 
     /* Main */
+    body{
+        padding:2% 10% 10% 10%;
+    }
     main article {
         float: left; 
-        width: 100; 
+        width: 100%; 
     }
 
     main iframe {
@@ -268,11 +265,9 @@ address {
 
     }
 
-    /* Aside */
     aside div{
-        display: inline-block;
-        width: 33%;
-        margin-top: 0; 
-        box-sizing: border-box;
+        display:inline-block;
+        width: 33.15%;
+        
     }
-}
+   
