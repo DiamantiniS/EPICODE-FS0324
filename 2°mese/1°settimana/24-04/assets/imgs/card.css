@@ -1,0 +1,40 @@
+body {
+    margin: 0 3%;
+    color: #612406
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #fff6d3;
+    border-radius: 125px;
+    align-items: stretch
+}
+
+img {
+    border-radius: 125px 125px 0 0;
+}
+
+.card {
+    padding: 0 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#btn {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    width: 50%;
+    margin-bottom: 1em;
+    background-color: #F3DF85;
+    border: none;
+    border-radius: 150px;
+    width: 190px;
+    padding: 15px;
+}
