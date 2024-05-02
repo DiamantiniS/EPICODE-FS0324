@@ -1,0 +1,9 @@
+@each $size, $value in $bg-color-btn{
+    .btn-#{$size}{
+        background-color: #{$value};
+        border:none;
+        border-radius: 0.5em;
+        padding:1em;
+        color:#f4f4f4;
+    }
+}

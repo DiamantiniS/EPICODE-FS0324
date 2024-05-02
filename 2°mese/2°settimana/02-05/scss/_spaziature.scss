@@ -1,0 +1,37 @@
+$value-map: (   sm: 12px,   normal: 12px,   md: 15px,   lg: 18px,   xl: 36px,   xxl: 50px, );  
+
+@each $size, $value in $value-map {   
+    .padding-#{$size} {     
+        padding: #{$value};   
+    } 
+}  
+
+@each $size, $value in $value-map {   
+    .margin-#{$size} {     
+        margin: #{$value};   
+    } 
+}
+
+$display: (
+    inline: inline,
+    normal: block,
+);
+
+@each $size, $value in $display{
+    .margin-#{$size}{
+        margin:#{$value},
+    };
+    
+};
+
+@each $size, $value in $display{
+    .padding-#{$size}{
+        padding:#{$value},
+    }
+};
+
+@mixin grid {   
+    display: flex;   
+    justify-content: space-evenly;   
+    grid: 50px; 
+}
