@@ -191,6 +191,12 @@ body {
   padding: block;
 }
 
+.griglia {
+  display: flex;
+  justify-content: space-evenly;
+  grid: 50px;
+}
+
 .btn-blue {
   background-color: #0e6cff;
   border: none;

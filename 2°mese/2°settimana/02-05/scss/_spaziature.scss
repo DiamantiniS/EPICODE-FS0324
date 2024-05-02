@@ -35,3 +35,7 @@ $display: (
     justify-content: space-evenly;   
     grid: 50px; 
 }
+
+.griglia{
+    @include grid;
+}
