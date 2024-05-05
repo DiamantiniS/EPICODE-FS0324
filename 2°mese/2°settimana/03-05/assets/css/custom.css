@@ -4,6 +4,11 @@
 .logo-profile {
   width: 150px;
 }
+
+.social-icon {
+  font-size: 1.5rem; 
+}
+
 .avatar {
   width: 60px;
 }
