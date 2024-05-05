@@ -1,0 +1,13 @@
+.social-icon {
+  font-size: 1.5rem; /* Modifica la dimensione delle icone sociali */
+}
+
+.car-button-width {
+  width: 5%;
+}
+
+.carousel-control.active, .carousel-control:focus {
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+}/*# sourceMappingURL=css.css.map */
