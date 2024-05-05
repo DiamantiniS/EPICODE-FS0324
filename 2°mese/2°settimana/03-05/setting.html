@@ -7,72 +7,117 @@
     <link rel="stylesheet" href="assets/css/style.min.css" />
     <link rel="stylesheet" href="assets/css/custom.css" />
     <title>Setting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
   </head>
   <body class="bg-settings">
-    <header class="bg-darkgray mb-5">
-      <div class="row">
-        <div class="col-12">
-          <nav class="navbar navbar-expand-lg bg-transparent" data-bs-theme="dark">
-            <div class="container-fluid">
-              <a class="navbar-brand text-white" href="index.html">
-                <img src="assets/img/netflix_logo.png" alt="logo" class="logo" />
-              </a>
-              <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span class="navbar-toggler-icon text-white btn-outline-light"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">TV Shows</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Movies</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Recently added</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">My list</a>
-                  </li>
-                </ul>
-                <div id="rightbar" class="d-none d-lg-flex justify-content-around align-items-center">
-                  <i class="bi bi-search text-white px-3"></i>
-                  <p class="text-white px-3 m-0">KIDS</p>
-                  <i class="bi bi-bell-fill text-white px-3"></i>
-                  <div class="buttonsettings">
+    <header class="bg-darkgray dark">
+      <div class="container mb-5">
+        <div class="row">
+          <div class="col-12">
+            <nav
+              class="navbar navbar-expand-lg bg-transparent"
+              data-bs-theme="dark"
+            >
+              <div class="container-fluid">
+                <a class="navbar-brand text-white" href="index.html">
+                  <img
+                    src="assets/img/netflix_logo.png"
+                    alt="logo"
+                    class="logo"
+                  />
+                </a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span
+                    class="navbar-toggler-icon text-white btn-outline-light"
+                  ></span>
+                </button>
+                <div
+                  class="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+                >
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">TV Shows</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Recently added</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">My list</a>
+                    </li>
+                  </ul>
+                  <div class="d-none d-lg-flex justify-content-around align-items-center">
+                    <a href="#" class="btn btn-outline-light border-0 ">
+                      <i class="bi bi-search px-2"></i></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light border-0 ">
+                      KIDS
+                    </a>
+                    <a href="#" class="btn btn-outline-light border-0 ">
+                      <i class="bi bi-bell-fill px-2"></i>
+                    </a>
+
                     <div class="btn-group">
-                      <button type="button" class="btn btn-darkgray btn-sm">
-                        <img class="avatar px-3" src="assets/img/avatar.png" alt="avatar" />Simone
-                      </button>
                       <button
                         type="button"
-                        class="btn btn-darkgray dropdown-toggle dropdown-toggle-split"
+                        class="btn btn-darkgray btn-sm dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
+                        <img
+                          class="avatar px-3"
+                          src="assets/img/avatar.png"
+                          alt="avatar"
+                        />
                         <span class="visually-hidden">Toggle Dropdown</span>
                       </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="./profile.html">Profile</a></li>
-                        <li><a class="dropdown-item" href="./index.html">Home</a></li>
+                      <ul class="dropdown-menu border border-white">
+                        <li>
+                          <a class="dropdown-item p-2" href="profile.html"
+                            ><i class="fas fa-user"></i> Simone</a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown-item p-2" href="./profile.html"
+                            ><i class="fas fa-pencil-alt"></i> Edit-Profile</a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown-item p-2" href="./index.html"
+                            ><i class="fas fa-home"></i> Home</a
+                          >
+                        </li>
+                        <li>
+                          <a
+                            class="dropdown-item border-white border-top p-2 text-center"
+                            href="#"
+                            ><i class="fas fa-sign-out-alt"></i> Exit</a
+                          >
+                        </li>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         </div>
       </div>
     </header>
