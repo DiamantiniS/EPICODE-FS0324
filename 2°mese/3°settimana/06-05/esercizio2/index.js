@@ -25,12 +25,13 @@ class Pet {
   }
 }
 
+
 const renderList = function () {
   petList.innerHTML = "";
   pets.forEach((pet) => {
     const newLi = document.createElement("li");
     newLi.innerText =
-      "Nome: " + pet.petName + ", proprietario: " + pet.ownerName;
+      "Nome: " + pet.petName + ", Proprietario: " + pet.ownerName;
 
     petList.appendChild(newLi);
   });
