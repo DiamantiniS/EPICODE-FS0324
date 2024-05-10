@@ -1,5 +1,3 @@
-document.getElementById("year").innerText = new Date().getFullYear();
-
 const generateProductCards = function (productsArray) {
   const row = document.getElementById("events-row");
   productsArray.forEach((product) => {
@@ -15,12 +13,21 @@ const generateProductCards = function (productsArray) {
           <div class="d-flex justify-content-between">
             <button class="btn btn-primary">${product.price}€</button>
             <a href="details.html?eventId=${product._id}" class="btn btn-info">INFO</a>
-            <button id="edit-button-${product._id}"  class="btn btn-warning" data-event-id="${product._id}">MODIFICA</button>
+            <button class="btn btn-warning edit-button" data-event-id="${product._id}">MODIFICA</button>
           </div>
         </div>
       </div>
       `;
     row.appendChild(newCol);
+  });
+
+  // Aggiungi l'evento di click a tutti i bottoni "Modifica"
+  const editButtons = document.querySelectorAll(".edit-button");
+  editButtons.forEach((button) => {
+    button.addEventListener("click", function (event) {
+      const eventId = event.target.dataset.eventId;
+      location.assign(`backoffice.html?eventId=${eventId}`);
+    });
   });
 };
 
@@ -33,15 +40,12 @@ const getEvents = function () {
   })
     .then((response) => {
       if (response.ok) {
-        console.log(response);
         return response.json();
       } else {
         throw new Error("Errore nella risposta del server");
       }
     })
     .then((array) => {
-      console.log("ARRAY!", array);
-
       generateProductCards(array);
     })
     .catch((err) => {
@@ -50,12 +54,3 @@ const getEvents = function () {
 };
 
 getEvents();
-
-const editButtons = document.getElementsByClassName('btn-warning')
-Array.from(editButtons).forEach(function (button) {
-  button.addEventListener("click", function () {
-    location.assign(`backoffice.html?eventId=${eventId}`);
-  });
-});
-
-const editCard = function () {};
