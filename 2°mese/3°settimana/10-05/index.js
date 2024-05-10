@@ -52,7 +52,10 @@ const getEvents = function () {
 getEvents();
 
 const editButtons = document.getElementsByClassName('btn-warning')
-editButtons.forEach(
-  addEventListener('click', function () {
-  location.assign(`backoffice.html?eventId=${eventId}`)
-})
+Array.from(editButtons).forEach(function (button) {
+  button.addEventListener("click", function () {
+    location.assign(`backoffice.html?eventId=${eventId}`);
+  });
+});
+
+const editCard = function () {};
