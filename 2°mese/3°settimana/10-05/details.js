@@ -30,25 +30,4 @@ const getEventData = function () {
 
 getEventData()
 
-// const deleteEvent = function () {
-//   fetch(`https://striveschool-api.herokuapp.com/api/product/${eventId}`, {
-//     method: 'DELETE',
-//     headers: {
-//       "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjNkZDllZjgxODQ0MjAwMTUzNzU4ODgiLCJpYXQiOjE3MTUzMjk1MTksImV4cCI6MTcxNjUzOTExOX0.5UnqSLiwETottFfZvZzuCEaI-U2HYFFx220D4lVQQM8"
-//       },
-    
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         alert('RISORSA ELIMINATA')
-//         location.assign('index.html') 
-//       } else {
-//         alert('ERRORE - RISORSA NON ELIMINATA')
-//       }
-//     })
-//     .catch((err) => {
-//       console.log('ERR', err)
-//     })
-// }
-
 
