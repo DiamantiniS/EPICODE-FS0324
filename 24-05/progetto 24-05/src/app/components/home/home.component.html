@@ -27,21 +27,21 @@
                             </h5>
                             <p class="card-text">
                                 <span
-                                    class="badge bg-info text-black me-1 text-uppercase">Anno:
+                                    class="badge bg-dark me-1 text-uppercase">Anno:
                                     {{random.year}}</span>
                                 <span
-                                    class="badge bg-info text-black me-1 text-uppercase">Prezzo:
+                                    class="badge bg-dark me-1 text-uppercase">Prezzo:
                                     {{random.price}}</span>
                                 <span *ngIf="random.available; else elseSpan"
-                                    class="badge bg-info text-black me-1 text-uppercase">Pronta
+                                    class="badge bg-dark me-1 text-uppercase">Pronta
                                     consegna: sì</span>
                                     <ng-template #elseSpan>
                                         <span
-                                    class="badge bg-info text-black me-1 text-uppercase">Pronta
+                                    class="badge bg-dark me-1 text-uppercase">Pronta
                                     consegna: no</span>
                                     </ng-template>
                             </p>
-                            <a [routerLink]="['/' + random.brand.toLowerCase()]" class="btn btn-info text-black">Tutti i nostri prodotti {{random.brand}}</a>
+                            <a [routerLink]="['/' + random.brand.toLowerCase()]" class="btn btn-dark">Tutti i nostri prodotti {{random.brand}}</a>
                         </div>
                     </div>
                 </div>
