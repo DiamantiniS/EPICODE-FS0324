@@ -1,5 +1,5 @@
 <div class="container-fluid text-center">
-    <div class="mt-4 p-5 bg-body-secondary text-dark rounded">
+    <div class="mt-4 p-5 bg-body bg-secondary text-dark rounded">
         <img src="../../../assets/img/Progetto senza titolo.png">
         <h1>Il tuo e-commerce PREFERITO!</h1>
         <div>
@@ -12,9 +12,9 @@
             </ul>
         </div>
         <div class="bg-white pb-5  ">
-            <h3 class="text-center">Pc in Offerta</h3>
+            <h3 class="text-center mb-5 ">Pc in Offerta</h3>
             <div class="row">
-                <div class="col-6 d-flex justify-content-center" *ngFor="let random of randomPc">
+                <div class="col-6 d-flex justify-content-center " *ngFor="let random of randomPc">
                     <div class="card" style="width: 18rem;" [ngClass]="{
                         'bg-success': random.available,
                         'bg-danger': !random.available
@@ -27,21 +27,21 @@
                             </h5>
                             <p class="card-text">
                                 <span
-                                    class="badge bg-primary me-1 text-uppercase">Anno:
+                                    class="badge bg-info text-black me-1 text-uppercase">Anno:
                                     {{random.year}}</span>
                                 <span
-                                    class="badge bg-primary me-1 text-uppercase">Prezzo:
+                                    class="badge bg-info text-black me-1 text-uppercase">Prezzo:
                                     {{random.price}}</span>
                                 <span *ngIf="random.available; else elseSpan"
-                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    class="badge bg-info text-black me-1 text-uppercase">Pronta
                                     consegna: sì</span>
                                     <ng-template #elseSpan>
                                         <span
-                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    class="badge bg-info text-black me-1 text-uppercase">Pronta
                                     consegna: no</span>
                                     </ng-template>
                             </p>
-                            <a [routerLink]="['/' + random.brand.toLowerCase()]" class="btn btn-primary">Tutti i nostri prodotti {{random.brand}}</a>
+                            <a [routerLink]="['/' + random.brand.toLowerCase()]" class="btn btn-info text-black">Tutti i nostri prodotti {{random.brand}}</a>
                         </div>
                     </div>
                 </div>

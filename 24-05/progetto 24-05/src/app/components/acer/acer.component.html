@@ -16,17 +16,17 @@
                             </h5>
                             <p class="card-text h4">
                                 <span
-                                    class="badge bg-primary me-1 text-uppercase">Anno:
+                                    class="badge bg-info me-1 text-uppercase">Anno:
                                     {{pc.year}}</span>
                                 <span
-                                    class="badge bg-primary me-1 text-uppercase">Prezzo:
+                                    class="badge bg-info me-1 text-uppercase">Prezzo:
                                     {{pc.price}}</span>
                                 <span *ngIf="pc.available; else elseSpan"
-                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    class="badge bg-info me-1 text-uppercase">Pronta
                                     consegna: sì</span>
                                     <ng-template #elseSpan>
                                         <span
-                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    class="badge bg-info me-1 text-uppercase">Pronta
                                     consegna: no</span>
                                     </ng-template>
                                 <span></span>
