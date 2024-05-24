@@ -1,25 +1,18 @@
 <div class="container-fluid bg-dark mt-5 text-light">
-    <div class="row">
-        <div class="col-4 text-center mt-2">
-            <img src="../../../assets/img/Progetto senza titolo (1).png" width="20%">
-            <h5>Il tuo store Preferito</h5>
-            <address>
-                Via Tal dei Tali 25<br>
-                00100 Torino<br>
-                ☎️ - 📠 01124567845<br>
-                📧 info@diamafy.it
-            </address>
-        </div>
-        <div class="col-4 d-flex justify-content-around align-items-center">
-            <a [routerLink]="['/']" class="menu-footer">Home</a> |
-            <a [routerLink]="['/asus']" class="menu-footer">Asus</a> |
-            <a [routerLink]="['/acer']" class="menu-footer">Acer</a> |
-            <a [routerLink]="['/lenovo']" class="menu-footer">Lenovo</a>
-        </div>
-        <div class="col-4 d-flex justify-content-center align-items-center">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eos repudiandae laudantium? Delectus quisquam tempora dolores qui illum animi praesentium, rerum, vero facere fuga quas laudantium deserunt veritatis aliquam maxime! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora error quisquam dignissimos saepe adipisci nam. Minus laboriosam natus veritatis libero quae autem corporis quod odit, animi fuga quia dignissimos ratione.
-            </p>
-        </div>
-    </div>
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <p class="col-md-4 mb-0 text-body-white">© 2024 Company, Inc</p>
+
+          <p class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img src="../../../assets/img/Progetto senza titolo (1).png" class="bi me-2" width="40" height="32">
+          </p>
+
+          <ul class="nav col-md-4 justify-content-end  ">
+            <li class="nav-item "><a [routerLink]="['/']" class="nav-link px-2 text-body-white">Home</a></li>
+            <li class="nav-item"><a [routerLink]="['/asus']" class="nav-link px-2 text-body-white menu-footer">Asus</a></li>
+            <li class="nav-item"><a [routerLink]="['/acer']" class="nav-link px-2 text-body-white menu-footer">Acer</a></li>
+            <li class="nav-item"><a [routerLink]="['/lenovo']" class="nav-link px-2 text-body-white menu-footer">Lenovo</a></li>
+          </ul>
+        </footer>
+      </div>
 </div>
