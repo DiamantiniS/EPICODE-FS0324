@@ -1,0 +1,52 @@
+<div class="container-fluid text-center">
+    <div class="mt-4 p-5 bg-body-secondary text-dark rounded">
+        <img src="../../../assets/img/Progetto senza titolo.png">
+        <h1>Il tuo e-commerce PREFERITO!</h1>
+        <div>
+            <h3 class="text-center">I nostri brand!</h3>
+            <ul width="33%" class="d-flex justify-content-center p-0 row-cols-3">
+                <li *ngFor="let brand of brands"  class="col list-unstyled  bg-white d-flex justify-content-around  align-content-center ">
+                    <img src="{{brand}}"
+                        width="50%">
+                </li>
+            </ul>
+        </div>
+        <div class="bg-white pb-5  ">
+            <h3 class="text-center">Pc in Offerta</h3>
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center" *ngFor="let random of randomPc">
+                    <div class="card" style="width: 18rem;" [ngClass]="{
+                        'bg-success': random.available,
+                        'bg-danger': !random.available
+                    }">
+                        <img src="{{random.modelImage}}"
+                            class="card-img-top"
+                            alt="{{random.brand}} {{random.model}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{random.brand}} {{random.model}}
+                            </h5>
+                            <p class="card-text">
+                                <span
+                                    class="badge bg-primary me-1 text-uppercase">Anno:
+                                    {{random.year}}</span>
+                                <span
+                                    class="badge bg-primary me-1 text-uppercase">Prezzo:
+                                    {{random.price}}</span>
+                                <span *ngIf="random.available; else elseSpan"
+                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    consegna: sì</span>
+                                    <ng-template #elseSpan>
+                                        <span
+                                    class="badge bg-primary me-1 text-uppercase">Pronta
+                                    consegna: no</span>
+                                    </ng-template>
+                            </p>
+                            <a [routerLink]="['/' + random.brand.toLowerCase()]" class="btn btn-primary">Tutti i nostri prodotti {{random.brand}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>

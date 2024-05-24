@@ -1,0 +1,56 @@
+[
+    {
+        "brand": "Asus",
+        "brandLogo": "https://logowik.com/content/uploads/images/424_asus.jpg",
+        "model": "Pro Art",
+        "modelImage": "https://www.asus.com/media/Odin/Websites/global/Series/9.png",
+        "year": 2023,
+        "price": 750,
+        "available": false
+    },
+    {
+        "brand": "Asus",
+        "brandLogo": "https://logowik.com/content/uploads/images/424_asus.jpg",
+        "model": "Scar G18",
+        "modelImage": "https://dlcdnwebimgs.asus.com/gain/2EC328E4-7529-4CB5-A797-3B13E84D4664/w1000/h732",
+        "year": 2023,
+        "price": 2500,
+        "available": true
+    },
+    {
+        "brand": "Acer",
+        "brandLogo": "https://static.vecteezy.com/ti/vettori-gratis/p1/19136406-acer-logo-vettore-acer-icona-gratuito-vettore-gratuito-vettoriale.jpg",
+        "model": "Taurus",
+        "modelImage": "https://m.media-amazon.com/images/I/81-IsEEeFuL._AC_UF1000,1000_QL80_.jpg",
+        "year": 2020,
+        "price": 520,
+        "available": false
+    },
+    {
+        "brand": "Acer",
+        "brandLogo": "https://static.vecteezy.com/ti/vettori-gratis/p1/19136406-acer-logo-vettore-acer-icona-gratuito-vettore-gratuito-vettoriale.jpg",
+        "model": "Nitro 5",
+        "modelImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThL1N5JLm5dqTQsbXdtJW-P77AN1hJvq5UvbqSytnSYTdBKg7C4GyvCuvN0RndgSREJPs&usqp=CAU",
+        "year": 2022,
+        "price": 1200,
+        "available": true
+    },
+    {
+        "brand": "Lenovo",
+        "brandLogo": "https://static.vecteezy.com/ti/vettori-gratis/p3/20927282-lenovo-logo-marca-telefono-simbolo-nome-nero-design-cina-mobile-vettore-illustrazione-gratuito-vettoriale.jpg",
+        "model": "Think Pad",
+        "modelImage": "https://www.rigeneratech.it/7172-large_default/workstation-ricondizionate-workstation-portatile-ricondizionata-lenovo-w541-156-i7-4910-ram-16gb-ssd-512gb-nvidia-quadro-k1100m.jpg",
+        "year": 2018,
+        "price": 1000,
+        "available": true
+    },
+    {
+        "brand": "Lenovo",
+        "brandLogo": "https://static.vecteezy.com/ti/vettori-gratis/p3/20927282-lenovo-logo-marca-telefono-simbolo-nome-nero-design-cina-mobile-vettore-illustrazione-gratuito-vettoriale.jpg",
+        "model": "Legion pro 5i",
+        "modelImage": "https://p2-ofp.static.pub/fes/cms/2023/02/14/humxyq653qmbamu9ggmpgpbjekupue482588.png",
+        "year": 2023,
+        "price": 1700,
+        "available": false
+    }
+]
