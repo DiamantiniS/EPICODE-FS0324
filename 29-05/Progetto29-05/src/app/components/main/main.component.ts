@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +8,7 @@ import { ProductService } from '../../services/product.service';
   styleUrl: './main.component.scss',
 })
 export class MainComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
 
   constructor(private productService: ProductService) {}
 
@@ -17,11 +18,11 @@ export class MainComponent implements OnInit {
     });
   }
 
-  addToFavorites(product: any) {
+  addToFavorites(product: Product) {
     this.productService.addToFavorites(product);
   }
 
-  addToCart(product: any) {
+  addToCart(product: Product) {
     this.productService.addToCart(product);
   }
 }
