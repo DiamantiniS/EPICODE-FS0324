@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Photo Gallery</h1>
+  <h2>Favorites: {{ favoriteCount }}</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let photo of photos">
+      <div class="card mb-4">
+        <img [src]="photo.thumbnailUrl" class="card-img-top" alt="{{ photo.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ photo.title }}</h5>
+          <button class="btn btn-primary" (click)="likePhoto(photo)">Mi Piace</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
