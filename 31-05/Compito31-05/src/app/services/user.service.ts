@@ -1727,16 +1727,4 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
-
-  searchUsersByAuthor(author: string): User[] {
-    if (!author) {
-      return this.users;
-    }
-
-    return this.users.filter(
-      (user: User) =>
-        user.firstName.toLowerCase().includes(author.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(author.toLowerCase())
-    );
-  }
 }
