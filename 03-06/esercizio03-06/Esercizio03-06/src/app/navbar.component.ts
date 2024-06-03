@@ -54,14 +54,7 @@ import { AuthService } from './auth/auth.service';
                 >Users</a
               >
             </li>
-            <!-- <li class="nav-item">
-              <a
-                class="nav-link"
-                [routerLink]="['/users/new']"
-                routerLinkActive="active"
-                >Nuovo Utente</a
-              >
-            </li> -->
+
           </ul>
           <button (click)="login()">login</button>
           <button (click)="logout()">logout</button>
