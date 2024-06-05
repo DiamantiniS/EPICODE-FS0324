@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SignUp } from 'src/app/interfaces/auth.interface';
-import { AuthService } from 'src/app/services/auth.service';
+
+import { AuthService } from '../../services/auth.service';
+import { SignUp } from '../../interfaces/auth.interface';
+
 
 @Component({
   selector: 'app-profile-page',

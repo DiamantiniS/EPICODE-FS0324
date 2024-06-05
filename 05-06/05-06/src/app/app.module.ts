@@ -10,20 +10,13 @@ import { SigninComponent } from './components/signin/signin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { AuthService } from './services/auth.service';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ProfilePageComponent,
-    FullNamePipe,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, ProfilePageComponent, FullNamePipe],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [AuthService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
