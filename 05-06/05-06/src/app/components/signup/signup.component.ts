@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms"
-import { AuthService } from 'src/app/services/auth.service';
-import { passwordMatch, passwordValidator } from 'src/app/utils/password.validator';
+
+
+import { AuthService } from '../../services/auth.service';
+import {
+  passwordMatch,
+  passwordValidator,
+} from '../../utils/password.validator';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',

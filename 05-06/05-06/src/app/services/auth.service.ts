@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Auth, LoginData, SignUp } from '../interfaces/auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
