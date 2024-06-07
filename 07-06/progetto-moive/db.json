@@ -1,0 +1,39 @@
+{
+    "users": [
+      {
+        "email": "forofuw@mailinator.com",
+        "password": "$2a$10$IQOXZWcGTLARYTSu3aj5V.16qO/s54RgXWVRlSmUUWVlBmMguWQPS",
+        "nome": "Hic iure laboris pla",
+        "id": 1
+      },
+      {
+        "email": "vizig@mailinator.com",
+        "password": "$2a$10$/ZFuof8ZUzWwk2QkziFAROS53IuWkkBpF945Ouji5hoq7pbftL5Q6",
+        "nome": "Quia non et necessit",
+        "id": 2
+      },
+      {
+        "email": "zufojoruv@mailinator.com",
+        "password": "$2a$10$kJR.w6ueaexoSwXlJWX4p.iFGza4/HW7ywKDDGGE858a7aDWyRFwW",
+        "nome": "Quia id excepturi e",
+        "id": 3
+      },
+      {
+        "email": "logan@gmail.com",
+        "password": "$2a$10$nZqFkf/qCo8/onwu9wFAseOsISAyxSFLEyqJbuav6Ip9TGldyPoga",
+        "nome": "morgan",
+        "cognome": "grande",
+        "id": 4
+      },
+      {
+        "email": "qwer@qwer",
+        "password": "$2a$10$9a0wFy8eePHvmByZ6sfMje.Y.ihvAP9rBYa15sMUC/BNpl03MwfX2",
+        "nome": "qwert",
+        "cognome": "rewq",
+        "id": 5
+      }
+    ],
+    "movies": [],
+    "favourites": []
+  }
+
