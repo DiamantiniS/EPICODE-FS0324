@@ -1,0 +1,76 @@
+<section class="vh-100">
+  <div class="container p-5 border-5 border border-dark rounded bg-dark bg-gradient">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+          <h2 class="text-center mb-2 text-white">Register</h2>
+
+          <div data-mdb-input-init class="form-outline mb-4 mt-2 bg-dark">
+            <input type="text" id="form1Example13" class="form-control form-control-lg bg-transparent text-white border-light" formControlName="username"
+              placeholder="Your username" />
+            <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+              <strong class="text-danger" *ngIf="registerForm.get('username')?.errors?.['required']">
+                Username is required
+              </strong>
+            </div>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4 mt-2 bg-dark">
+            <input type="email" id="form1Example13" class="form-control form-control-lg bg-transparent text-white border-light" formControlName="email"
+              placeholder="Your email" />
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+              <strong class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">
+                Email is required
+              </strong>
+              <strong class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">
+                Enter a valid email
+              </strong>
+            </div>
+          </div>
+
+          <div class="form-outline mb-4 position-relative bg-dark">
+            <input type="{{ hidePassword ? 'password' : 'text' }}" id="form1Example23"
+              class="form-control form-control-lg bg-transparent text-white border-light" formControlName="password" placeholder="Your password" />
+            <button type="button" class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y"
+              (click)="togglePasswordVisibility()">
+              <i class="bi bi-eye{{ hidePassword ? '-slash' : '' }}"></i>
+            </button>
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+              <strong class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">
+                Password is required
+              </strong>
+              <strong class="text-danger" *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters
+              </strong>
+            </div>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4 mt-2 bg-dark">
+            <input type="number" id="form1Example13" class="form-control form-control-lg bg-transparent text-white border-light" formControlName="age"
+              placeholder="Your age" />
+            <div *ngIf="registerForm.get('age')?.invalid && registerForm.get('age')?.touched">
+              <strong class="text-danger" *ngIf="registerForm.get('age')?.errors?.['required']">
+                Age is required
+              </strong>
+              <strong class="text-danger" *ngIf="registerForm.get('age')?.errors?.['min']">
+                Age must be a positive number
+              </strong>
+            </div>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4 bg-dark">
+            <input type="text" id="form1Example23" class="form-control form-control-lg bg-transparent text-white border-light" formControlName="proPic"
+              placeholder="URL of your profile picture" />
+          </div>
+
+          <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block"
+            [disabled]="registerForm.invalid">Sign up</button>
+          <span class="ms-3 fs-5 text-white">
+            Already have an account?
+            <a routerLink="/auth/login" class="text-primary">Sign in</a>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

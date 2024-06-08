@@ -1,0 +1,49 @@
+<section class="vh-100 text-white">
+  <div class="container p-5 border-5 border border-light rounded bg-dark bg-gradient">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        <form [formGroup]="createMovieForm" (ngSubmit)="createMovie()">
+          <h2 class="text-center mb-4">New Movie</h2>
+
+          <div class="mb-3">
+            <input class="form-control form-control-lg bg-dark text-white border-light" formControlName="title" placeholder="Title">
+            <div *ngIf="createMovieForm.get('title')?.invalid && createMovieForm.get('title')?.touched">
+              <strong class="text-danger">Title is required</strong>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input class="form-control form-control-lg bg-dark text-white border-light" type="number" formControlName="duration" placeholder="Duration (minutes)">
+            <div *ngIf="createMovieForm.get('duration')?.invalid && createMovieForm.get('duration')?.touched">
+              <strong class="text-danger">Duration must be more than 1 min</strong>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input class="form-control form-control-lg bg-dark text-white border-light" type="number" formControlName="rating" placeholder="Rating">
+            <div *ngIf="createMovieForm.get('rating')?.invalid && createMovieForm.get('rating')?.touched">
+              <strong class="text-danger">Rating must be between 1 and 10</strong>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input class="form-control form-control-lg bg-dark text-white border-light" formControlName="image" placeholder="URL image">
+            <div *ngIf="createMovieForm.get('image')?.invalid && createMovieForm.get('image')?.touched">
+              <strong class="text-danger">Image URL is required</strong>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <textarea class="form-control form-control-lg bg-dark text-white border-light" rows="5" formControlName="description" placeholder="Description"></textarea>
+            <div *ngIf="createMovieForm.get('description')?.invalid && createMovieForm.get('description')?.touched">
+              <strong class="text-danger">Description is required</strong>
+            </div>
+          </div>
+
+          <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="createMovieForm.invalid">Add New Movie</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

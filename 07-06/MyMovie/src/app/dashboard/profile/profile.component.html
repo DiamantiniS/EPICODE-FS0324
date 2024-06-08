@@ -1,0 +1,19 @@
+<section class="vh-100 text-white">
+  <div class="container p-5 border-5 border border-light rounded bg-dark bg-gradient">
+    <div class="row align-items-center justify-content-center h-100">
+      <div class="col-md-6">
+        <img class="img-fluid mb-3 rounded" [src]="user?.proPic" alt="{{user?.username}} propic">
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <h1 class="display-6 fw-bold text-center">You: {{ user?.username }}</h1>
+          <p class="text-white text-center"><strong>Email:</strong> {{ user?.email }}</p>
+          <p class="text-white text-center"><strong>Username:</strong> {{ user?.username }}</p>
+          <p class="text-white text-center"><strong>Age:</strong> {{ user?.age }}</p>
+          <p class="text-white text-center"><strong>Favorites:</strong> {{ numFavorites }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,21 @@
+.btn.btn-light {
+  color: #f6f3f3;
+  background-color: transparent;
+  border-color: #fbfbfb;
+}
+
+.btn.btn-light:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.heart-icon {
+  &.heart-filled {
+    color: red;
+
+  }
+  &:hover {
+    color: red;
+
+}
+}
