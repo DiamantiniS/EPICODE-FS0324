@@ -1,7 +1,7 @@
 <nav class="sticky-top navbar navbar-expand-lg bg-dark bg-gradient p-2">
   <div class="container-fluid">
     <a routerLink="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-      <img src="../../../assets/img/logo.png"  class="d-inline-block align-top me-2 logo" alt="logo">
+      <img src="../../../assets/img/logo.png" class="d-inline-block align-top me-2 logo" alt="logo">
       Diama's Movies!
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,12 @@
           </button>
         </li>
       </ul>
-      <div class="ms-auto d-flex">
+      <div class="ms-auto d-flex align-items-center">
+
+        <div *ngIf="isLoggedIn && user?.proPic" class="d-flex align-items-center me-3">
+          <img [src]="user?.proPic" class="rounded-circle" alt="Profile Picture" width="30" height="30">
+        </div>
+
         <button *ngIf="!isLoggedIn" routerLink="/auth/login" type="button" class="nav-link text-white">
           <i class="bi bi-door-open"></i>
           Login
