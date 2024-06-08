@@ -1,7 +1,7 @@
 <section class="vh-100 text-white">
   <div class="container p-5 border-5 border border-light rounded bg-dark bg-gradient">
     <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <div class="col-md-7 col-lg-5 col-xl-5 ">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
           <h2 class="text-center mb-4">Login</h2>
 
@@ -19,12 +19,15 @@
           </div>
 
           <div class="form-outline mb-4 position-relative">
-            <input type="{{ hidePassword ? 'password' : 'text' }}" id="form1Example23"
-              class="form-control form-control-lg bg-dark text-white border-light" formControlName="password" placeholder="Your password" />
-            <button type="button" class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y"
-              (click)="togglePasswordVisibility()">
-              <i class="bi bi-eye{{ hidePassword ? '-slash' : '' }}"></i>
-            </button>
+            <div class="position-relative">
+              <input type="{{ hidePassword ? 'password' : 'text' }}" id="form1Example23"
+                class="form-control form-control-lg bg-dark text-white border-light pe-5" formControlName="password"
+                placeholder="Your password" />
+              <button type="button" class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y me-2"
+                style="z-index: 1;" (click)="togglePasswordVisibility()">
+                <i class="bi bi-eye{{ hidePassword ? '-slash' : '' }}"></i>
+              </button>
+            </div>
             <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
               <strong class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">
                 Password is required

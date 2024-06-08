@@ -8,11 +8,11 @@
     </div>
   </div>
 
-  <div id="movieCarousel" class="carousel slide bg-dark" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let movie of movies; let i = index" [class.active]="i === 0">
-        <div class="d-flex justify-content-center align-items-center">
-          <img [src]="movie.image" class=" w-100 h-25 " [alt]="'Movie ' + (i + 1)">
+  <div id="movieCarousel" class="carousel slide bg-dark h-75" data-bs-ride="carousel">
+    <div class="carousel-inner h-100">
+      <div class="carousel-item h-100" *ngFor="let movie of movies; let i = index" [class.active]="i === 0">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <img [src]="movie.image" class="w-100 h-100 object-fit-contain" [alt]="'Movie ' + (i + 1)">
         </div>
         <div class="carousel-caption d-none d-md-block bg-dark fs-4">
           <h4>{{ movie.title }}</h4>

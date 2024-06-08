@@ -1,7 +1,7 @@
 <section class="vh-100">
   <div class="container p-5 border-5 border border-dark rounded bg-dark bg-gradient">
     <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <div class="col-md-7 col-lg-5 col-xl-5 ">
         <form [formGroup]="registerForm" (ngSubmit)="register()">
           <h2 class="text-center mb-2 text-white">Register</h2>
 
@@ -29,12 +29,15 @@
           </div>
 
           <div class="form-outline mb-4 position-relative bg-dark">
-            <input type="{{ hidePassword ? 'password' : 'text' }}" id="form1Example23"
-              class="form-control form-control-lg bg-transparent text-white border-light" formControlName="password" placeholder="Your password" />
-            <button type="button" class="btn btn-outline-light position-absolute end-0 top-50 translate-middle-y"
-              (click)="togglePasswordVisibility()">
-              <i class="bi bi-eye{{ hidePassword ? '-slash' : '' }}"></i>
-            </button>
+            <div class="position-relative">
+              <input type="{{ hidePassword ? 'password' : 'text' }}" id="form1Example23"
+                class="form-control form-control-lg bg-transparent text-white border-light pe-5" formControlName="password"
+                placeholder="Your password" />
+              <button type="button" class="btn btn-outline-light position-absolute end-0 top-50 me-2 translate-middle-y"
+                style="z-index: 1;" (click)="togglePasswordVisibility()">
+                <i class="bi bi-eye{{ hidePassword ? '-slash' : '' }}"></i>
+              </button>
+            </div>
             <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
               <strong class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">
                 Password is required
@@ -54,6 +57,22 @@
               </strong>
               <strong class="text-danger" *ngIf="registerForm.get('age')?.errors?.['min']">
                 Age must be a positive number
+              </strong>
+            </div>
+          </div>
+
+          <div data-mdb-input-init class="form-outline mb-4 mt-2 bg-dark">
+            <input type="number" id="formPhone" class="form-control form-control-lg bg-transparent text-white border-light" formControlName="phone"
+              placeholder="Your phone number" />
+            <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+              <strong class="text-danger" *ngIf="registerForm.get('phone')?.errors?.['required']">
+                Phone number is required
+              </strong>
+              <strong class="text-danger" *ngIf="registerForm.get('phone')?.errors?.['maxlength']">
+                Phone number cannot exceed 10 digits
+              </strong>
+              <strong class="text-danger" *ngIf="registerForm.get('phone')?.errors?.['minlength']">
+                Enter a valid phone number
               </strong>
             </div>
           </div>

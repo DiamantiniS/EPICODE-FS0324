@@ -5,5 +5,6 @@ export interface iUsers {
   email: string;
   password: string;
   age: number;
+  phone: number;
   proPic: string;
 }
