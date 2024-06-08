@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth/auth.guard';
-import { GuestGuard } from './auth/guest.guard';
+import { NaviGuard } from './auth/navigation.guard';
 
 const routes: Routes = [
   {
@@ -12,14 +12,14 @@ const routes: Routes = [
         (m) => m.HomeModule
       ),
     title: 'Home',
-    canActivate: [GuestGuard],
-    canActivateChild: [GuestGuard],
+    canActivate: [NaviGuard],
+    canActivateChild: [NaviGuard],
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [GuestGuard],
-    canActivateChild: [GuestGuard],
+    canActivate: [NaviGuard],
+    canActivateChild: [NaviGuard],
   },
   {
     path: 'dashboard',

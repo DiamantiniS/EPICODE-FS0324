@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root',
 })
-export class GuestGuard {
+export class NaviGuard {
   constructor(private authService: AuthService, private router: Router) {}
   private redirectToDashboard(): boolean {
     this.router.navigate(['/dashboard']);

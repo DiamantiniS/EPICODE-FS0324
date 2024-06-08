@@ -1,4 +1,4 @@
-import { iUsers } from './iUsers.interface';
+import { iUsers } from '../../interfaces/iUsers.interface';
 
 export interface iAuthResponse {
   accessToken: string;

@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { iUsers } from '../interfaces/iUsers.interface';
-import { iAuthResponse } from '../interfaces/iauth-response.interface';
-import { iAuthData } from '../interfaces/iAuth-Datas.interface';
+import { iAuthResponse } from './auth-interfaces/iAuth-Response.interface';
+import { iAuthData } from './auth-interfaces/iAuth-Datas.interface';
 
 @Injectable({
   providedIn: 'root',
