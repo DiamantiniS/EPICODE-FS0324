@@ -1,0 +1,15 @@
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\bin\Debug\net8.0\ConsoleApp4.exe
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\bin\Debug\net8.0\ConsoleApp4.deps.json
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\bin\Debug\net8.0\ConsoleApp4.runtimeconfig.json
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\bin\Debug\net8.0\ConsoleApp4.dll
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\bin\Debug\net8.0\ConsoleApp4.pdb
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.GeneratedMSBuildEditorConfig.editorconfig
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.AssemblyInfoInputs.cache
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.AssemblyInfo.cs
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.csproj.CoreCompileInputs.cache
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.sourcelink.json
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.dll
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\refint\ConsoleApp4.dll
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.pdb
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ConsoleApp4.genruntimeconfig.cache
+C:\GIT\EPICODE-FS0324\backend\ConsoleApp4\obj\Debug\net8.0\ref\ConsoleApp4.dll
