@@ -1,4 +1,4 @@
-namespace WebApplication2.Models
+namespace CinemaMVC.Models
 {
     public class ErrorViewModel
     {

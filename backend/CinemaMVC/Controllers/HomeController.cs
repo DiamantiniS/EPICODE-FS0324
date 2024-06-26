@@ -1,8 +1,8 @@
+using CinemaMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebApplication2.Models;
 
-namespace WebApplication2.Controllers
+namespace CinemaMVC.Controllers
 {
     public class HomeController : Controller
     {

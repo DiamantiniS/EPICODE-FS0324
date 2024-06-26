@@ -8,7 +8,7 @@ namespace CinemaMVC.Controllers
     {
         public IActionResult Index()
         {
-            return View(StaticData.Rooms);
+            return View(StaticData.Rooms); 
         }
 
         public IActionResult Create()
