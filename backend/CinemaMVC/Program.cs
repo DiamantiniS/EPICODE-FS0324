@@ -5,12 +5,10 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Aggiungi i servizi al contenitore.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configura il middleware della pipeline HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
