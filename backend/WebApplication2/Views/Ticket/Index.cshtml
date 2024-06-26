@@ -1,0 +1,29 @@
+﻿@model IEnumerable<CinemaMVC.Models.Room>
+
+<h2>Biglietti Venduti</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Vendi Biglietto</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sala</th>
+            <th>Biglietti Totali</th>
+            <th>Biglietti Ridotti</th>
+            <th>Capacità</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.Name</td>
+                <td>@room.TotalTickets</td>
+                <td>@room.ReducedTickets</td>
+                <td>@room.Capacity</td>
+            </tr>
+        }
+    </tbody>
+</table>

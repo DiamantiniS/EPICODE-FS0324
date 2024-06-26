@@ -1,0 +1,37 @@
+﻿@model CinemaMVC.Models.Ticket
+
+<h2>Vendita Biglietto</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Room"></label>
+        <select asp-for="Room" class="form-control">
+            <option value="SALA NORD">SALA NORD</option>
+            <option value="SALA EST">SALA EST</option>
+            <option value="SALA SUD">SALA SUD</option>
+        </select>
+        <span asp-validation-for="Room" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check mt-1">
+        <input asp-for="IsReduced" class="form-check-input" />
+        <label asp-for="IsReduced" class="form-check-label"></label>
+        <span asp-validation-for="IsReduced" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-1">Vendi Biglietto</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
