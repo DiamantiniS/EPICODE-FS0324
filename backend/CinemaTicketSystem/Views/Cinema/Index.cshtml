@@ -1,0 +1,37 @@
+﻿@model List<CinemaTicketSystem.Identiti.Cinema>
+
+@{
+    ViewData["Title"] = "Lista delle Sale";
+}
+
+<h1>Lista delle Sale</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sala</th>
+            <th>Capacità Massima</th>
+            <th>Biglietti Venduti</th>
+            <th>Biglietti Ridotti Venduti</th>
+            <th>Progressione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cinema in Model)
+        {
+            <tr>
+                <td>@cinema.Nome</td>
+                <td>@cinema.CapacitaMassima</td>
+                <td>@cinema.BigliettiVenduti</td>
+                <td>@cinema.BigliettiRidottiVenduti</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: @(cinema.BigliettiVenduti * 100 / cinema.CapacitaMassima)%" aria-valuenow="@(cinema.BigliettiVenduti * 100 / cinema.CapacitaMassima)" aria-valuemin="0" aria-valuemax="100">
+                            @(cinema.BigliettiVenduti * 100 / cinema.CapacitaMassima)%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
