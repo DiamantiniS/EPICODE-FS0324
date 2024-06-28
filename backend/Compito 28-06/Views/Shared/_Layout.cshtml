@@ -7,18 +7,16 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Compito_28_06.styles.css" asp-append-version="true" />
-    <style>
+     <style>
         html, body {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
         }
-
         body {
             display: flex;
             flex-direction: column;
         }
-
         .sidebar {
             min-width: 220px;
             max-width: 220px;
@@ -28,36 +26,36 @@
             position: fixed;
             color: white;
         }
-
-            .sidebar .navbar-brand {
-                color: #ffffff;
-                font-size: 1.5rem;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            .sidebar .navbar-nav {
-                margin-top: 20px;
-            }
-
-            .sidebar .nav-link {
-                color: #ffffff;
-                margin: 10px 0;
-                text-align: center;
-            }
-
-                .sidebar .nav-link:hover {
-                    background-color: #495057;
-                    border-radius: 5px;
-                }
-
+        .sidebar .navbar-brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .sidebar .navbar-brand img {
+            max-width: 150px; 
+        }
+        .sidebar .navbar-nav {
+            margin-top: 20px;
+        }
+        .sidebar .nav-link {
+            color: #ffffff;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+            border-radius: 5px;
+        }
         .content {
             flex: 1;
             margin-left: 220px;
             padding: 20px;
             background-color: #f8f9fa;
         }
-
         .footer {
             background-color: #343a40;
             color: #ffffff;
@@ -68,41 +66,23 @@
             width: calc(100% - 220px);
             margin-left: 220px;
         }
-
-        .card {
-            margin-bottom: 20px;
-            transition: transform 0.3s;
+        .no-hover:hover {
+            background-color: #007bff !important; 
+            border-color: #007bff !important; 
+            color: white !important; 
         }
-
-            .card:hover {
-                transform: scale(1.05);
-            }
-
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+        .no-hover.btn-secondary:hover {
+            background-color: #6c757d !important; 
+            border-color: #6c757d !important; 
         }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-                border-color: #0056b3;
-            }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            border-color: #6c757d;
-        }
-
-            .btn-secondary:hover {
-                background-color: #5a6268;
-                border-color: #545b62;
-            }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <nav class="navbar navbar-dark flex-column">
-            <a class="navbar-brand" href="@Url.Action("Index", "Products")">DiamaGym's</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Products")">
+                <img src="/asset/logo.png" alt="DiamaGym's Logo">
+            </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Index", "Products")">Home</a>
