@@ -4,12 +4,12 @@ using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Aggiungi i servizi al container.
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configura la pipeline delle richieste HTTP.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
