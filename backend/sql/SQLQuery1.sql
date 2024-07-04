@@ -1,0 +1,22 @@
+﻿INSERT INTO Impiego ([Tipo Impiego], Assunzione)
+VALUES
+('Manager', 2005-03-15),
+('Developer', 2008-07-20),
+('HR', 2010-01-12),
+('Accountant', 2009-06-18),
+('Sales', 2011-08-22),
+('Marketing', 2012-11-05),
+('IT Support', 2013-04-17),
+('Engineer', 2014-09-30),
+('Consultant', 2015-03-21),
+('Analyst', 2016-07-11),
+('Manager', 2017-10-19),
+('Developer', 2018-02-28),
+('HR', 2019-05-14),
+('Accountant', 2020-08-06),
+('Sales', 2021-11-10),
+('Marketing', 2022-03-22),
+('IT Support', 2023-01-15),
+('Engineer', 2023-04-10),
+('Consultant', 2023-06-25),
+('Analyst', 2023-07-01);

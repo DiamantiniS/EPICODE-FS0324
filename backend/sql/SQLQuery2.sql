@@ -1,0 +1,22 @@
+﻿INSERT INTO [dbo].[Impiegato] (Cognome, Nome, [Codice Fiscale], Eta, [Reddito Mensile], [Detrazione fiscale], IdImpiegoFK)
+VALUES
+('Rossi', 'Mario', 'RSSMRA80A01H501Z', 35, 1200.00, 1, 1),
+('Bianchi', 'Luigi', 'BNCLGU80A01H501Z', 28, 850.00, 0, 2),
+('Verdi', 'Giulia', 'VRDGLI90B01H501Z', 32, 950.00, 1, 3),
+('Neri', 'Marco', 'NRIMRC85C01H501Z', 45, 1300.00, 0, 4),
+('Gialli', 'Sara', 'GLLSRA92D01H501Z', 29, 780.00, 1, 5),
+('Azzurri', 'Luca', 'AZZLUC87E01H501Z', 38, 1100.00, 0, 6),
+('Rosa', 'Anna', 'ROSANA89F01H501Z', 26, 720.00, 1, 7),
+('Marroni', 'Paolo', 'MRNPLF81G01H501Z', 50, 1500.00, 0, 8),
+('Viola', 'Elena', 'VLELEN90H01H501Z', 34, 980.00, 1, 9),
+('Blu', 'Giovanni', 'BLUGVN88I01H501Z', 40, 1200.00, 0, 10),
+('Arancio', 'Francesca', 'ARCFRA91L01H501Z', 27, 810.00, 1, 11),
+('Beige', 'Stefano', 'BEISTF83M01H501Z', 33, 900.00, 0, 12),
+('Ciano', 'Roberta', 'CIAROB84N01H501Z', 31, 860.00, 1, 13),
+('Ocra', 'Giorgio', 'OCRGRG86O01H501Z', 42, 1400.00, 0, 14),
+('Fucsia', 'Laura', 'FUCLRA93P01H501Z', 30, 760.00, 1, 15),
+('Argento', 'Massimo', 'ARGMSM85Q01H501Z', 47, 1600.00, 0, 16),
+('Bronzo', 'Angela', 'BRNANG88R01H501Z', 36, 1050.00, 1, 17),
+('Platino', 'Stefania', 'PLTSFN87S01H501Z', 39, 1150.00, 0, 18),
+('Rubino', 'Alessandro', 'RBNALS82T01H501Z', 48, 1700.00, 1, 19),
+('Smeraldo', 'Marta', 'SMRMRT84U01H501Z', 41, 1250.00, 0, 20);
