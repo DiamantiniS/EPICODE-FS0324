@@ -24,7 +24,7 @@ SELECT MAX([Reddito Mensile]) AS RedditoMensileMassimo FROM IMPIEGATO;
 
 SELECT MIN([Reddito Mensile]) AS RedditoMensileMinimo FROM IMPIEGATO;
 
-SELECT I.* 
-FROM IMPIEGATO I
-JOIN IMPIEGO P ON I.IdImpiegato = P.IDImpiegato
-WHERE P.Assunzione BETWEEN '2007-01-01' AND '2008-01-01';
+SELECT I.*, p.Assunzione 
+FROM IMPIEGATO as I
+JOIN IMPIEGO as P ON I.IdImpiegoFK= P.IdImpiego
+WHERE P.Assunzione BETWEEN '2007-01-01' AND '2024-01-01';
