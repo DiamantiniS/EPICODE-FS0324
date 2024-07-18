@@ -1,0 +1,56 @@
+﻿@model esercizio_18_07.Models.Shipment
+
+@{
+    ViewData["Title"] = "Add Shipment";
+}
+
+<h1>Add Shipment</h1>
+
+<form asp-action="AddShipment" method="post">
+    <div class="form-group">
+        <label asp-for="TrackingNumber"></label>
+        <input asp-for="TrackingNumber" class="form-control" />
+        <span asp-validation-for="TrackingNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ClientId"></label>
+        <input asp-for="ClientId" class="form-control" />
+        <span asp-validation-for="ClientId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShipmentDate"></label>
+        <input asp-for="ShipmentDate" class="form-control" />
+        <span asp-validation-for="ShipmentDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DestinationCity"></label>
+        <input asp-for="DestinationCity" class="form-control" />
+        <span asp-validation-for="DestinationCity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DestinationAddress"></label>
+        <input asp-for="DestinationAddress" class="form-control" />
+        <span asp-validation-for="DestinationAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RecipientName"></label>
+        <input asp-for="RecipientName" class="form-control" />
+        <span asp-validation-for="RecipientName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ShippingCost"></label>
+        <input asp-for="ShippingCost" class="form-control" />
+        <span asp-validation-for="ShippingCost" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EstimatedDeliveryDate"></label>
+        <input asp-for="EstimatedDeliveryDate" class="form-control" />
+        <span asp-validation-for="EstimatedDeliveryDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

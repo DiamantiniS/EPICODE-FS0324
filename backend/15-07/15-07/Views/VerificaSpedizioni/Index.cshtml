@@ -1,0 +1,19 @@
+﻿@model YourNamespace.Models.Spedizione
+
+@{
+    ViewData["Title"] = "Verifica Spedizione";
+}
+
+<h1>Verifica Spedizione</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label for="codiceFiscale">Codice Fiscale</label>
+        <input type="text" class="form-control" id="codiceFiscale" name="codiceFiscale" required />
+    </div>
+    <div class="form-group">
+        <label for="numeroSpedizione">Numero Spedizione</label>
+        <input type="text" class="form-control" id="numeroSpedizione" name="numeroSpedizione" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Verifica</button>
+</form>

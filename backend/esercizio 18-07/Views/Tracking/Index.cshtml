@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Track Shipment";
+}
+
+<h1>Track Shipment</h1>
+
+<form asp-action="TrackShipment" method="post">
+    <div class="form-group">
+        <label for="fiscalCodeOrVat">Fiscal Code or VAT</label>
+        <input type="text" class="form-control" id="fiscalCodeOrVat" name="fiscalCodeOrVat" />
+    </div>
+    <div class="form-group">
+        <label for="trackingNumber">Tracking Number</label>
+        <input type="text" class="form-control" id="trackingNumber" name="trackingNumber" />
+    </div>
+    <button type="submit" class="btn btn-primary">Track</button>
+</form>

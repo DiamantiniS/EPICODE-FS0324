@@ -1,0 +1,32 @@
+﻿@model esercizio_18_07.Models.ShipmentUpdate
+
+@{
+    ViewData["Title"] = "Add Shipment Update";
+}
+
+<h1>Add Shipment Update</h1>
+
+<form asp-action="AddShipmentUpdate" method="post">
+    <input type="hidden" asp-for="ShipmentId" />
+    <div class="form-group">
+        <label asp-for="Status"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="UpdateDate"></label>
+        <input asp-for="UpdateDate" class="form-control" />
+        <span asp-validation-for="UpdateDate" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

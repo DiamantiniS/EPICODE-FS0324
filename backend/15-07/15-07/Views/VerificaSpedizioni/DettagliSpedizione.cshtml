@@ -1,0 +1,46 @@
+﻿@model YourNamespace.Models.Spedizione
+
+@{
+    ViewData["Title"] = "Dettagli Spedizione";
+}
+
+<h1>Dettagli Spedizione</h1>
+
+<p>
+    <strong>Numero Spedizione:</strong> @Model.NumeroIdentificativo
+</p>
+<p>
+    <strong>Data Spedizione:</strong> @Model.DataSpedizione.ToString("dd/MM/yyyy")
+</p>
+<p>
+    <strong>Destinatario:</strong> @Model.NominativoDestinatario, @Model.IndirizzoDestinatario, @Model.CittàDestinataria
+</p>
+<p>
+    <strong>Costo:</strong> @Model.CostoSpedizione
+</p>
+<p>
+    <strong>Data Consegna Prevista:</strong> @Model.DataConsegnaPrevista.ToString("dd/MM/yyyy")
+</p>
+
+<h2>Aggiornamenti</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stato</th>
+            <th>Luogo</th>
+            <th>Descrizione</th>
+            <th>Data e Ora</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aggiornamento in Model.AggiornamentiSpedizioni.OrderByDescending(a => a.DataOraAggiornamento))
+        {
+            <tr>
+                <td>@aggiornamento.Stato</td>
+                <td>@aggiornamento.Luogo</td>
+                <td>@aggiornamento.Descrizione</td>
+                <td>@aggiornamento.DataOraAggiornamento.ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>

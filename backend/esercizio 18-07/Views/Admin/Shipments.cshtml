@@ -1,0 +1,33 @@
+﻿@model IEnumerable<esercizio_18_07.Models.Shipment>
+
+@{
+    ViewData["Title"] = "Manage Shipments";
+}
+
+<h1>Manage Shipments</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tracking Number</th>
+            <th>Client</th>
+            <th>Shipment Date</th>
+            <th>Destination</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shipment in Model)
+        {
+            <tr>
+                <td>@shipment.TrackingNumber</td>
+                <td>@shipment.Client.Name</td>
+                <td>@shipment.ShipmentDate</td>
+                <td>@shipment.DestinationCity, @shipment.DestinationAddress</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a href="@Url.Action("AddShipment", "Admin")" class="btn btn-primary">Add New Shipment</a>
+</p>

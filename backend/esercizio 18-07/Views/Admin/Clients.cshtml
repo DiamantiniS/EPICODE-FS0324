@@ -1,0 +1,33 @@
+﻿@model IEnumerable<esercizio_18_07.Models.Client>
+
+@{
+    ViewData["Title"] = "Manage Clients";
+}
+
+<h1>Manage Clients</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Is Company</th>
+            <th>Fiscal Code</th>
+            <th>VAT Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.Name</td>
+                <td>@client.IsCompany</td>
+                <td>@client.FiscalCode</td>
+                <td>@client.VatNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a href="@Url.Action("AddClient", "Admin")" class="btn btn-primary">Add New Client</a>
+</p>

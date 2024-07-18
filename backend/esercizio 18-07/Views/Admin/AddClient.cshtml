@@ -1,0 +1,31 @@
+﻿@model esercizio_18_07.Models.Client
+
+@{
+    ViewData["Title"] = "Add Client";
+}
+
+<h1>Add Client</h1>
+
+<form asp-action="AddClient" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IsCompany"></label>
+        <input asp-for="IsCompany" class="form-control" />
+        <span asp-validation-for="IsCompany" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FiscalCode"></label>
+        <input asp-for="FiscalCode" class="form-control" />
+        <span asp-validation-for="FiscalCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VatNumber"></label>
+        <input asp-for="VatNumber" class="form-control" />
+        <span asp-validation-for="VatNumber" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

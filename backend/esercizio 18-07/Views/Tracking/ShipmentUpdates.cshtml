@@ -1,0 +1,29 @@
+﻿@model IEnumerable<esercizio_18_07.Models.ShipmentUpdate>
+
+@{
+    ViewData["Title"] = "Shipment Updates";
+}
+
+<h1>Shipment Updates</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var update in Model)
+        {
+            <tr>
+                <td>@update.Status</td>
+                <td>@update.Location</td>
+                <td>@update.Description</td>
+                <td>@update.UpdateDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
