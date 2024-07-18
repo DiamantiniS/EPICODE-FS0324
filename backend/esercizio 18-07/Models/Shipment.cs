@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace esercizio_18_07.Models
+﻿namespace esercizio_18_07.Models
 {
     public class Shipment
     {
@@ -17,6 +14,6 @@ namespace esercizio_18_07.Models
         public DateTime EstimatedDeliveryDate { get; set; }
 
         public Client Client { get; set; }
-        public ICollection<ShipmentUpdate> ShipmentUpdates { get; set; } // Aggiungi questa proprietà
+        public ICollection<ShipmentUpdate> ShipmentUpdates { get; set; }
     }
 }

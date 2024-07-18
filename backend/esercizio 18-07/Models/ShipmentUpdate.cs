@@ -2,7 +2,7 @@
 {
     public class ShipmentUpdate
     {
-        public int UpdateId { get; set; }  // Questa sarà la chiave primaria
+        public int UpdateId { get; set; }
         public int ShipmentId { get; set; }
         public string Status { get; set; }
         public string Location { get; set; }

@@ -7,5 +7,8 @@
         public bool IsCompany { get; set; }
         public string FiscalCode { get; set; }
         public string VatNumber { get; set; }
+
+        // Aggiungi questa proprietà per risolvere l'errore
+        public ICollection<Shipment> Shipments { get; set; }
     }
 }
