@@ -1,0 +1,31 @@
+﻿@model PoliziaMunicipale.Models.Anagrafica
+
+<h2>Nuovo Trasgressore</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Cognome">Cognome</label>
+        <input type="text" class="form-control" id="Cognome" name="Cognome" required>
+    </div>
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        <input type="text" class="form-control" id="Nome" name="Nome" required>
+    </div>
+    <div class="form-group">
+        <label for="Indirizzo">Indirizzo</label>
+        <input type="text" class="form-control" id="Indirizzo" name="Indirizzo" required>
+    </div>
+    <div class="form-group">
+        <label for="Citta">Città</label>
+        <input type="text" class="form-control" id="Citta" name="Citta" required>
+    </div>
+    <div class="form-group">
+        <label for="CAP">CAP</label>
+        <input type="text" class="form-control" id="CAP" name="CAP" required>
+    </div>
+    <div class="form-group">
+        <label for="Cod_Fisc">Codice Fiscale</label>
+        <input type="text" class="form-control" id="Cod_Fisc" name="Cod_Fisc" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Salva</button>
+</form>

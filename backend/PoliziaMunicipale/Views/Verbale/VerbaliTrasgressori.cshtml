@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PoliziaMunicipale.Models.Verbale>
+
+<h2>Verbali dei Trasgressori</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Verbale</th>
+            <th>Data Violazione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Anagrafica.Nome</td>
+                <td>@item.Anagrafica.Cognome</td>
+                <td>@item.Violazioni</td>
+                <td>@item.DataViolazione.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

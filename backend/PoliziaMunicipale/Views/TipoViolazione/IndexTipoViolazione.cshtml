@@ -1,0 +1,19 @@
+﻿@model IEnumerable<PoliziaMunicipale.Models.TipoViolazione>
+
+<h2>Elenco Violazioni</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var violazione in Model)
+        {
+            <tr>
+                <td>@violazione.Descrizione</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<PoliziaMunicipale.Models.Verbale>
+
+<h2>Punti Decurtati ai Trasgressori</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Punti Decurtati</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Anagrafica.Nome</td>
+                <td>@item.Anagrafica.Cognome</td>
+                <td>@item.DecurtamentoPunti</td>
+            </tr>
+        }
+    </tbody>
+</table>

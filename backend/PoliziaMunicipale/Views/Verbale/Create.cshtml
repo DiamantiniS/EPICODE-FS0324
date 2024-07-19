@@ -1,0 +1,40 @@
+﻿@model PoliziaMunicipale.Models.Verbale
+
+<h2>Nuovo Verbale</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="DataViolazione">Data Violazione</label>
+        <input type="datetime-local" class="form-control" id="DataViolazione" name="DataViolazione" required>
+    </div>
+    <div class="form-group">
+        <label for="IndirizzoViolazione">Indirizzo Violazione</label>
+        <input type="text" class="form-control" id="IndirizzoViolazione" name="IndirizzoViolazione" required>
+    </div>
+    <div class="form-group">
+        <label for="NominativoAgente">Nominativo Agente</label>
+        <input type="text" class="form-control" id="NominativoAgente" name="NominativoAgente" required>
+    </div>
+    <div class="form-group">
+        <label for="DataTrascrizioneVerbale">Data Trascrizione Verbale</label>
+        <input type="datetime-local" class="form-control" id="DataTrascrizioneVerbale" name="DataTrascrizioneVerbale" required>
+    </div>
+    <div class="form-group">
+        <label for="Importo">Importo</label>
+        <input type="number" class="form-control" id="Importo" name="Importo" required>
+    </div>
+    <div class="form-group">
+        <label for="DecurtamentoPunti">Decurtamento Punti</label>
+        <input type="number" class="form-control" id="DecurtamentoPunti" name="DecurtamentoPunti" required>
+    </div>
+    <div class="form-group">
+        <label for="IdAnagrafica">Trasgressore</label>
+        <select class="form-control" id="IdAnagrafica" name="IdAnagrafica" required>
+            @foreach (var anagrafica in ViewBag.Anagrafiche)
+            {
+                <option value="@anagrafica.IdAnagrafica">@anagrafica.Cognome @anagrafica.Nome</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Salva</button>
+</form>

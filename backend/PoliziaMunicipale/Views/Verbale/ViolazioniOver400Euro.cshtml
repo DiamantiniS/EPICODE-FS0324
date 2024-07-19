@@ -1,0 +1,27 @@
+﻿@model IEnumerable<(string Cognome, string Nome, decimal Importo, DateTime DataViolazione, int DecurtamentoPunti)>
+
+<h2>Violazioni con Importo > 400 Euro</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Importo</th>
+            <th>Data Violazione</th>
+            <th>Decurtamento Punti</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.Importo</td>
+                <td>@item.DataViolazione</td>
+                <td>@item.DecurtamentoPunti</td>
+            </tr>
+        }
+    </tbody>
+</table>
