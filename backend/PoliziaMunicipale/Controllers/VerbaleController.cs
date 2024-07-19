@@ -112,5 +112,11 @@ namespace PoliziaMunicipale.Controllers
             return View(model);
         }
 
+        public IActionResult TotalePuntiDecurtatiPerTrasgressore()
+        {
+            var result = _dao.GetTotalePuntiDecurtatiPerTrasgressore();
+            return View(result);
+        }
+
     }
 }

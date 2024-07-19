@@ -365,6 +365,36 @@ namespace PoliziaMunicipale.Data
             }
             return verbali;
         }
+
+        public IEnumerable<(string Cognome, string Nome, int TotalePunti)> GetTotalePuntiDecurtatiPerTrasgressore()
+        {
+            var result = new List<(string Cognome, string Nome, int TotalePunti)>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(@"
+            SELECT A.Cognome, A.Nome, SUM(V.DecurtamentoPunti) AS TotalePunti
+            FROM VERBALE V
+            JOIN ANAGRAFICA A ON V.idanagrafica = A.idanagrafica
+            GROUP BY A.Cognome, A.Nome", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add((
+                                reader.GetString(0),
+                                reader.GetString(1),
+                                reader.GetInt32(2)
+                            ));
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 
 }
