@@ -20,7 +20,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT * FROM TIPO_VIOLAZIONE";
+                var query = "SELECT idviolazione, descrizione FROM TIPO_VIOLAZIONE";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -45,7 +45,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT * FROM TIPO_VIOLAZIONE WHERE idviolazione = @Id";
+                var query = "SELECT idviolazione, descrizione FROM TIPO_VIOLAZIONE WHERE idviolazione = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);

@@ -1,25 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using PoliziaMunicipale.Data;
 using PoliziaMunicipale.Models;
-using System.Collections.Generic;
 
 namespace PoliziaMunicipale.Controllers
 {
     public class AnagraficaController : Controller
     {
-        private readonly AnagraficaDAO _anagraficaDAO;
+        private readonly AnagraficaDAO _dao;
 
-        public AnagraficaController(IConfiguration configuration)
+        public AnagraficaController(AnagraficaDAO dao)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            _anagraficaDAO = new AnagraficaDAO(connectionString);
+            _dao = dao;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Anagrafica> anagrafiche = _anagraficaDAO.GetAll();
-            return View(anagrafiche);
+            var model = _dao.GetAll();
+            return View(model);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = _dao.GetById(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
         }
 
         public IActionResult Create()
@@ -28,51 +35,51 @@ namespace PoliziaMunicipale.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Anagrafica anagrafica)
+        public IActionResult Create(Anagrafica model)
         {
             if (ModelState.IsValid)
             {
-                _anagraficaDAO.Add(anagrafica);
+                _dao.Create(model);
                 return RedirectToAction("Index");
             }
-            return View(anagrafica);
+            return View(model);
         }
 
         public IActionResult Edit(int id)
         {
-            var anagrafica = _anagraficaDAO.GetById(id);
-            if (anagrafica == null)
+            var model = _dao.GetById(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(anagrafica);
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(Anagrafica anagrafica)
+        public IActionResult Edit(int id, Anagrafica model)
         {
             if (ModelState.IsValid)
             {
-                _anagraficaDAO.Update(anagrafica);
+                _dao.Update(id, model);
                 return RedirectToAction("Index");
             }
-            return View(anagrafica);
+            return View(model);
         }
 
         public IActionResult Delete(int id)
         {
-            var anagrafica = _anagraficaDAO.GetById(id);
-            if (anagrafica == null)
+            var model = _dao.GetById(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(anagrafica);
+            return View(model);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            _anagraficaDAO.Delete(id);
+            _dao.Delete(id);
             return RedirectToAction("Index");
         }
     }

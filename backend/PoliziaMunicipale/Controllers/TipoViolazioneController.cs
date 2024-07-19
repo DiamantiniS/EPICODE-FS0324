@@ -1,25 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using PoliziaMunicipale.Data;
 using PoliziaMunicipale.Models;
-using System.Collections.Generic;
 
 namespace PoliziaMunicipale.Controllers
 {
     public class TipoViolazioneController : Controller
     {
-        private readonly TipoViolazioneDAO _tipoViolazioneDAO;
+        private readonly TipoViolazioneDAO _dao;
 
-        public TipoViolazioneController(IConfiguration configuration)
+        public TipoViolazioneController(TipoViolazioneDAO dao)
         {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            _tipoViolazioneDAO = new TipoViolazioneDAO(connectionString);
+            _dao = dao;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<TipoViolazione> tipoViolazioni = _tipoViolazioneDAO.GetAll();
-            return View(tipoViolazioni);
+            var model = _dao.GetAll();
+            return View(model);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = _dao.GetById(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
         }
 
         public IActionResult Create()
@@ -28,51 +35,51 @@ namespace PoliziaMunicipale.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(TipoViolazione tipoViolazione)
+        public IActionResult Create(TipoViolazione model)
         {
             if (ModelState.IsValid)
             {
-                _tipoViolazioneDAO.Add(tipoViolazione);
+                _dao.Create(model);
                 return RedirectToAction("Index");
             }
-            return View(tipoViolazione);
+            return View(model);
         }
 
         public IActionResult Edit(int id)
         {
-            var tipoViolazione = _tipoViolazioneDAO.GetById(id);
-            if (tipoViolazione == null)
+            var model = _dao.GetById(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(tipoViolazione);
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(TipoViolazione tipoViolazione)
+        public IActionResult Edit(int id, TipoViolazione model)
         {
             if (ModelState.IsValid)
             {
-                _tipoViolazioneDAO.Update(tipoViolazione);
+                _dao.Update(id, model);
                 return RedirectToAction("Index");
             }
-            return View(tipoViolazione);
+            return View(model);
         }
 
         public IActionResult Delete(int id)
         {
-            var tipoViolazione = _tipoViolazioneDAO.GetById(id);
-            if (tipoViolazione == null)
+            var model = _dao.GetById(id);
+            if (model == null)
             {
                 return NotFound();
             }
-            return View(tipoViolazione);
+            return View(model);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            _tipoViolazioneDAO.Delete(id);
+            _dao.Delete(id);
             return RedirectToAction("Index");
         }
     }

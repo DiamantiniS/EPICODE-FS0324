@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Benvenuto nel sistema di gestione delle contravvenzioni</h2>
+
+<ul>
+    <li><a asp-controller="Anagrafica" asp-action="Index">Gestione Trasgressori</a></li>
+    <li><a asp-controller="TipoViolazione" asp-action="Index">Elenco Violazioni</a></li>
+    <li><a asp-controller="Verbale" asp-action="Index">Gestione Verbali</a></li>
+    <li><a asp-controller="Verbale" asp-action="ViolazioniOver400Euro">Violazioni Over 400 Euro</a></li>
+    <li><a asp-controller="Verbale" asp-action="ViolazioniOverTenPoints">Violazioni Over 10 Points</a></li>
+    <li><a asp-controller="Verbale" asp-action="PuntiDecurtatiTrasgressori">Punti Decurtati Trasgressori</a></li>
+    <li><a asp-controller="Verbale" asp-action="VerbaliTrasgressori">Verbali Trasgressori</a></li>
+</ul>

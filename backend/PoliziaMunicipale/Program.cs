@@ -1,11 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using PoliziaMunicipale.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register DAO services
+builder.Services.AddScoped<VerbaleDAO>(sp => new VerbaleDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<AnagraficaDAO>(sp => new AnagraficaDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<TipoViolazioneDAO>(sp => new TipoViolazioneDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

@@ -1,24 +1,30 @@
-﻿@model IEnumerable<PoliziaMunicipale.Models.Verbale>
+﻿@model IEnumerable<(string Nome, string Cognome, decimal Importo, DateTime DataViolazione, int DecurtamentoPunti)>
 
-<h2>Verbali dei Trasgressori</h2>
+@{
+    ViewData["Title"] = "Verbali Trasgressori";
+}
+
+<h2>Verbali Trasgressori</h2>
 
 <table class="table">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Cognome</th>
-            <th>Verbale</th>
+            <th>Importo</th>
             <th>Data Violazione</th>
+            <th>Punti Decurtati</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Anagrafica.Nome</td>
-                <td>@item.Anagrafica.Cognome</td>
-                <td>@item.Violazioni</td>
+                <td>@item.Nome</td>
+                <td>@item.Cognome</td>
+                <td>@item.Importo</td>
                 <td>@item.DataViolazione.ToShortDateString()</td>
+                <td>@item.DecurtamentoPunti</td>
             </tr>
         }
     </tbody>

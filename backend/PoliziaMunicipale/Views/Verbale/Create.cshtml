@@ -1,40 +1,52 @@
 ﻿@model PoliziaMunicipale.Models.Verbale
 
-<h2>Nuovo Verbale</h2>
+@{
+    ViewData["Title"] = "Crea Verbale";
+}
 
-<form asp-action="Create" method="post">
+<h2>Crea Verbale</h2>
+
+<form asp-action="Create">
     <div class="form-group">
-        <label for="DataViolazione">Data Violazione</label>
-        <input type="datetime-local" class="form-control" id="DataViolazione" name="DataViolazione" required>
+        <label asp-for="DataViolazione" class="control-label"></label>
+        <input asp-for="DataViolazione" class="form-control" />
+        <span asp-validation-for="DataViolazione" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="IndirizzoViolazione">Indirizzo Violazione</label>
-        <input type="text" class="form-control" id="IndirizzoViolazione" name="IndirizzoViolazione" required>
+        <label asp-for="IndirizzoViolazione" class="control-label"></label>
+        <input asp-for="IndirizzoViolazione" class="form-control" />
+        <span asp-validation-for="IndirizzoViolazione" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="NominativoAgente">Nominativo Agente</label>
-        <input type="text" class="form-control" id="NominativoAgente" name="NominativoAgente" required>
+        <label asp-for="NominativoAgente" class="control-label"></label>
+        <input asp-for="NominativoAgente" class="form-control" />
+        <span asp-validation-for="NominativoAgente" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="DataTrascrizioneVerbale">Data Trascrizione Verbale</label>
-        <input type="datetime-local" class="form-control" id="DataTrascrizioneVerbale" name="DataTrascrizioneVerbale" required>
+        <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
+        <input asp-for="DataTrascrizioneVerbale" class="form-control" />
+        <span asp-validation-for="DataTrascrizioneVerbale" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="Importo">Importo</label>
-        <input type="number" class="form-control" id="Importo" name="Importo" required>
+        <label asp-for="Importo" class="control-label"></label>
+        <input asp-for="Importo" class="form-control" />
+        <span asp-validation-for="Importo" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="DecurtamentoPunti">Decurtamento Punti</label>
-        <input type="number" class="form-control" id="DecurtamentoPunti" name="DecurtamentoPunti" required>
+        <label asp-for="DecurtamentoPunti" class="control-label"></label>
+        <input asp-for="DecurtamentoPunti" class="form-control" />
+        <span asp-validation-for="DecurtamentoPunti" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="IdAnagrafica">Trasgressore</label>
-        <select class="form-control" id="IdAnagrafica" name="IdAnagrafica" required>
-            @foreach (var anagrafica in ViewBag.Anagrafiche)
-            {
-                <option value="@anagrafica.IdAnagrafica">@anagrafica.Cognome @anagrafica.Nome</option>
-            }
-        </select>
+        <label asp-for="AnagraficaId" class="control-label"></label>
+        <input asp-for="AnagraficaId" class="form-control" />
+        <span asp-validation-for="AnagraficaId" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Salva</button>
+    <div class="form-group">
+        <input type="submit" value="Crea" class="btn btn-primary" />
+    </div>
 </form>
+
+<div>
+    <a asp-action="Index">Torna alla lista</a>
+</div>

@@ -1,12 +1,12 @@
 ﻿@model PoliziaMunicipale.Models.Anagrafica
 
 @{
-    ViewData["Title"] = "Crea Anagrafica";
+    ViewData["Title"] = "Modifica Anagrafica";
 }
 
-<h2>Crea Anagrafica</h2>
+<h2>Modifica Anagrafica</h2>
 
-<form asp-action="Create">
+<form asp-action="Edit">
     <div class="form-group">
         <label asp-for="Nome" class="control-label"></label>
         <input asp-for="Nome" class="form-control" />
@@ -37,8 +37,9 @@
         <input asp-for="Cod_Fisc" class="form-control" />
         <span asp-validation-for="Cod_Fisc" class="text-danger"></span>
     </div>
+    <input type="hidden" asp-for="Id" />
     <div class="form-group">
-        <input type="submit" value="Crea" class="btn btn-primary" />
+        <input type="submit" value="Salva" class="btn btn-primary" />
     </div>
 </form>
 

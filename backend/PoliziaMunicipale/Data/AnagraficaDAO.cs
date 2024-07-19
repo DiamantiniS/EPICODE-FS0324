@@ -20,7 +20,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT * FROM ANAGRAFICA";
+                var query = "SELECT idanagrafica, Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc FROM ANAGRAFICA";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -50,7 +50,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT * FROM ANAGRAFICA WHERE idanagrafica = @Id";
+                var query = "SELECT idanagrafica, Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc FROM ANAGRAFICA WHERE idanagrafica = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);

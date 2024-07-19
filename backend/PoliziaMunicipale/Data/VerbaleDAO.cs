@@ -20,11 +20,11 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT v.Id, v.DataViolazione, v.IndirizzoViolazione, v.NominativoAgente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.AnagraficaId, " +
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
                             "a.Nome, a.Cognome, vv.idviolazione, t.descrizione " +
                             "FROM VERBALE v " +
-                            "JOIN ANAGRAFICA a ON v.AnagraficaId = a.Id " +
-                            "LEFT JOIN VERBALE_VIOLAZIONE vv ON v.Id = vv.idverbale " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
+                            "LEFT JOIN VERBALE_VIOLAZIONE vv ON v.idverbale = vv.idverbale " +
                             "LEFT JOIN TIPO_VIOLAZIONE t ON vv.idviolazione = t.idviolazione";
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -37,7 +37,7 @@ namespace PoliziaMunicipale.Data
                                 Id = reader.GetInt32(0),
                                 DataViolazione = reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
-                                NominativoAgente = reader.GetString(3),
+                                NominativoAgente = reader.GetString(3),  // Correzione: Nominativo_Agente
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
@@ -73,13 +73,13 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT v.Id, v.DataViolazione, v.IndirizzoViolazione, v.NominativoAgente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.AnagraficaId, " +
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
                             "a.Nome, a.Cognome, vv.idviolazione, t.descrizione " +
                             "FROM VERBALE v " +
-                            "JOIN ANAGRAFICA a ON v.AnagraficaId = a.Id " +
-                            "LEFT JOIN VERBALE_VIOLAZIONE vv ON v.Id = vv.idverbale " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
+                            "LEFT JOIN VERBALE_VIOLAZIONE vv ON v.idverbale = vv.idverbale " +
                             "LEFT JOIN TIPO_VIOLAZIONE t ON vv.idviolazione = t.idviolazione " +
-                            "WHERE v.Id = @Id";
+                            "WHERE v.idverbale = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
@@ -92,7 +92,7 @@ namespace PoliziaMunicipale.Data
                                 Id = reader.GetInt32(0),
                                 DataViolazione = reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
-                                NominativoAgente = reader.GetString(3),
+                                NominativoAgente = reader.GetString(3),  // Correzione: Nominativo_Agente
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
@@ -125,18 +125,18 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "INSERT INTO VERBALE (DataViolazione, IndirizzoViolazione, NominativoAgente, DataTrascrizioneVerbale, Importo, DecurtamentoPunti, AnagraficaId) " +
-                            "VALUES (@DataViolazione, @IndirizzoViolazione, @NominativoAgente, @DataTrascrizioneVerbale, @Importo, @DecurtamentoPunti, @AnagraficaId); " +
+                var query = "INSERT INTO VERBALE (DataViolazione, IndirizzoViolazione, Nominativo_Agente, DataTrascrizioneVerbale, Importo, DecurtamentoPunti, idanagrafica) " +
+                            "VALUES (@DataViolazione, @IndirizzoViolazione, @Nominativo_Agente, @DataTrascrizioneVerbale, @Importo, @DecurtamentoPunti, @idanagrafica); " +
                             "SELECT SCOPE_IDENTITY();";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", verbale.IndirizzoViolazione);
-                    command.Parameters.AddWithValue("@NominativoAgente", verbale.NominativoAgente);
+                    command.Parameters.AddWithValue("@Nominativo_Agente", verbale.NominativoAgente);  // Correzione: Nominativo_Agente
                     command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
                     command.Parameters.AddWithValue("@Importo", verbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", verbale.DecurtamentoPunti);
-                    command.Parameters.AddWithValue("@AnagraficaId", verbale.AnagraficaId);
+                    command.Parameters.AddWithValue("@idanagrafica", verbale.AnagraficaId);
                     var id = Convert.ToInt32(command.ExecuteScalar());
                     verbale.Id = id;
                 }
@@ -160,18 +160,18 @@ namespace PoliziaMunicipale.Data
             {
                 connection.Open();
                 var query = "UPDATE VERBALE SET DataViolazione = @DataViolazione, IndirizzoViolazione = @IndirizzoViolazione, " +
-                            "NominativoAgente = @NominativoAgente, DataTrascrizioneVerbale = @DataTrascrizioneVerbale, " +
-                            "Importo = @Importo, DecurtamentoPunti = @DecurtamentoPunti, AnagraficaId = @AnagraficaId WHERE Id = @Id";
+                            "Nominativo_Agente = @Nominativo_Agente, DataTrascrizioneVerbale = @DataTrascrizioneVerbale, " +
+                            "Importo = @Importo, DecurtamentoPunti = @DecurtamentoPunti, idanagrafica = @idanagrafica WHERE idverbale = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
                     command.Parameters.AddWithValue("@DataViolazione", updatedVerbale.DataViolazione);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", updatedVerbale.IndirizzoViolazione);
-                    command.Parameters.AddWithValue("@NominativoAgente", updatedVerbale.NominativoAgente);
+                    command.Parameters.AddWithValue("@Nominativo_Agente", updatedVerbale.NominativoAgente);  // Correzione: Nominativo_Agente
                     command.Parameters.AddWithValue("@DataTrascrizioneVerbale", updatedVerbale.DataTrascrizioneVerbale);
                     command.Parameters.AddWithValue("@Importo", updatedVerbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", updatedVerbale.DecurtamentoPunti);
-                    command.Parameters.AddWithValue("@AnagraficaId", updatedVerbale.AnagraficaId);
+                    command.Parameters.AddWithValue("@idanagrafica", updatedVerbale.AnagraficaId);
                     command.ExecuteNonQuery();
                 }
 
@@ -207,7 +207,7 @@ namespace PoliziaMunicipale.Data
                     command.ExecuteNonQuery();
                 }
 
-                var queryDeleteVerbale = "DELETE FROM VERBALE WHERE Id = @Id";
+                var queryDeleteVerbale = "DELETE FROM VERBALE WHERE idverbale = @Id";
                 using (var command = new SqlCommand(queryDeleteVerbale, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
@@ -215,5 +215,156 @@ namespace PoliziaMunicipale.Data
                 }
             }
         }
+
+        public List<Verbale> GetVerbaliTrasgressori()
+        {
+            var verbali = new List<Verbale>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT * FROM VERBALE"; // Modifica la query in base alle tue necessità
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            verbali.Add(new Verbale
+                            {
+                                Id = reader.GetInt32(0),
+                                DataViolazione = reader.GetDateTime(1),
+                                IndirizzoViolazione = reader.GetString(2),
+                                NominativoAgente = reader.GetString(3),
+                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                Importo = reader.GetDecimal(5),
+                                DecurtamentoPunti = reader.GetInt32(6),
+                                AnagraficaId = reader.GetInt32(7)
+                            });
+                        }
+                    }
+                }
+            }
+            return verbali;
+        }
+
+        public List<Verbale> GetPuntiDecurtatiTrasgressori()
+        {
+            var verbali = new List<Verbale>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, a.Nome, a.Cognome " +
+                            "FROM VERBALE v " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            verbali.Add(new Verbale
+                            {
+                                Id = reader.GetInt32(0),
+                                DataViolazione = reader.GetDateTime(1),
+                                IndirizzoViolazione = reader.GetString(2),
+                                NominativoAgente = reader.GetString(3),
+                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                Importo = reader.GetDecimal(5),
+                                DecurtamentoPunti = reader.GetInt32(6),
+                                AnagraficaId = reader.GetInt32(7),
+                                Anagrafica = new Anagrafica
+                                {
+                                    Id = reader.GetInt32(7),
+                                    Nome = reader.GetString(8),
+                                    Cognome = reader.GetString(9)
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            return verbali;
+        }
+
+        public List<Verbale> GetViolazioniOver400Euro()
+        {
+            var verbali = new List<Verbale>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, a.Nome, a.Cognome " +
+                            "FROM VERBALE v " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
+                            "WHERE v.Importo > 400";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            verbali.Add(new Verbale
+                            {
+                                Id = reader.GetInt32(0),
+                                DataViolazione = reader.GetDateTime(1),
+                                IndirizzoViolazione = reader.GetString(2),
+                                NominativoAgente = reader.GetString(3),
+                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                Importo = reader.GetDecimal(5),
+                                DecurtamentoPunti = reader.GetInt32(6),
+                                AnagraficaId = reader.GetInt32(7),
+                                Anagrafica = new Anagrafica
+                                {
+                                    Id = reader.GetInt32(7),
+                                    Nome = reader.GetString(8),
+                                    Cognome = reader.GetString(9)
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            return verbali;
+        }
+
+        public List<Verbale> GetViolazioniOverTenPoints()
+        {
+            var verbali = new List<Verbale>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, a.Nome, a.Cognome " +
+                            "FROM VERBALE v " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
+                            "WHERE v.DecurtamentoPunti > 10";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            verbali.Add(new Verbale
+                            {
+                                Id = reader.GetInt32(0),
+                                DataViolazione = reader.GetDateTime(1),
+                                IndirizzoViolazione = reader.GetString(2),
+                                NominativoAgente = reader.GetString(3),
+                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                Importo = reader.GetDecimal(5),
+                                DecurtamentoPunti = reader.GetInt32(6),
+                                AnagraficaId = reader.GetInt32(7),
+                                Anagrafica = new Anagrafica
+                                {
+                                    Id = reader.GetInt32(7),
+                                    Nome = reader.GetString(8),
+                                    Cognome = reader.GetString(9)
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            return verbali;
+        }
     }
+
 }
