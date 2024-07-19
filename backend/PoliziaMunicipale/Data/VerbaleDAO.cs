@@ -396,5 +396,4 @@ namespace PoliziaMunicipale.Data
             return result;
         }
     }
-
 }

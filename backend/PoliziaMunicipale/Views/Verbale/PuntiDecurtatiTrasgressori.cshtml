@@ -1,20 +1,26 @@
-﻿@model IEnumerable<(string Cognome, string Nome, int TotalePunti)>
+﻿@model IEnumerable<(string Nome, string Cognome, int PuntiDecurtati)>
 
-<table>
+@{
+    ViewData["Title"] = "Punti Decurtati Trasgressori";
+}
+
+<h2>Punti Decurtati Trasgressori</h2>
+
+<table class="table">
     <thead>
         <tr>
-            <th>Cognome</th>
             <th>Nome</th>
-            <th>Totale Punti Decurtati</th>
+            <th>Cognome</th>
+            <th>Punti Decurtati</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Cognome</td>
                 <td>@item.Nome</td>
-                <td>@item.TotalePunti</td>
+                <td>@item.Cognome</td>
+                <td>@item.PuntiDecurtati</td>
             </tr>
         }
     </tbody>

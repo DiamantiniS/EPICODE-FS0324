@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    display: flex;
 }
 
 h2 {
@@ -59,3 +60,16 @@ h2 {
         background-color: #0056b3;
         border-color: #004085;
     }
+
+.sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}

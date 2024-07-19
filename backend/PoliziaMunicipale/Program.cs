@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddLogging(config => {
+    config.AddConsole();
+    config.AddDebug();
+});
 
 // Register DAO services
 builder.Services.AddScoped<VerbaleDAO>(sp => new VerbaleDAO(builder.Configuration.GetConnectionString("DefaultConnection")));

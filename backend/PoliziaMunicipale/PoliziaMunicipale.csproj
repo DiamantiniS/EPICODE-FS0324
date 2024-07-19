@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Anagrafica\Edit.cshtml" />
+    <Content Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +23,16 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Anagrafica\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Verbale\Edit.cshtml" />
+    <None Include="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
   </ItemGroup>
 
 </Project>
