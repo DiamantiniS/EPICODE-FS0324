@@ -6,29 +6,44 @@
     <title>@ViewData["Title"] - PoliziaMunicipale</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/PoliziaMunicipale.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="d-flex">
-        <nav class="flex-shrink-0 p-3 bg-light" style="width: 280px;">
-            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-                <span class="fs-5 fw-semibold">Menu</span>
-            </a>
-            <ul class="list-unstyled ps-0">
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Anagrafica" asp-action="Index">Gestione Trasgressori</a></li>
-                <li><a asp-controller="TipoViolazione" asp-action="Index">Elenco Violazioni</a></li>
-                <li><a asp-controller="Verbale" asp-action="Index">Gestione Verbali</a></li>
-            </ul>
-        </nav>
-        <main class="flex-grow-1 p-3">
-            @RenderBody()
-        </main>
+    <div class="d-flex" id="wrapper">
+        
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Menu</div>
+            <div class="list-group list-group-flush">
+                <a href="/" class="list-group-item list-group-item-action bg-light"><i class="fas fa-home"></i> Home</a>
+                <a asp-controller="Anagrafica" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user"></i> Gestione Trasgressori</a>
+                <a asp-controller="TipoViolazione" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-list"></i> Elenco Violazioni</a>
+                <a asp-controller="Verbale" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-file-alt"></i> Gestione Verbali</a>
+            </div>
+        </div>
+        
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+            </nav>
+
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/fontawesome/js/all.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
