@@ -4,54 +4,56 @@
     ViewData["Title"] = "Elimina Verbale";
 }
 
-<h2>Elimina Verbale</h2>
+<div class="container my-4">
+    <h2 class="text-center">Elimina Verbale</h2>
 
-<h3>Sei sicuro di voler eliminare questo verbale?</h3>
-<div>
-    <h4>Verbale</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Data Violazione
-        </dt>
-        <dd class="col-sm-10">
-            @Model.DataViolazione
-        </dd>
-        <dt class="col-sm-2">
-            Indirizzo Violazione
-        </dt>
-        <dd class="col-sm-10">
-            @Model.IndirizzoViolazione
-        </dd>
-        <dt class="col-sm-2">
-            Nominativo Agente
-        </dt>
-        <dd class="col-sm-10">
-            @Model.NominativoAgente
-        </dd>
-        <dt class="col-sm-2">
-            Data Trascrizione Verbale
-        </dt>
-        <dd class="col-sm-10">
-            @Model.DataTrascrizioneVerbale
-        </dd>
-        <dt class="col-sm-2">
-            Importo
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Importo
-        </dd>
-        <dt class="col-sm-2">
-            Decurtamento Punti
-        </dt>
-        <dd class="col-sm-10">
-            @Model.DecurtamentoPunti
-        </dd>
-    </dl>
+    <h3 class="text-center">Sei sicuro di voler eliminare questo verbale?</h3>
+    <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Data Violazione
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.DataViolazione
+                </dd>
+                <dt class="col-sm-2">
+                    Indirizzo Violazione
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.IndirizzoViolazione
+                </dd>
+                <dt class="col-sm-2">
+                    Nominativo Agente
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.NominativoAgente
+                </dd>
+                <dt class="col-sm-2">
+                    Data Trascrizione Verbale
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.DataTrascrizioneVerbale
+                </dd>
+                <dt class="col-sm-2">
+                    Importo
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Importo
+                </dd>
+                <dt class="col-sm-2">
+                    Decurtamento Punti
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.DecurtamentoPunti
+                </dd>
+            </dl>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Elimina" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-secondary">Annulla</a>
-    </form>
+            <form asp-action="Delete" class="d-flex justify-content-between">
+                <input type="hidden" asp-for="Id" />
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Elimina</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Annulla</a>
+            </form>
+        </div>
+    </div>
 </div>

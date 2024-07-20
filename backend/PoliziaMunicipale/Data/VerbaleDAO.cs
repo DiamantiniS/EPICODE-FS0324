@@ -120,6 +120,8 @@ namespace PoliziaMunicipale.Data
             return verbale;
         }
 
+
+
         public void Create(Verbale verbale)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -130,10 +132,10 @@ namespace PoliziaMunicipale.Data
                             "SELECT SCOPE_IDENTITY();";
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione.Date);
+                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", verbale.IndirizzoViolazione);
                     command.Parameters.AddWithValue("@Nominativo_Agente", verbale.NominativoAgente);
-                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale.Date);
+                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
                     command.Parameters.AddWithValue("@Importo", verbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", verbale.DecurtamentoPunti);
                     command.Parameters.AddWithValue("@idanagrafica", verbale.AnagraficaId);
@@ -153,6 +155,8 @@ namespace PoliziaMunicipale.Data
                 }
             }
         }
+
+
 
         public void Update(int id, Verbale updatedVerbale)
         {
@@ -224,7 +228,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, a.Nome, a.Cognome " +
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, a.Nome, a.Cognome " +
                             "FROM VERBALE v " +
                             "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica";
                 using (var command = new SqlCommand(query, connection))
@@ -242,10 +246,11 @@ namespace PoliziaMunicipale.Data
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
+                                AnagraficaId = reader.GetInt32(7),
                                 Anagrafica = new Anagrafica
                                 {
-                                    Nome = reader.GetString(7),
-                                    Cognome = reader.GetString(8)
+                                    Nome = reader.GetString(8),
+                                    Cognome = reader.GetString(9)
                                 }
                             });
                         }
@@ -254,6 +259,7 @@ namespace PoliziaMunicipale.Data
             }
             return verbali;
         }
+
 
         public List<Verbale> GetPuntiDecurtatiTrasgressori()
         {
@@ -405,6 +411,37 @@ namespace PoliziaMunicipale.Data
             return result;
         }
 
+        public Anagrafica GetAnagraficaByNomeCognome(string nome, string cognome)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA WHERE Nome = @Nome AND Cognome = @Cognome";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Nome", nome);
+                    command.Parameters.AddWithValue("@Cognome", cognome);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Anagrafica
+                            {
+                                Id = reader.GetInt32(0),
+                                Nome = reader.GetString(1),
+                                Cognome = reader.GetString(2),
+                                Indirizzo = reader.GetString(3),
+                                Citta = reader.GetString(4),
+                                CAP = reader.GetString(5),
+                                Cod_Fisc = reader.GetString(6)
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
 
     }
 }

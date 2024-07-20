@@ -4,46 +4,55 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PoliziaMunicipale</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="~/PoliziaMunicipale.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="d-flex" id="wrapper">
-        
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Menu</div>
-            <div class="list-group list-group-flush">
-                <a href="/" class="list-group-item list-group-item-action bg-light"><i class="fas fa-home"></i> Home</a>
-                <a asp-controller="Anagrafica" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user"></i> Gestione Trasgressori</a>
-                <a asp-controller="TipoViolazione" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-list"></i> Elenco Violazioni</a>
-                <a asp-controller="Verbale" asp-action="Index" class="list-group-item list-group-item-action bg-light"><i class="fas fa-file-alt"></i> Gestione Verbali</a>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-dark text-white p-3" style="width: 250px; height: 100vh; position: fixed;">
+            <div class="sidebar-heading text-center pb-4 mb-4 border-bottom">
+                <h2>Menu</h2>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-white" asp-controller="Anagrafica" asp-action="Index">
+                        <i class="bi bi-person"></i> Gestione Trasgressori
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-white" asp-controller="TipoViolazione" asp-action="Index">
+                        <i class="bi bi-exclamation-circle"></i> Elenco Violazioni
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-white" asp-controller="Verbale" asp-action="Index">
+                        <i class="bi bi-file-earmark-text"></i> Gestione Verbali
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div class="container-fluid" style="margin-left: 250px;">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    @RenderBody()
+                </div>
             </div>
         </div>
-        
-        <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
-            </nav>
-
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
-        </div>
-        
+        <!-- /#page-content-wrapper -->
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/fontawesome/js/all.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

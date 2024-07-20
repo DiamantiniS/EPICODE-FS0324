@@ -75,6 +75,38 @@ namespace PoliziaMunicipale.Data
             return anagrafica;
         }
 
+        public Anagrafica GetByNomeCognome(string nome, string cognome)
+        {
+            Anagrafica anagrafica = null;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA WHERE Nome = @Nome AND Cognome = @Cognome";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Nome", nome);
+                    command.Parameters.AddWithValue("@Cognome", cognome);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            anagrafica = new Anagrafica
+                            {
+                                Id = reader.GetInt32(0),
+                                Nome = reader.GetString(1),
+                                Cognome = reader.GetString(2),
+                                Indirizzo = reader.GetString(3),
+                                Citta = reader.GetString(4),
+                                CAP = reader.GetString(5),
+                                Cod_Fisc = reader.GetString(6)
+                            };
+                        }
+                    }
+                }
+            }
+            return anagrafica;
+        }
+
         public void Create(Anagrafica anagrafica)
         {
             using (var connection = new SqlConnection(_connectionString))

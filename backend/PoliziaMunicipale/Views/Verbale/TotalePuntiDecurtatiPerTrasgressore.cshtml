@@ -1,33 +1,33 @@
 ﻿@model IEnumerable<(string Cognome, string Nome, int TotalePunti, int Id)>
 
-@{
-    ViewData["Title"] = "Totale Punti Decurtati per Trasgressore";
-}
+<div class="container my-4">
+    <h2 class="text-center">Totale Punti Decurtati per Trasgressore</h2>
 
-<h2>Totale Punti Decurtati per Trasgressore</h2>
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cognome</th>
+                        <th>Nome</th>
+                        <th>Totale Punti Decurtati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Cognome</td>
+                            <td>@item.Nome</td>
+                            <td>@item.TotalePunti</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cognome</th>
-            <th>Nome</th>
-            <th>Totale Punti Decurtati</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Cognome</td>
-                <td>@item.Nome</td>
-                <td>@item.TotalePunti</td>
-                
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Home</a>
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Home</a>
+    </div>
 </div>

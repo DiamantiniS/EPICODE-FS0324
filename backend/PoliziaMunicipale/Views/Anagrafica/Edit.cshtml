@@ -4,45 +4,44 @@
     ViewData["Title"] = "Modifica Anagrafica";
 }
 
-<h2>Modifica Anagrafica</h2>
+<div class="container my-4">
+    <h2 class="text-center">Modifica Anagrafica</h2>
 
-<form asp-action="Edit">
-    <div class="form-group">
-        <label asp-for="Nome" class="control-label"></label>
-        <input asp-for="Nome" class="form-control" />
-        <span asp-validation-for="Nome" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Cognome" class="control-label"></label>
-        <input asp-for="Cognome" class="form-control" />
-        <span asp-validation-for="Cognome" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Indirizzo" class="control-label"></label>
-        <input asp-for="Indirizzo" class="form-control" />
-        <span asp-validation-for="Indirizzo" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Citta" class="control-label"></label>
-        <input asp-for="Citta" class="form-control" />
-        <span asp-validation-for="Citta" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="CAP" class="control-label"></label>
-        <input asp-for="CAP" class="form-control" />
-        <span asp-validation-for="CAP" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Cod_Fisc" class="control-label"></label>
-        <input asp-for="Cod_Fisc" class="form-control" />
-        <span asp-validation-for="Cod_Fisc" class="text-danger"></span>
-    </div>
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <input type="submit" value="Salva" class="btn btn-primary" />
-    </div>
-</form>
-
-<div>
-    <a asp-action="Index">Torna alla lista</a>
+    <form asp-action="Edit" class="mt-3">
+        <div class="mb-3">
+            <label asp-for="Nome" class="form-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cognome" class="form-label"></label>
+            <input asp-for="Cognome" class="form-control" />
+            <span asp-validation-for="Cognome" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Indirizzo" class="form-label"></label>
+            <input asp-for="Indirizzo" class="form-control" />
+            <span asp-validation-for="Indirizzo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Citta" class="form-label"></label>
+            <input asp-for="Citta" class="form-control" />
+            <span asp-validation-for="Citta" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CAP" class="form-label"></label>
+            <input asp-for="CAP" class="form-control" />
+            <span asp-validation-for="CAP" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cod_Fisc" class="form-label"></label>
+            <input asp-for="Cod_Fisc" class="form-control" />
+            <span asp-validation-for="Cod_Fisc" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex justify-content-between">
+            <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Torna alla lista</a>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Salva</button>
+        </div>
+    </form>
 </div>

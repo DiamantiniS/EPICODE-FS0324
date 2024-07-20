@@ -4,50 +4,59 @@
     ViewData["Title"] = "Gestione Verbali";
 }
 
-<h2>Gestione Verbali</h2>
+<div class="container my-4">
+    <h2 class="text-center">Gestione Verbali</h2>
 
-<ul>
-    <li><a asp-action="Create">Nuovo Verbale</a></li>
-    <li><a asp-action="VerbaliTrasgressori">Totale Verbali per Trasgressore</a></li>
-    <li><a asp-action="ViolazioniOver400Euro">Violazioni Over 400 Euro</a></li>
-    <li><a asp-action="ViolazioniOverTenPoints">Violazioni Over 10 Points</a></li>
-    <li><a asp-action="PuntiDecurtatiTrasgressori">Punti Decurtati Trasgressori</a></li>
-    <li><a asp-action="TotalePuntiDecurtatiPerTrasgressore">Totale Punti Decurtati per Trasgressore</a></li>
-</ul>
+    <div class="d-flex justify-content-center mb-3">
+        <a asp-action="VerbaliTrasgressori" class="btn btn-info mx-1"><i class="bi bi-file-text"></i> Totale Verbali per Trasgressore</a>
+        <a asp-action="ViolazioniOver400Euro" class="btn btn-info mx-1"><i class="bi bi-currency-exchange"></i> Violazioni Over 400 Euro</a>
+        <a asp-action="ViolazioniOverTenPoints" class="btn btn-info mx-1"><i class="bi bi-graph-up"></i> Violazioni Over 10 Points</a>
+        <a asp-action="PuntiDecurtatiTrasgressori" class="btn btn-info mx-1"><i class="bi bi-scissors"></i> Punti Decurtati Trasgressori</a>
+        <a asp-action="TotalePuntiDecurtatiPerTrasgressore" class="btn btn-info mx-1"><i class="bi bi-file-earmark-bar-graph"></i> Totale Punti Decurtati per Trasgressore</a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Data Violazione</th>
-            <th>Indirizzo Violazione</th>
-            <th>Nominativo Agente</th>
-            <th>Data Trascrizione Verbale</th>
-            <th>Importo</th>
-            <th>Decurtamento Punti</th>
-            <th>Anagrafica</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.DataViolazione</td>
-                <td>@item.IndirizzoViolazione</td>
-                <td>@item.NominativoAgente</td>
-                <td>@item.DataTrascrizioneVerbale</td>
-                <td>@item.Importo</td>
-                <td>@item.DecurtamentoPunti</td>
-                <td>@item.Anagrafica?.Nome @item.Anagrafica?.Cognome</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifica</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Elimina</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Nuovo Verbale</a>
+    </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Home</a>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Data Violazione</th>
+                        <th>Indirizzo Violazione</th>
+                        <th>Nominativo Agente</th>
+                        <th>Data Trascrizione Verbale</th>
+                        <th>Importo</th>
+                        <th>Decurtamento Punti</th>
+                        <th>Anagrafica</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.DataViolazione.ToString("dd/MM/yyyy")</td>
+                            <td>@item.IndirizzoViolazione</td>
+                            <td>@item.NominativoAgente</td>
+                            <td>@item.DataTrascrizioneVerbale.ToString("dd/MM/yyyy")</td>
+                            <td>@item.Importo</td>
+                            <td>@item.DecurtamentoPunti</td>
+                            <td>@item.Anagrafica?.Nome @item.Anagrafica?.Cognome</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Modifica</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Elimina</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Home</a>
+    </div>
 </div>

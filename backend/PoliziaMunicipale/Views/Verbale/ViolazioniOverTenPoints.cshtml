@@ -1,36 +1,42 @@
 ﻿@model IEnumerable<(string Nome, string Cognome, decimal Importo, DateTime DataViolazione, int DecurtamentoPunti, int Id)>
 
-<h2>Violazioni Over 10 Points</h2>
+<div class="container my-4">
+    <h2 class="text-center">Violazioni Over 10 Points</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Importo</th>
-            <th>Data Violazione</th>
-            <th>Punti Decurtati</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.Cognome</td>
-                <td>@item.Importo</td>
-                <td>@item.DataViolazione</td>
-                <td>@item.DecurtamentoPunti</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifica</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Elimina</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="card shadow-sm mt-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cognome</th>
+                        <th>Importo</th>
+                        <th>Data Violazione</th>
+                        <th>Punti Decurtati</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td>@item.Cognome</td>
+                            <td>@item.Importo</td>
+                            <td>@item.DataViolazione</td>
+                            <td>@item.DecurtamentoPunti</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i> Modifica</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Elimina</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Home</a>
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Home</a>
+    </div>
 </div>
