@@ -20,7 +20,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
+                var query = "SELECT v.idverbale, CONVERT(date, v.DataViolazione), v.IndirizzoViolazione, v.Nominativo_Agente, CONVERT(date, v.DataTrascrizioneVerbale), v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
                             "a.Nome, a.Cognome, vv.idviolazione, t.descrizione " +
                             "FROM VERBALE v " +
                             "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
@@ -37,7 +37,7 @@ namespace PoliziaMunicipale.Data
                                 Id = reader.GetInt32(0),
                                 DataViolazione = reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
-                                NominativoAgente = reader.GetString(3),  // Correzione: Nominativo_Agente
+                                NominativoAgente = reader.GetString(3),
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
@@ -73,7 +73,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
+                var query = "SELECT v.idverbale, CONVERT(date, v.DataViolazione), v.IndirizzoViolazione, v.Nominativo_Agente, CONVERT(date, v.DataTrascrizioneVerbale), v.Importo, v.DecurtamentoPunti, v.idanagrafica, " +
                             "a.Nome, a.Cognome, vv.idviolazione, t.descrizione " +
                             "FROM VERBALE v " +
                             "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica " +
@@ -92,7 +92,7 @@ namespace PoliziaMunicipale.Data
                                 Id = reader.GetInt32(0),
                                 DataViolazione = reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
-                                NominativoAgente = reader.GetString(3),  // Correzione: Nominativo_Agente
+                                NominativoAgente = reader.GetString(3),
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
@@ -130,10 +130,10 @@ namespace PoliziaMunicipale.Data
                             "SELECT SCOPE_IDENTITY();";
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione);
+                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione.Date);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", verbale.IndirizzoViolazione);
-                    command.Parameters.AddWithValue("@Nominativo_Agente", verbale.NominativoAgente);  // Correzione: Nominativo_Agente
-                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
+                    command.Parameters.AddWithValue("@Nominativo_Agente", verbale.NominativoAgente);
+                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale.Date);
                     command.Parameters.AddWithValue("@Importo", verbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", verbale.DecurtamentoPunti);
                     command.Parameters.AddWithValue("@idanagrafica", verbale.AnagraficaId);
@@ -165,10 +165,10 @@ namespace PoliziaMunicipale.Data
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    command.Parameters.AddWithValue("@DataViolazione", updatedVerbale.DataViolazione);
+                    command.Parameters.AddWithValue("@DataViolazione", updatedVerbale.DataViolazione.Date);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", updatedVerbale.IndirizzoViolazione);
-                    command.Parameters.AddWithValue("@Nominativo_Agente", updatedVerbale.NominativoAgente);  // Correzione: Nominativo_Agente
-                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", updatedVerbale.DataTrascrizioneVerbale);
+                    command.Parameters.AddWithValue("@Nominativo_Agente", updatedVerbale.NominativoAgente);
+                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", updatedVerbale.DataTrascrizioneVerbale.Date);
                     command.Parameters.AddWithValue("@Importo", updatedVerbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", updatedVerbale.DecurtamentoPunti);
                     command.Parameters.AddWithValue("@idanagrafica", updatedVerbale.AnagraficaId);
@@ -194,6 +194,8 @@ namespace PoliziaMunicipale.Data
                 }
             }
         }
+
+
 
         public void Delete(int id)
         {
@@ -222,7 +224,9 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT * FROM VERBALE"; // Modifica la query in base alle tue necessità
+                var query = "SELECT v.idverbale, v.DataViolazione, v.IndirizzoViolazione, v.Nominativo_Agente, v.DataTrascrizioneVerbale, v.Importo, v.DecurtamentoPunti, a.Nome, a.Cognome " +
+                            "FROM VERBALE v " +
+                            "JOIN ANAGRAFICA a ON v.idanagrafica = a.idanagrafica";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -238,7 +242,11 @@ namespace PoliziaMunicipale.Data
                                 DataTrascrizioneVerbale = reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
-                                AnagraficaId = reader.GetInt32(7)
+                                Anagrafica = new Anagrafica
+                                {
+                                    Nome = reader.GetString(7),
+                                    Cognome = reader.GetString(8)
+                                }
                             });
                         }
                     }
@@ -366,15 +374,15 @@ namespace PoliziaMunicipale.Data
             return verbali;
         }
 
-        public IEnumerable<(string Cognome, string Nome, int TotalePunti)> GetTotalePuntiDecurtatiPerTrasgressore()
+        public IEnumerable<(string Cognome, string Nome, int TotalePunti, int Id)> GetTotalePuntiDecurtatiPerTrasgressore()
         {
-            var result = new List<(string Cognome, string Nome, int TotalePunti)>();
+            var result = new List<(string Cognome, string Nome, int TotalePunti, int Id)>();
 
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 using (var command = new SqlCommand(@"
-            SELECT A.Cognome, A.Nome, SUM(V.DecurtamentoPunti) AS TotalePunti
+            SELECT A.Cognome, A.Nome, SUM(V.DecurtamentoPunti) AS TotalePunti, MIN(V.idverbale) AS Id
             FROM VERBALE V
             JOIN ANAGRAFICA A ON V.idanagrafica = A.idanagrafica
             GROUP BY A.Cognome, A.Nome", connection))
@@ -386,7 +394,8 @@ namespace PoliziaMunicipale.Data
                             result.Add((
                                 reader.GetString(0),
                                 reader.GetString(1),
-                                reader.GetInt32(2)
+                                reader.GetInt32(2),
+                                reader.GetInt32(3)
                             ));
                         }
                     }
@@ -395,5 +404,7 @@ namespace PoliziaMunicipale.Data
 
             return result;
         }
+
+
     }
 }

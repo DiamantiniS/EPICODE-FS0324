@@ -1,17 +1,9 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
 using PoliziaMunicipale.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddLogging(config => {
-    config.AddConsole();
-    config.AddDebug();
-});
 
 // Register DAO services
 builder.Services.AddScoped<VerbaleDAO>(sp => new VerbaleDAO(builder.Configuration.GetConnectionString("DefaultConnection")));

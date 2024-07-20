@@ -87,35 +87,36 @@ namespace PoliziaMunicipale.Controllers
         public IActionResult ViolazioniOver400Euro()
         {
             var verbali = _dao.GetViolazioniOver400Euro();
-            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti)).ToList();
+            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti, v.Id)).ToList();
             return View(model);
         }
 
         public IActionResult ViolazioniOverTenPoints()
         {
             var verbali = _dao.GetViolazioniOverTenPoints();
-            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti)).ToList();
+            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti, v.Id)).ToList();
             return View(model);
         }
 
         public IActionResult PuntiDecurtatiTrasgressori()
         {
             var verbali = _dao.GetPuntiDecurtatiTrasgressori();
-            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti)).ToList();
+            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.DecurtamentoPunti, v.Id)).ToList();
             return View(model);
         }
 
         public IActionResult VerbaliTrasgressori()
         {
             var verbali = _dao.GetVerbaliTrasgressori();
-            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti)).ToList();
+            var model = verbali.Select(v => (v.Anagrafica?.Nome, v.Anagrafica?.Cognome, v.Importo, v.DataViolazione, v.DecurtamentoPunti, v.Id)).ToList();
             return View(model);
         }
 
         public IActionResult TotalePuntiDecurtatiPerTrasgressore()
         {
             var result = _dao.GetTotalePuntiDecurtatiPerTrasgressore();
-            return View(result);
+            var model = result.Select(r => (r.Cognome, r.Nome, r.TotalePunti, 0)).ToList(); // Aggiungi un valore di 0 come esempio per il quarto elemento della tupla
+            return View(model);
         }
     }
 }

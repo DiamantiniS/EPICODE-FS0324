@@ -14,9 +14,7 @@ namespace PoliziaMunicipale.Models
         public int DecurtamentoPunti { get; set; }
         public int AnagraficaId { get; set; }
         public Anagrafica Anagrafica { get; set; }
-        public List<TipoViolazione> Violazioni { get; set; } = new List<TipoViolazione>();
-
-        // Aggiungi la proprietà Descrizione se è necessaria
+        public List<TipoViolazione> Violazioni { get; set; } = new List<TipoViolazione>();     
         public string Descrizione { get; set; }
     }
 }

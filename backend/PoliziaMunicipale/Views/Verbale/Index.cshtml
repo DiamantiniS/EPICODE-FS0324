@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<PoliziaMunicipale.Models.Verbale>
+
+@{
     ViewData["Title"] = "Gestione Verbali";
 }
 
@@ -7,5 +9,45 @@
 <ul>
     <li><a asp-action="Create">Nuovo Verbale</a></li>
     <li><a asp-action="VerbaliTrasgressori">Totale Verbali per Trasgressore</a></li>
-    <li><a asp-action="Edit">Edit</a></li>
+    <li><a asp-action="ViolazioniOver400Euro">Violazioni Over 400 Euro</a></li>
+    <li><a asp-action="ViolazioniOverTenPoints">Violazioni Over 10 Points</a></li>
+    <li><a asp-action="PuntiDecurtatiTrasgressori">Punti Decurtati Trasgressori</a></li>
+    <li><a asp-action="TotalePuntiDecurtatiPerTrasgressore">Totale Punti Decurtati per Trasgressore</a></li>
 </ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data Violazione</th>
+            <th>Indirizzo Violazione</th>
+            <th>Nominativo Agente</th>
+            <th>Data Trascrizione Verbale</th>
+            <th>Importo</th>
+            <th>Decurtamento Punti</th>
+            <th>Anagrafica</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DataViolazione</td>
+                <td>@item.IndirizzoViolazione</td>
+                <td>@item.NominativoAgente</td>
+                <td>@item.DataTrascrizioneVerbale</td>
+                <td>@item.Importo</td>
+                <td>@item.DecurtamentoPunti</td>
+                <td>@item.Anagrafica?.Nome @item.Anagrafica?.Cognome</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifica</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Home</a>
+</div>

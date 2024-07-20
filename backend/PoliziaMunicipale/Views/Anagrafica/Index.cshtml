@@ -4,7 +4,11 @@
     ViewData["Title"] = "Elenco Trasgressori";
 }
 
-<h2>Elenco Trasgressori</h2>
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Nuova Anagrafica</a>
+</p>
 
 <table class="table">
     <thead>
@@ -15,6 +19,7 @@
             <th>Città</th>
             <th>CAP</th>
             <th>Codice Fiscale</th>
+            <th>Azione</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +32,11 @@
                 <td>@anagrafica.Citta</td>
                 <td>@anagrafica.CAP</td>
                 <td>@anagrafica.Cod_Fisc</td>
+                <td>
+                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@anagrafica.Id">Modifica</a>
+                    <a class="btn btn-info" asp-action="Details" asp-route-id="@anagrafica.Id">Dettagli</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@anagrafica.Id">Elimina</a>
+                </td>
             </tr>
         }
     </tbody>

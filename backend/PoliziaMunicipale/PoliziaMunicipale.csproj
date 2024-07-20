@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\Anagrafica\Edit.cshtml" />
-    <Content Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
@@ -23,16 +18,10 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Anagrafica\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Verbale\Edit.cshtml" />
-    <None Include="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Verbale\TotalePuntiDecurtatiPerTrasgressore.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,4 @@
-﻿@model IEnumerable<(string Nome, string Cognome, int PuntiDecurtati)>
-
-@{
-    ViewData["Title"] = "Punti Decurtati Trasgressori";
-}
+﻿@model IEnumerable<(string Nome, string Cognome, int DecurtamentoPunti, int Id)>
 
 <h2>Punti Decurtati Trasgressori</h2>
 
@@ -12,6 +8,7 @@
             <th>Nome</th>
             <th>Cognome</th>
             <th>Punti Decurtati</th>
+            <th>Azioni</th>
         </tr>
     </thead>
     <tbody>
@@ -20,8 +17,16 @@
             <tr>
                 <td>@item.Nome</td>
                 <td>@item.Cognome</td>
-                <td>@item.PuntiDecurtati</td>
+                <td>@item.DecurtamentoPunti</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifica</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Elimina</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Home</a>
+</div>

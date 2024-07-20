@@ -119,8 +119,18 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "DELETE FROM ANAGRAFICA WHERE idanagrafica = @Id";
-                using (var command = new SqlCommand(query, connection))
+
+                // Elimina i record correlati nella tabella VERBALE
+                var deleteVerbaliQuery = "DELETE FROM VERBALE WHERE idanagrafica = @Id";
+                using (var command = new SqlCommand(deleteVerbaliQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.ExecuteNonQuery();
+                }
+
+                // Elimina il record nella tabella ANAGRAFICA
+                var deleteAnagraficaQuery = "DELETE FROM ANAGRAFICA WHERE idanagrafica = @Id";
+                using (var command = new SqlCommand(deleteAnagraficaQuery, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
                     command.ExecuteNonQuery();

@@ -1,10 +1,6 @@
 ﻿@model IEnumerable<(string Nome, string Cognome, decimal Importo, DateTime DataViolazione, int DecurtamentoPunti)>
 
-@{
-    ViewData["Title"] = "Verbali Trasgressori";
-}
-
-<h2>Verbali Trasgressori</h2>
+<h2>Totale Verbali per Trasgressore</h2>
 
 <table class="table">
     <thead>
@@ -13,7 +9,7 @@
             <th>Cognome</th>
             <th>Importo</th>
             <th>Data Violazione</th>
-            <th>Punti Decurtati</th>
+            <th>Decurtamento Punti</th>
         </tr>
     </thead>
     <tbody>

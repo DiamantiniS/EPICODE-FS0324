@@ -52,7 +52,7 @@ namespace PoliziaMunicipale.Controllers
             {
                 return NotFound();
             }
-            return View(model);
+            return View(model); 
         }
 
         [HttpPost]
@@ -65,6 +65,7 @@ namespace PoliziaMunicipale.Controllers
             }
             return View(model);
         }
+
 
         public IActionResult Delete(int id)
         {
@@ -82,5 +83,6 @@ namespace PoliziaMunicipale.Controllers
             _dao.Delete(id);
             return RedirectToAction("Index");
         }
+
     }
 }
