@@ -20,7 +20,7 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT idanagrafica, Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc FROM ANAGRAFICA";
+                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -30,8 +30,8 @@ namespace PoliziaMunicipale.Data
                             anagrafiche.Add(new Anagrafica
                             {
                                 Id = reader.GetInt32(0),
-                                Cognome = reader.GetString(1),
-                                Nome = reader.GetString(2),
+                                Nome = reader.GetString(1),
+                                Cognome = reader.GetString(2),
                                 Indirizzo = reader.GetString(3),
                                 Citta = reader.GetString(4),
                                 CAP = reader.GetString(5),
@@ -50,42 +50,10 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "SELECT idanagrafica, Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc FROM ANAGRAFICA WHERE idanagrafica = @Id";
+                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA WHERE idanagrafica = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            anagrafica = new Anagrafica
-                            {
-                                Id = reader.GetInt32(0),
-                                Cognome = reader.GetString(1),
-                                Nome = reader.GetString(2),
-                                Indirizzo = reader.GetString(3),
-                                Citta = reader.GetString(4),
-                                CAP = reader.GetString(5),
-                                Cod_Fisc = reader.GetString(6)
-                            };
-                        }
-                    }
-                }
-            }
-            return anagrafica;
-        }
-
-        public Anagrafica GetByNomeCognome(string nome, string cognome)
-        {
-            Anagrafica anagrafica = null;
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA WHERE Nome = @Nome AND Cognome = @Cognome";
-                using (var command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Nome", nome);
-                    command.Parameters.AddWithValue("@Cognome", cognome);
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -107,21 +75,61 @@ namespace PoliziaMunicipale.Data
             return anagrafica;
         }
 
+        public Anagrafica GetAnagraficaByNomeCognome(string nome, string cognome)
+        {
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cognome))
+            {
+                throw new ArgumentException("Nome e Cognome non possono essere null o vuoti.");
+            }
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var query = "SELECT idanagrafica, Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc FROM ANAGRAFICA WHERE Nome = @Nome AND Cognome = @Cognome";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Nome", nome);
+                    command.Parameters.AddWithValue("@Cognome", cognome);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Anagrafica
+                            {
+                                Id = reader.GetInt32(0),
+                                Nome = reader.GetString(1),
+                                Cognome = reader.GetString(2),
+                                Indirizzo = reader.GetString(3),
+                                Citta = reader.GetString(4),
+                                CAP = reader.GetString(5),
+                                Cod_Fisc = reader.GetString(6)
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public void Create(Anagrafica anagrafica)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "INSERT INTO ANAGRAFICA (Cognome, Nome, Indirizzo, Città, CAP, Cod_Fisc) VALUES (@Cognome, @Nome, @Indirizzo, @Città, @CAP, @Cod_Fisc)";
+                var query = "INSERT INTO ANAGRAFICA (Nome, Cognome, Indirizzo, Citta, CAP, Cod_Fisc) " +
+                            "VALUES (@Nome, @Cognome, @Indirizzo, @Citta, @CAP, @Cod_Fisc); " +
+                            "SELECT SCOPE_IDENTITY();";
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Cognome", anagrafica.Cognome);
                     command.Parameters.AddWithValue("@Nome", anagrafica.Nome);
+                    command.Parameters.AddWithValue("@Cognome", anagrafica.Cognome);
                     command.Parameters.AddWithValue("@Indirizzo", anagrafica.Indirizzo);
-                    command.Parameters.AddWithValue("@Città", anagrafica.Citta);
+                    command.Parameters.AddWithValue("@Citta", anagrafica.Citta);
                     command.Parameters.AddWithValue("@CAP", anagrafica.CAP);
                     command.Parameters.AddWithValue("@Cod_Fisc", anagrafica.Cod_Fisc);
-                    command.ExecuteNonQuery();
+                    var id = Convert.ToInt32(command.ExecuteScalar());
+                    anagrafica.Id = id;
                 }
             }
         }
@@ -131,14 +139,14 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var query = "UPDATE ANAGRAFICA SET Cognome = @Cognome, Nome = @Nome, Indirizzo = @Indirizzo, Città = @Città, CAP = @CAP, Cod_Fisc = @Cod_Fisc WHERE idanagrafica = @Id";
+                var query = "UPDATE ANAGRAFICA SET Nome = @Nome, Cognome = @Cognome, Indirizzo = @Indirizzo, Citta = @Citta, CAP = @CAP, Cod_Fisc = @Cod_Fisc WHERE idanagrafica = @Id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    command.Parameters.AddWithValue("@Cognome", updatedAnagrafica.Cognome);
                     command.Parameters.AddWithValue("@Nome", updatedAnagrafica.Nome);
+                    command.Parameters.AddWithValue("@Cognome", updatedAnagrafica.Cognome);
                     command.Parameters.AddWithValue("@Indirizzo", updatedAnagrafica.Indirizzo);
-                    command.Parameters.AddWithValue("@Città", updatedAnagrafica.Citta);
+                    command.Parameters.AddWithValue("@Citta", updatedAnagrafica.Citta);
                     command.Parameters.AddWithValue("@CAP", updatedAnagrafica.CAP);
                     command.Parameters.AddWithValue("@Cod_Fisc", updatedAnagrafica.Cod_Fisc);
                     command.ExecuteNonQuery();
@@ -151,18 +159,8 @@ namespace PoliziaMunicipale.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-
-                // Elimina i record correlati nella tabella VERBALE
-                var deleteVerbaliQuery = "DELETE FROM VERBALE WHERE idanagrafica = @Id";
-                using (var command = new SqlCommand(deleteVerbaliQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@Id", id);
-                    command.ExecuteNonQuery();
-                }
-
-                // Elimina il record nella tabella ANAGRAFICA
-                var deleteAnagraficaQuery = "DELETE FROM ANAGRAFICA WHERE idanagrafica = @Id";
-                using (var command = new SqlCommand(deleteAnagraficaQuery, connection))
+                var query = "DELETE FROM ANAGRAFICA WHERE idanagrafica = @Id";
+                using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
                     command.ExecuteNonQuery();

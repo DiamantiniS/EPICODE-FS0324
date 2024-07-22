@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PoliziaMunicipale.Data;
@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register DAO services
-builder.Services.AddScoped<VerbaleDAO>(sp => new VerbaleDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<AnagraficaDAO>(sp => new AnagraficaDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<TipoViolazioneDAO>(sp => new TipoViolazioneDAO(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configure the database connection
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddSingleton<VerbaleDAO>(sp => new VerbaleDAO(connectionString));
+builder.Services.AddSingleton<AnagraficaDAO>(sp => new AnagraficaDAO(connectionString));
 
 var app = builder.Build();
 
@@ -24,7 +24,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

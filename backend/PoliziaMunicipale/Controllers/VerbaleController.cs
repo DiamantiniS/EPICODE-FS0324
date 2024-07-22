@@ -8,9 +8,9 @@ namespace PoliziaMunicipale.Controllers
     public class VerbaleController : Controller
     {
         private readonly VerbaleDAO _dao;
-        private readonly AnagraficaDAO _anagraficaDAO;  // Aggiungi l'AnagraficaDAO
+        private readonly AnagraficaDAO _anagraficaDAO;
 
-        public VerbaleController(VerbaleDAO dao, AnagraficaDAO anagraficaDAO)  // Includi l'AnagraficaDAO nel costruttore
+        public VerbaleController(VerbaleDAO dao, AnagraficaDAO anagraficaDAO)
         {
             _dao = dao;
             _anagraficaDAO = anagraficaDAO;
@@ -38,12 +38,11 @@ namespace PoliziaMunicipale.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Verbale model)
+        public IActionResult Create(Verbale model, string nome, string cognome)
         {
             if (ModelState.IsValid)
             {
-                
-                var anagrafica = _dao.GetAnagraficaByNomeCognome(model.Anagrafica.Nome, model.Anagrafica.Cognome);
+                var anagrafica = _anagraficaDAO.GetAnagraficaByNomeCognome(nome, cognome);
                 if (anagrafica == null)
                 {
                     ModelState.AddModelError(string.Empty, "Anagrafica non trovata. Verifica Nome e Cognome.");
@@ -56,7 +55,6 @@ namespace PoliziaMunicipale.Controllers
             }
             return View(model);
         }
-
 
         public IActionResult Edit(int id)
         {
@@ -71,7 +69,13 @@ namespace PoliziaMunicipale.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Verbale model, string nome, string cognome)
         {
-            var anagrafica = _anagraficaDAO.GetByNomeCognome(nome, cognome);
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(cognome))
+            {
+                ModelState.AddModelError(string.Empty, "Nome e Cognome non possono essere null o vuoti.");
+                return View(model);
+            }
+
+            var anagrafica = _anagraficaDAO.GetAnagraficaByNomeCognome(nome, cognome);
 
             if (anagrafica == null)
             {
@@ -90,6 +94,7 @@ namespace PoliziaMunicipale.Controllers
 
             return View(model);
         }
+
 
         public IActionResult Delete(int id)
         {
@@ -139,7 +144,7 @@ namespace PoliziaMunicipale.Controllers
         public IActionResult TotalePuntiDecurtatiPerTrasgressore()
         {
             var result = _dao.GetTotalePuntiDecurtatiPerTrasgressore();
-            var model = result.Select(r => (r.Cognome, r.Nome, r.TotalePunti, r.Id)).ToList(); // Assicurati che la tupla abbia il giusto numero di elementi
+            var model = result.Select(r => (r.Cognome, r.Nome, r.TotalePunti, r.Id)).ToList();
             return View(model);
         }
     }

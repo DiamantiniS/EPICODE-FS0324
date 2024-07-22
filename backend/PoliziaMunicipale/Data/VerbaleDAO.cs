@@ -35,10 +35,10 @@ namespace PoliziaMunicipale.Data
                             var verbale = new Verbale
                             {
                                 Id = reader.GetInt32(0),
-                                DataViolazione = reader.GetDateTime(1),
+                                DataViolazione = reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
                                 NominativoAgente = reader.GetString(3),
-                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                DataTrascrizioneVerbale = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
                                 AnagraficaId = reader.GetInt32(7),
@@ -90,10 +90,10 @@ namespace PoliziaMunicipale.Data
                             verbale = new Verbale
                             {
                                 Id = reader.GetInt32(0),
-                                DataViolazione = reader.GetDateTime(1),
+                                DataViolazione = reader.IsDBNull(1) ? (DateTime?)null : reader.GetDateTime(1),
                                 IndirizzoViolazione = reader.GetString(2),
                                 NominativoAgente = reader.GetString(3),
-                                DataTrascrizioneVerbale = reader.GetDateTime(4),
+                                DataTrascrizioneVerbale = reader.IsDBNull(4) ? (DateTime?)null : reader.GetDateTime(4),
                                 Importo = reader.GetDecimal(5),
                                 DecurtamentoPunti = reader.GetInt32(6),
                                 AnagraficaId = reader.GetInt32(7),
@@ -120,8 +120,6 @@ namespace PoliziaMunicipale.Data
             return verbale;
         }
 
-
-
         public void Create(Verbale verbale)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -132,10 +130,10 @@ namespace PoliziaMunicipale.Data
                             "SELECT SCOPE_IDENTITY();";
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione);
+                    command.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", verbale.IndirizzoViolazione);
                     command.Parameters.AddWithValue("@Nominativo_Agente", verbale.NominativoAgente);
-                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
+                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Importo", verbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", verbale.DecurtamentoPunti);
                     command.Parameters.AddWithValue("@idanagrafica", verbale.AnagraficaId);
@@ -156,8 +154,6 @@ namespace PoliziaMunicipale.Data
             }
         }
 
-
-
         public void Update(int id, Verbale updatedVerbale)
         {
             using (var connection = new SqlConnection(_connectionString))
@@ -169,10 +165,10 @@ namespace PoliziaMunicipale.Data
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-                    command.Parameters.AddWithValue("@DataViolazione", updatedVerbale.DataViolazione.Date);
+                    command.Parameters.AddWithValue("@DataViolazione", updatedVerbale.DataViolazione ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@IndirizzoViolazione", updatedVerbale.IndirizzoViolazione);
                     command.Parameters.AddWithValue("@Nominativo_Agente", updatedVerbale.NominativoAgente);
-                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", updatedVerbale.DataTrascrizioneVerbale.Date);
+                    command.Parameters.AddWithValue("@DataTrascrizioneVerbale", updatedVerbale.DataTrascrizioneVerbale ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Importo", updatedVerbale.Importo);
                     command.Parameters.AddWithValue("@DecurtamentoPunti", updatedVerbale.DecurtamentoPunti);
                     command.Parameters.AddWithValue("@idanagrafica", updatedVerbale.AnagraficaId);
@@ -198,8 +194,6 @@ namespace PoliziaMunicipale.Data
                 }
             }
         }
-
-
 
         public void Delete(int id)
         {
@@ -259,7 +253,6 @@ namespace PoliziaMunicipale.Data
             }
             return verbali;
         }
-
 
         public List<Verbale> GetPuntiDecurtatiTrasgressori()
         {
@@ -388,10 +381,10 @@ namespace PoliziaMunicipale.Data
             {
                 connection.Open();
                 using (var command = new SqlCommand(@"
-            SELECT A.Cognome, A.Nome, SUM(V.DecurtamentoPunti) AS TotalePunti, MIN(V.idverbale) AS Id
-            FROM VERBALE V
-            JOIN ANAGRAFICA A ON V.idanagrafica = A.idanagrafica
-            GROUP BY A.Cognome, A.Nome", connection))
+                    SELECT A.Cognome, A.Nome, SUM(V.DecurtamentoPunti) AS TotalePunti, MIN(V.idverbale) AS Id
+                    FROM VERBALE V
+                    JOIN ANAGRAFICA A ON V.idanagrafica = A.idanagrafica
+                    GROUP BY A.Cognome, A.Nome", connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -442,6 +435,5 @@ namespace PoliziaMunicipale.Data
             }
             return null;
         }
-
     }
 }

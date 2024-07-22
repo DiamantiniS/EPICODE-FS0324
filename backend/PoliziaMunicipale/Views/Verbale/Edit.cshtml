@@ -39,9 +39,12 @@
             <span asp-validation-for="DecurtamentoPunti" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="AnagraficaId" class="form-label"></label>
-            <input asp-for="AnagraficaId" class="form-control" />
-            <span asp-validation-for="AnagraficaId" class="text-danger"></span>
+            <label asp-for="Anagrafica.Nome" class="form-label">Nome</label>
+            <input asp-for="Anagrafica.Nome" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Anagrafica.Cognome" class="form-label">Cognome</label>
+            <input asp-for="Anagrafica.Cognome" class="form-control" />
         </div>
         <input type="hidden" asp-for="Id" />
         <div class="d-flex justify-content-between">
