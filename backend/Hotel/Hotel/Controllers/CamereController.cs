@@ -1,11 +1,10 @@
-﻿using Hotel.Interfaces;
-using Hotel.Models;
+﻿using Hotel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-using ProgettoS6GestionaleHotelSabrinaCinque.Models;
+using Hotel.DAO;
 
 namespace Hotel.Controllers
 {

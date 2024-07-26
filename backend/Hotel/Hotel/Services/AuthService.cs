@@ -1,6 +1,4 @@
-﻿using Hotel.Interfaces;
-using Hotel.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Hotel.Models;
 using System.Collections.Generic;
 using System.Linq;
 

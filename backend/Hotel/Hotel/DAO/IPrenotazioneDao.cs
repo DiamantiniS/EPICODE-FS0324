@@ -1,8 +1,9 @@
 ﻿using Hotel.Models;
+using ProgettoS6GestionaleHotelSabrinaCinque.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hotel.Interfaces
+namespace Hotel.DAO
 {
     public interface IPrenotazioneDao
     {

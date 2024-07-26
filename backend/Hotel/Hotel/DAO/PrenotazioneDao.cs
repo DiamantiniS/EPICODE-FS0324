@@ -1,8 +1,9 @@
-﻿using Hotel.Interfaces;
-using Hotel.Models;
+﻿using Hotel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using ProgettoS6GestionaleHotelSabrinaCinque.Models;
+using Hotel.Controllers;
+using Hotel.Services;
+using System.Collections.Generic;
 
 namespace Hotel.DAO
 {
@@ -326,4 +327,3 @@ namespace Hotel.DAO
 
     }
 }
-

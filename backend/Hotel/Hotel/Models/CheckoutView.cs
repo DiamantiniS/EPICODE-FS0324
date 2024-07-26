@@ -9,4 +9,3 @@
         public decimal ExtraSoggiorno { get; set; }
     }
 }
-

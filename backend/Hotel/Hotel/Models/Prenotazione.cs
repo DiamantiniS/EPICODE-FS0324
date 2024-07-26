@@ -1,7 +1,7 @@
-﻿using ProgettoS6GestionaleHotelSabrinaCinque.Models;
+﻿using Hotel.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Hotel.Models
+namespace ProgettoS6GestionaleHotelSabrinaCinque.Models
 {
     public class Prenotazione
     {

@@ -1,4 +1,4 @@
-﻿namespace ProgettoS6GestionaleHotelSabrinaCinque.Models
+﻿namespace Hotel.Models
 {
     public class Camera
     {
