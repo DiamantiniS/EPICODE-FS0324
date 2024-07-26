@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Hotel.Models.Camera>
+
+@{
+    ViewData["Title"] = "Tipologia Camere";
+}
+
+<h2>Tipologia Camere</h2>
+
+<p>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#createCameraModal">Crea nuova camera</button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+            <th>Tipologia</th>
+            <th>Prezzo</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Descrizione</td>
+                <td>@item.Tipologia</td>
+                <td>@item.Prezzo</td>
+                <td>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#editCameraModal-@item.Numero">Modifica</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsCameraModal-@item.Numero">Dettagli</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteCameraModal-@item.Numero">Elimina</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@foreach (var item in Model)
+{
+    <!-- Modale Modifica Camera -->
+    <div class="modal fade" id="editCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="editCameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCameraModalLabel">Modifica Camera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Numero" value="@item.Numero" />
+                        <div class="form-group">
+                            <label asp-for="Descrizione" class="control-label"></label>
+                            <input asp-for="Descrizione" class="form-control" value="@item.Descrizione" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Tipologia" class="control-label"></label>
+                            <input asp-for="Tipologia" class="form-control" value="@item.Tipologia" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Prezzo" class="control-label"></label>
+                            <input asp-for="Prezzo" class="form-control" value="@item.Prezzo" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Salva" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Dettagli Camera -->
+    <div class="modal fade" id="detailsCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="detailsCameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsCameraModalLabel">Dettagli Camera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="Numero" class="control-label"></label>
+                        <input asp-for="Numero" class="form-control" readonly value="@item.Numero" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descrizione" class="control-label"></label>
+                        <input asp-for="Descrizione" class="form-control" readonly value="@item.Descrizione" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tipologia" class="control-label"></label>
+                        <input asp-for="Tipologia" class="form-control" readonly value="@item.Tipologia" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prezzo" class="control-label"></label>
+                        <input asp-for="Prezzo" class="form-control" readonly value="@item.Prezzo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Elimina Camera -->
+    <div class="modal fade" id="deleteCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="deleteCameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCameraModalLabel">Elimina Camera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Sei sicuro di voler eliminare questa camera?
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="Numero" value="@item.Numero" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                        <input type="submit" value="Elimina" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modale Crea Camera -->
+<div class="modal fade" id="createCameraModal" tabindex="-1" role="dialog" aria-labelledby="createCameraModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCameraModalLabel">Crea Camera</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label asp-for="Descrizione" class="control-label"></label>
+                        <input asp-for="Descrizione" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tipologia" class="control-label"></label>
+                        <input asp-for="Tipologia" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Prezzo" class="control-label"></label>
+                        <input asp-for="Prezzo" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Salva" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
