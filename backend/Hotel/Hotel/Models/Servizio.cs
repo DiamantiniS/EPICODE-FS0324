@@ -1,10 +1,9 @@
 ﻿namespace Hotel.Models
 {
-    public class Trattamento
+    public class Servizio
     {
         public int Id { get; set; }
         public string Descrizione { get; set; }
-        public decimal TariffaSupplementare { get; set; }
+        public decimal Prezzo { get; set; }
     }
-
 }

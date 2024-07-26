@@ -4,76 +4,63 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hotel</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Hotel.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 </head>
 <body>
-    @if (Context.Request.Path.StartsWithSegments("/Admin"))
-    {
-        <div class="d-flex">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light flex-column" style="width: 250px; height: 100vh;">
-                <a class="navbar-brand" href="/">Hotel Management</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAdmin" aria-controls="navbarNavAdmin" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAdmin">
-                    <ul class="nav nav-pills flex-column">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <a class="navbar-brand linkNav" href="@Url.Action("Index", "Home")">Gestionale Hotel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item">
-                            <a class="nav-link" href="/Admin/Clienti">Gestione Clienti</a>
+                            <a class="nav-link linkNav" asp-controller="Clienti" asp-action="Index">Anagrafica Cliente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Admin/Camere">Gestione Camere</a>
+                            <a class="nav-link linkNav" asp-controller="Camere" asp-action="Index">Tipologia Camere</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Admin/Prenotazioni">Check-In/Check-Out</a>
+                            <a class="nav-link linkNav" asp-controller="Servizi" asp-action="Index">Servizi</a>
                         </li>
-                    </ul>
-                </div>
-            </nav>
-            <div class="flex-grow-1 p-4">
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
+                        <li class="nav-item">
+                            <a class="nav-link linkNav" asp-controller="Prenotazioni" asp-action="Index">Prenotazioni</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link linkNav" asp-controller="Ricerca" asp-action="Index">Ricerca</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link linkNav" asp-controller="Account" asp-action="Logout">Logout (@User.Identity.Name)</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link linkNav" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                    }
+                </ul>
             </div>
-        </div>
-    }
-    else
-    {
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Hotel Management</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Home">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Admin">Admin</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-    }
-    <footer class="border-top footer text-muted mt-4">
-        <div class="container">
-            &copy; 2023 - Hotel Management - <a href="/Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

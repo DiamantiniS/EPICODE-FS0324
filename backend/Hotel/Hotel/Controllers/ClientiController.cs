@@ -1,65 +1,104 @@
 ﻿using Hotel.Interfaces;
 using Hotel.Models;
+using Hotel.DAO;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics;
 
 namespace Hotel.Controllers
 {
-    [Route("Admin/Clienti")]
+    [Authorize(Policy = "GeneralAccessPolicy")]
     public class ClientiController : Controller
     {
-        private readonly IClienteService _clienteService;
+        private readonly IClienteDao _clienteDao;
 
-        public ClientiController(IClienteService clienteService)
+        public ClientiController(IClienteDao clienteDao)
         {
-            _clienteService = clienteService;
+            _clienteDao = clienteDao;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var clients = await _clienteService.GetAllClients();
-            return View("~/Views/Admin/Clienti/Index.cshtml", clients);
-        }
-
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(Cliente cliente)
-        {
-            if (ModelState.IsValid)
+            try
             {
-                await _clienteService.AddClient(cliente);
-                return Ok();
+                var clienti = _clienteDao.GetAll();
+                return View(clienti);
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                // Log dell'errore (opzionale)
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
 
-        [HttpGet("Edit/{id}")]
-        public async Task<IActionResult> Edit(string id)
+        public IActionResult Details(int id)
         {
-            var client = await _clienteService.GetClientByCodiceFiscale(id);
-            if (client == null)
+            var cliente = _clienteDao.GetById(id);
+            if (cliente == null)
             {
                 return NotFound();
             }
-            return Json(client);
+            return View(cliente);
         }
 
-        [HttpPost("Edit")]
-        public async Task<IActionResult> Edit(Cliente cliente)
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                await _clienteService.UpdateClient(cliente);
-                return Ok();
+                _clienteDao.Add(cliente);
+                return RedirectToAction(nameof(Index));
             }
-            return BadRequest();
+            return View(cliente);
         }
 
-        [HttpPost("Delete")]
-        public async Task<IActionResult> Delete(string codiceFiscale)
+        public IActionResult Edit(int id)
         {
-            await _clienteService.DeleteClient(codiceFiscale);
-            return Ok();
+            var cliente = _clienteDao.GetById(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return View(cliente);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Cliente cliente)
+        {
+            if (id != cliente.Id)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _clienteDao.Update(cliente);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _clienteDao.Delete(id);
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                // Log dell'errore (opzionale)
+                return Json(new { success = false, message = ex.Message });
+            }
         }
     }
 }

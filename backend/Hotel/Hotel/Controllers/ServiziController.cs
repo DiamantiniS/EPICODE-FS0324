@@ -1,40 +1,45 @@
 ﻿using Hotel.Interfaces;
 using Hotel.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.Extensions.Logging;
+using Hotel.DAO;
 using Microsoft.AspNetCore.Authorization;
-using ProgettoS6GestionaleHotelSabrinaCinque.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Hotel.Controllers
 {
-    [Authorize(Policy = "AdminPolicy")]//solo l'admin ha accesso al database delle camere e fare le crud
-    public class CamereController : Controller
+    [Authorize(Policy = "AdminPolicy")]
+    public class ServiziController : Controller
     {
-        private readonly ICameraDao _cameraDao;
+        private readonly IServizioDao _servizioDao;
 
-        public CamereController(ICameraDao cameraDao)
+        public ServiziController(IServizioDao servizioDao)
         {
-            _cameraDao = cameraDao;
+            _servizioDao = servizioDao;
         }
 
         public IActionResult Index()
         {
-            var camere = _cameraDao.GetAll();
-            return View(camere);
+            try
+            {
+                var servizi = _servizioDao.GetAll();
+                return View(servizi);
+            }
+            catch (Exception ex)
+            {
+                
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
 
         public IActionResult Details(int id)
         {
-            var camera = _cameraDao.GetById(id);
-            if (camera == null)
+            var servizio = _servizioDao.GetById(id);
+            if (servizio == null)
             {
                 return NotFound();
             }
-            return View(camera);
+            return View(servizio);
         }
-
 
         public IActionResult Create()
         {
@@ -43,41 +48,41 @@ namespace Hotel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Camera camera)
+        public IActionResult Create(Servizio servizio)
         {
             if (ModelState.IsValid)
             {
-                _cameraDao.Add(camera);
+                _servizioDao.Add(servizio);
                 return RedirectToAction(nameof(Index));
             }
-            return View(camera);
+            return View(servizio);
         }
 
         public IActionResult Edit(int id)
         {
-            var camera = _cameraDao.GetById(id);
-            if (camera == null)
+            var servizio = _servizioDao.GetById(id);
+            if (servizio == null)
             {
                 return NotFound();
             }
-            return View(camera);
+            return View(servizio);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Camera camera)
+        public IActionResult Edit(int id, Servizio servizio)
         {
-            if (id != camera.Id)
+            if (id != servizio.Id)
             {
                 return BadRequest();
             }
 
             if (ModelState.IsValid)
             {
-                _cameraDao.Update(camera);
+                _servizioDao.Update(servizio);
                 return RedirectToAction(nameof(Index));
             }
-            return View(camera);
+            return View(servizio);
         }
 
         [HttpPost]
@@ -85,11 +90,12 @@ namespace Hotel.Controllers
         {
             try
             {
-                _cameraDao.Delete(id);
+                _servizioDao.Delete(id);
                 return Json(new { success = true });
             }
             catch (Exception ex)
             {
+                
                 return Json(new { success = false, message = ex.Message });
             }
         }

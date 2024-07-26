@@ -9,8 +9,7 @@
 <table class="table mt-3">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Codice Fiscale Cliente</th>
+            <th>Cliente</th>
             <th>Numero Camera</th>
             <th>Data Prenotazione</th>
             <th>Numero Progressivo Anno</th>
@@ -27,7 +26,6 @@
         @foreach (var prenotazione in Model)
         {
             <tr>
-                <td>@prenotazione.Id</td>
                 <td>@prenotazione.CodiceFiscaleCliente</td>
                 <td>@prenotazione.NumeroCamera</td>
                 <td>@prenotazione.DataPrenotazione.ToString("yyyy-MM-dd")</td>
@@ -37,7 +35,7 @@
                 <td>@prenotazione.Al.ToString("yyyy-MM-dd")</td>
                 <td>@prenotazione.CaparraConfirmatoria</td>
                 <td>@prenotazione.TariffaApplicata</td>
-                <td>@prenotazione.Trattamento.Descrizione</td>
+                <td>@prenotazione.TrattamentoId</td>
                 <td>
                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editPrenotazioneModal" onclick="loadEditPrenotazioneModal(@prenotazione.Id)">⚙️</button>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePrenotazioneModal" onclick="loadDeletePrenotazioneModal(@prenotazione.Id)">🗑️</button>
@@ -62,18 +60,35 @@
                         <select class="form-control" id="createCodiceFiscaleCliente" name="CodiceFiscaleCliente" required>
                             @foreach (var cliente in ViewBag.Clienti)
                             {
-                                <option value="@cliente.CodiceFiscale">@cliente.Nome</option>
+                                <option value="@cliente.CodiceFiscale">@cliente.Nome @cliente.Cognome</option>
                             }
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="createNumeroCamera" class="form-label">Camera</label>
+                        <label for="createNumeroCamera" class="form-label">Numero Camera</label>
                         <select class="form-control" id="createNumeroCamera" name="NumeroCamera" required>
                             @foreach (var camera in ViewBag.Camere)
                             {
-                                <option value="@camera.Numero">@camera.Descrizione</option>
+                                <option value="@camera.Numero">@camera.Numero - @camera.Descrizione</option>
                             }
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="costoCamera" class="form-label">Costo Camera</label>
+                        <input type="text" class="form-control" id="costoCamera" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createTrattamentoId" class="form-label">Trattamento</label>
+                        <select class="form-control" id="createTrattamentoId" name="TrattamentoId" required>
+                            @foreach (var trattamento in ViewBag.Trattamenti)
+                            {
+                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="costoTrattamento" class="form-label">Costo Trattamento</label>
+                        <input type="text" class="form-control" id="costoTrattamento" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="createDataPrenotazione" class="form-label">Data Prenotazione</label>
@@ -81,11 +96,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="createNumeroProgressivoAnno" class="form-label">Numero Progressivo Anno</label>
-                        <input type="number" class="form-control" id="createNumeroProgressivoAnno" name="NumeroProgressivoAnno" required />
+                        <input type="number" class="form-control" id="createNumeroProgressivoAnno" name="NumeroProgressivoAnno" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="createAnno" class="form-label">Anno</label>
-                        <input type="number" class="form-control" id="createAnno" name="Anno" required />
+                        <input type="number" class="form-control" id="createAnno" name="Anno" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="createDal" class="form-label">Dal</label>
@@ -101,16 +116,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="createTariffaApplicata" class="form-label">Tariffa Applicata</label>
-                        <input type="number" step="0.01" class="form-control" id="createTariffaApplicata" name="TariffaApplicata" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="createTrattamentoId" class="form-label">Trattamento</label>
-                        <select class="form-control" id="createTrattamentoId" name="TrattamentoId" required>
-                            @foreach (var trattamento in ViewBag.Trattamenti)
-                            {
-                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
-                            }
-                        </select>
+                        <input type="text" class="form-control" id="createTariffaApplicata" name="TariffaApplicata" readonly />
                     </div>
                     <button type="button" class="btn btn-primary" onclick="submitCreatePrenotazione()">Salva</button>
                 </form>
@@ -135,18 +141,35 @@
                         <select class="form-control" id="editCodiceFiscaleCliente" name="CodiceFiscaleCliente" required>
                             @foreach (var cliente in ViewBag.Clienti)
                             {
-                                <option value="@cliente.CodiceFiscale">@cliente.Nome</option>
+                                <option value="@cliente.CodiceFiscale">@cliente.Nome @cliente.Cognome</option>
                             }
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="editNumeroCamera" class="form-label">Camera</label>
+                        <label for="editNumeroCamera" class="form-label">Numero Camera</label>
                         <select class="form-control" id="editNumeroCamera" name="NumeroCamera" required>
                             @foreach (var camera in ViewBag.Camere)
                             {
-                                <option value="@camera.Numero">@camera.Descrizione</option>
+                                <option value="@camera.Numero">@camera.Numero - @camera.Descrizione</option>
                             }
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCostoCamera" class="form-label">Costo Camera</label>
+                        <input type="text" class="form-control" id="editCostoCamera" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTrattamentoId" class="form-label">Trattamento</label>
+                        <select class="form-control" id="editTrattamentoId" name="TrattamentoId" required>
+                            @foreach (var trattamento in ViewBag.Trattamenti)
+                            {
+                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCostoTrattamento" class="form-label">Costo Trattamento</label>
+                        <input type="text" class="form-control" id="editCostoTrattamento" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="editDataPrenotazione" class="form-label">Data Prenotazione</label>
@@ -154,11 +177,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="editNumeroProgressivoAnno" class="form-label">Numero Progressivo Anno</label>
-                        <input type="number" class="form-control" id="editNumeroProgressivoAnno" name="NumeroProgressivoAnno" required />
+                        <input type="number" class="form-control" id="editNumeroProgressivoAnno" name="NumeroProgressivoAnno" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="editAnno" class="form-label">Anno</label>
-                        <input type="number" class="form-control" id="editAnno" name="Anno" required />
+                        <input type="number" class="form-control" id="editAnno" name="Anno" readonly />
                     </div>
                     <div class="mb-3">
                         <label for="editDal" class="form-label">Dal</label>
@@ -174,16 +197,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="editTariffaApplicata" class="form-label">Tariffa Applicata</label>
-                        <input type="number" step="0.01" class="form-control" id="editTariffaApplicata" name="TariffaApplicata" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editTrattamentoId" class="form-label">Trattamento</label>
-                        <select class="form-control" id="editTrattamentoId" name="TrattamentoId" required>
-                            @foreach (var trattamento in ViewBag.Trattamenti)
-                            {
-                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
-                            }
-                        </select>
+                        <input type="text" class="form-control" id="editTariffaApplicata" name="TariffaApplicata" readonly />
                     </div>
                     <button type="button" class="btn btn-primary" onclick="submitEditPrenotazione()">Salva</button>
                 </form>
@@ -211,45 +225,6 @@
     </div>
 </div>
 
-<script>
-    function loadEditPrenotazioneModal(id) {
-        $.get('/Admin/Prenotazioni/Edit/' + id, function (data) {
-            $('#editId').val(data.id);
-            $('#editCodiceFiscaleCliente').val(data.codiceFiscaleCliente);
-            $('#editNumeroCamera').val(data.numeroCamera);
-            $('#editDataPrenotazione').val(data.dataPrenotazione.substring(0, 10));
-            $('#editNumeroProgressivoAnno').val(data.numeroProgressivoAnno);
-            $('#editAnno').val(data.anno);
-            $('#editDal').val(data.dal.substring(0, 10));
-            $('#editAl').val(data.al.substring(0, 10));
-            $('#editCaparraConfirmatoria').val(data.caparraConfirmatoria);
-            $('#editTariffaApplicata').val(data.tariffaApplicata);
-            $('#editTrattamentoId').val(data.trattamentoId);
-        });
-    }
-
-    function loadDeletePrenotazioneModal(id) {
-        $('#deleteId').val(id);
-    }
-
-    function submitCreatePrenotazione() {
-        var form = $('#createPrenotazioneForm');
-        $.post('/Admin/Prenotazioni/Create', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-
-    function submitEditPrenotazione() {
-        var form = $('#editPrenotazioneForm');
-        $.post('/Admin/Prenotazioni/Edit', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-
-    function submitDeletePrenotazione() {
-        var form = $('#deletePrenotazioneForm');
-        $.post('/Admin/Prenotazioni/Delete', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-</script>
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

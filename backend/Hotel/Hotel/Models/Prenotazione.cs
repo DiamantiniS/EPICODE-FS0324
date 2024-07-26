@@ -1,19 +1,33 @@
-﻿namespace Hotel.Models
+﻿using ProgettoS6GestionaleHotelSabrinaCinque.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace Hotel.Models
 {
     public class Prenotazione
     {
         public int Id { get; set; }
-        public string CodiceFiscaleCliente { get; set; }
-        public int NumeroCamera { get; set; }
+
+        [Required(ErrorMessage = "Il campo Cliente è obbligatorio.")]
+        public int ClienteId { get; set; }
+
+        [Required(ErrorMessage = "Il campo Camera è obbligatorio.")]
+        public int CameraId { get; set; }
+
+        [Required(ErrorMessage = "Il campo Data Prenotazione è obbligatorio.")]
         public DateTime DataPrenotazione { get; set; }
-        public int NumeroProgressivoAnno { get; set; }
+
+        public int NumeroProgressivo { get; set; }
         public int Anno { get; set; }
         public DateTime Dal { get; set; }
         public DateTime Al { get; set; }
-        public decimal CaparraConfirmatoria { get; set; }
-        public decimal TariffaApplicata { get; set; }
-        public int TrattamentoId { get; set; }
-        public Trattamento Trattamento { get; set; }
-    }
+        public decimal Caparra { get; set; }
+        public decimal Tariffa { get; set; }
+        public string TipologiaSoggiorno { get; set; }
 
+        public Cliente? Cliente { get; set; }
+        public Camera? Camera { get; set; }
+
+        public List<int> ServiziSelezionati { get; set; } = new List<int>();
+        public List<Servizio>? Servizi { get; set; }
+    }
 }

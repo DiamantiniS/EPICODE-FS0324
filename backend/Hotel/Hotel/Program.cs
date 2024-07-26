@@ -1,6 +1,8 @@
 using Hotel.Interfaces;
-using Hotel.Services;
+using Hotel.DAO;
 using Microsoft.Extensions.Logging;
+using Hotel.DAO;
+using Hotel.Services;
 
 namespace Hotel
 {
@@ -15,9 +17,11 @@ namespace Hotel
             builder.Services.AddLogging();
 
             // Dependency Injection
-            builder.Services.AddScoped<IClienteService, ClienteService>();
-            builder.Services.AddScoped<ICameraService, CameraService>();
-            builder.Services.AddScoped<IPrenotazioneService, PrenotazioneService>();
+            builder.Services.AddScoped<IClienteDao, ClienteDao>();
+            builder.Services.AddScoped<ICameraDao, CameraDao>();
+            builder.Services.AddScoped<IPrenotazioneDao, PrenotazioneDao>();
+            builder.Services.AddScoped<IServizioDao, ServizioDao>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             var app = builder.Build();
 

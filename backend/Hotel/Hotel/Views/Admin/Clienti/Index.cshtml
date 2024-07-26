@@ -155,42 +155,4 @@
     </div>
 </div>
 
-<script>
-    function loadEditClienteModal(codiceFiscale) {
-        $.get('/Admin/Clienti/Edit/' + codiceFiscale, function (data) {
-            $('#editCodiceFiscale').val(data.codiceFiscale);
-            $('#editCognome').val(data.cognome);
-            $('#editNome').val(data.nome);
-            $('#editCitta').val(data.citta);
-            $('#editProvincia').val(data.provincia);
-            $('#editEmail').val(data.email);
-            $('#editTelefono').val(data.telefono);
-            $('#editCellulare').val(data.cellulare);
-        });
-    }
 
-    function loadDeleteClienteModal(codiceFiscale) {
-        $('#deleteCodiceFiscale').val(codiceFiscale);
-    }
-
-    function submitCreateCliente() {
-        var form = $('#createClienteForm');
-        $.post('/Admin/Clienti/Create', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-
-    function submitEditCliente() {
-        var form = $('#editClienteForm');
-        $.post('/Admin/Clienti/Edit', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-
-    function submitDeleteCliente() {
-        var form = $('#deleteClienteForm');
-        $.post('/Admin/Clienti/Delete', form.serialize(), function (response) {
-            location.reload();
-        });
-    }
-</script>
