@@ -1,158 +1,200 @@
 ﻿@model IEnumerable<Hotel.Models.Cliente>
 
 @{
-    ViewData["Title"] = "Gestione Clienti";
+    ViewData["Title"] = "Anagrafica Cliente";
 }
 
-<h1>Gestione Clienti</h1>
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createClienteModal">+ Aggiungi Cliente</button>
-<table class="table mt-3">
+<h2>Anagrafica Cliente</h2>
+
+<p>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#createClienteModal">Crea nuovo cliente</button>
+</p>
+
+<table class="table">
     <thead>
         <tr>
-            <th>Codice Fiscale</th>
-            <th>Cognome</th>
-            <th>Nome</th>
-            <th>Città</th>
-            <th>Provincia</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Cellulare</th>
-            <th>Azioni</th>
+            <th>@Html.DisplayNameFor(model => model.CodiceFiscale)</th>
+            <th>@Html.DisplayNameFor(model => model.Cognome)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Indirizzo)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var cliente in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@cliente.CodiceFiscale</td>
-                <td>@cliente.Cognome</td>
-                <td>@cliente.Nome</td>
-                <td>@cliente.Citta</td>
-                <td>@cliente.Provincia</td>
-                <td>@cliente.Email</td>
-                <td>@cliente.Telefono</td>
-                <td>@cliente.Cellulare</td>
+                <td>@Html.DisplayFor(modelItem => item.CodiceFiscale)</td>
+                <td>@Html.DisplayFor(modelItem => item.Cognome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Indirizzo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>
-                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editClienteModal" onclick="loadEditClienteModal('@cliente.CodiceFiscale')">⚙️</button>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteClienteModal" onclick="loadDeleteClienteModal('@cliente.CodiceFiscale')">🗑️</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#editClienteModal-@item.CodiceFiscale">Modifica</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsClienteModal-@item.CodiceFiscale">Dettagli</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteClienteModal-@item.CodiceFiscale">Elimina</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<!-- Modale Creazione Cliente -->
-<div class="modal fade" id="createClienteModal" tabindex="-1" aria-labelledby="createClienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+@foreach (var item in Model)
+{
+    <!-- Modale Modifica Cliente -->
+    <div class="modal fade" id="editClienteModal-@item.CodiceFiscale" tabindex="-1" role="dialog" aria-labelledby="editClienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editClienteModalLabel">Modifica Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Edit" method="post">
+                        <div class="form-group">
+                            <label asp-for="CodiceFiscale" class="control-label"></label>
+                            <input asp-for="CodiceFiscale" class="form-control" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Cognome" class="control-label"></label>
+                            <input asp-for="Cognome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Nome" class="control-label"></label>
+                            <input asp-for="Nome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Indirizzo" class="control-label"></label>
+                            <input asp-for="Indirizzo" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Telefono" class="control-label"></label>
+                            <input asp-for="Telefono" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Salva" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Dettagli Cliente -->
+    <div class="modal fade" id="detailsClienteModal-@item.CodiceFiscale" tabindex="-1" role="dialog" aria-labelledby="detailsClienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsClienteModalLabel">Dettagli Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="CodiceFiscale" class="control-label"></label>
+                        <input asp-for="CodiceFiscale" class="form-control" readonly value="@item.CodiceFiscale" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cognome" class="control-label"></label>
+                        <input asp-for="Cognome" class="form-control" readonly value="@item.Cognome" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" readonly value="@item.Nome" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Indirizzo" class="control-label"></label>
+                        <input asp-for="Indirizzo" class="form-control" readonly value="@item.Indirizzo" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" readonly value="@item.Telefono" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" readonly value="@item.Email" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Elimina Cliente -->
+    <div class="modal fade" id="deleteClienteModal-@item.CodiceFiscale" tabindex="-1" role="dialog" aria-labelledby="deleteClienteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteClienteModalLabel">Elimina Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Sei sicuro di voler eliminare questo cliente?
+                </div>
+                <div class="modal-footer">
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="CodiceFiscale" value="@item.CodiceFiscale" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+                        <input type="submit" value="Elimina" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modale Crea Cliente -->
+<div class="modal fade" id="createClienteModal" tabindex="-1" role="dialog" aria-labelledby="createClienteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createClienteModalLabel">Aggiungi Cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="createClienteModalLabel">Crea Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <form id="createClienteForm">
-                    <div class="mb-3">
-                        <label for="createCodiceFiscale" class="form-label">Codice Fiscale</label>
-                        <input type="text" class="form-control" id="createCodiceFiscale" name="CodiceFiscale" required />
+                <form asp-action="Create" method="post">
+                    <div class="form-group">
+                        <label asp-for="CodiceFiscale" class="control-label"></label>
+                        <input asp-for="CodiceFiscale" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createCognome" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" id="createCognome" name="Cognome" required />
+                    <div class="form-group">
+                        <label asp-for="Cognome" class="control-label"></label>
+                        <input asp-for="Cognome" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createNome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="createNome" name="Nome" required />
+                    <div class="form-group">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input asp-for="Nome" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createCitta" class="form-label">Città</label>
-                        <input type="text" class="form-control" id="createCitta" name="Citta" required />
+                    <div class="form-group">
+                        <label asp-for="Indirizzo" class="control-label"></label>
+                        <input asp-for="Indirizzo" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createProvincia" class="form-label">Provincia</label>
-                        <input type="text" class="form-control" id="createProvincia" name="Provincia" required />
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label"></label>
+                        <input asp-for="Telefono" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="createEmail" name="Email" required />
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createTelefono" class="form-label">Telefono</label>
-                        <input type="tel" class="form-control" id="createTelefono" name="Telefono" required />
+                    <div class="form-group">
+                        <input type="submit" value="Salva" class="btn btn-primary" />
                     </div>
-                    <div class="mb-3">
-                        <label for="createCellulare" class="form-label">Cellulare</label>
-                        <input type="tel" class="form-control" id="createCellulare" name="Cellulare" required />
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="submitCreateCliente()">Salva</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modale Modifica Cliente -->
-<div class="modal fade" id="editClienteModal" tabindex="-1" aria-labelledby="editClienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editClienteModalLabel">Modifica Cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="editClienteForm">
-                    <input type="hidden" id="editCodiceFiscale" name="CodiceFiscale" />
-                    <div class="mb-3">
-                        <label for="editCognome" class="form-label">Cognome</label>
-                        <input type="text" class="form-control" id="editCognome" name="Cognome" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editNome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="editNome" name="Nome" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCitta" class="form-label">Città</label>
-                        <input type="text" class="form-control" id="editCitta" name="Citta" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editProvincia" class="form-label">Provincia</label>
-                        <input type="text" class="form-control" id="editProvincia" name="Provincia" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="editEmail" name="Email" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editTelefono" class="form-label">Telefono</label>
-                        <input type="tel" class="form-control" id="editTelefono" name="Telefono" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCellulare" class="form-label">Cellulare</label>
-                        <input type="tel" class="form-control" id="editCellulare" name="Cellulare" required />
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="submitEditCliente()">Salva</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modale Elimina Cliente -->
-<div class="modal fade" id="deleteClienteModal" tabindex="-1" aria-labelledby="deleteClienteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteClienteModalLabel">Elimina Cliente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Sei sicuro di voler eliminare questo cliente?</p>
-                <form id="deleteClienteForm">
-                    <input type="hidden" id="deleteCodiceFiscale" name="CodiceFiscale" />
-                    <button type="button" class="btn btn-danger" onclick="submitDeleteCliente()">Elimina</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-

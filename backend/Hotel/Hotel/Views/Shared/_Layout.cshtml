@@ -6,11 +6,38 @@
     <title>@ViewData["Title"] - Hotel</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <style>
+        body {
+            padding-top: 56px;
+        }
+        @media (min-width: 768px) {
+            .sidebar-nav {
+                position: fixed;
+                top: 56px;
+                left: 0;
+                width: 200px;
+                height: 100%;
+                background-color: #f8f9fa;
+                padding-top: 20px;
+            }
+            .sidebar-nav a {
+                display: block;
+                padding: 10px 15px;
+                color: #333;
+            }
+            .sidebar-nav a:hover {
+                background-color: #ddd;
+            }
+            .main-content {
+                margin-left: 220px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <a class="navbar-brand linkNav" href="@Url.Action("Index", "Home")">Gestionale Hotel</a>
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Gestionale Hotel</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,19 +46,19 @@
                     @if (User.Identity != null && User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Clienti" asp-action="Index">Anagrafica Cliente</a>
+                            <a class="nav-link" asp-controller="Clienti" asp-action="Index">Anagrafica Cliente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Camere" asp-action="Index">Tipologia Camere</a>
+                            <a class="nav-link" asp-controller="Camere" asp-action="Index">Tipologia Camere</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Servizi" asp-action="Index">Servizi</a>
+                            <a class="nav-link" asp-controller="Servizi" asp-action="Index">Servizi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Prenotazioni" asp-action="Index">Prenotazioni</a>
+                            <a class="nav-link" asp-controller="Prenotazioni" asp-action="Index">Prenotazioni</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Ricerca" asp-action="Index">Ricerca</a>
+                            <a class="nav-link" asp-controller="Ricerca" asp-action="Index">Ricerca</a>
                         </li>
                     }
                 </ul>
@@ -39,20 +66,30 @@
                     @if (User.Identity != null && User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Account" asp-action="Logout">Logout (@User.Identity.Name)</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout (@User.Identity.Name)</a>
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link linkNav" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
                     }
                 </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="sidebar-nav">
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Clienti" asp-action="Index">Anagrafica Cliente</a>
+            <a asp-controller="Camere" asp-action="Index">Tipologia Camere</a>
+            <a asp-controller="Servizi" asp-action="Index">Servizi</a>
+            <a asp-controller="Prenotazioni" asp-action="Index">Prenotazioni</a>
+            <a asp-controller="Ricerca" asp-action="Index">Ricerca</a>
+        }
+    </div>
+    <div class="container main-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

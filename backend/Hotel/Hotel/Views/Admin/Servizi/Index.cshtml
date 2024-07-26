@@ -1,35 +1,33 @@
-﻿@model IEnumerable<Hotel.Models.Camera>
+﻿@model IEnumerable<Hotel.Models.Servizio>
 
 @{
-    ViewData["Title"] = "Tipologia Camere";
+    ViewData["Title"] = "Servizi";
 }
 
-<h2>Tipologia Camere</h2>
+<h2>Servizi</h2>
 
 <p>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#createCameraModal">Crea nuova camera</button>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#createServizioModal">Crea nuovo servizio</button>
 </p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Descrizione</th>
-            <th>Tipologia</th>
-            <th>Prezzo</th>
-            <th>Azioni</th>
+            <th>@Html.DisplayNameFor(model => model.Descrizione)</th>
+            <th>@Html.DisplayNameFor(model => model.Prezzo)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Descrizione</td>
-                <td>@item.Tipologia</td>
-                <td>@item.Prezzo</td>
+                <td>@Html.DisplayFor(modelItem => item.Descrizione)</td>
+                <td>@Html.DisplayFor(modelItem => item.Prezzo)</td>
                 <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#editCameraModal-@item.Numero">Modifica</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsCameraModal-@item.Numero">Dettagli</button>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteCameraModal-@item.Numero">Elimina</button>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#editServizioModal-@item.Id">Modifica</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsServizioModal-@item.Id">Dettagli</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteServizioModal-@item.Id">Elimina</button>
                 </td>
             </tr>
         }
@@ -38,30 +36,29 @@
 
 @foreach (var item in Model)
 {
-    <!-- Modale Modifica Camera -->
-    <div class="modal fade" id="editCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="editCameraModalLabel" aria-hidden="true">
+    <!-- Modale Modifica Servizio -->
+    <div class="modal fade" id="editServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="editServizioModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editCameraModalLabel">Modifica Camera</h5>
+                    <h5 class="modal-title" id="editServizioModalLabel">Modifica Servizio</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form asp-action="Edit" method="post">
-                        <input type="hidden" asp-for="Numero" value="@item.Numero" />
                         <div class="form-group">
-                            <label asp-for="Descrizione" class="control-label"></label>
-                            <input asp-for="Descrizione" class="form-control" value="@item.Descrizione" />
+                            <label asp-for="Id" class="control-label"></label>
+                            <input asp-for="Id" class="form-control" readonly />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Tipologia" class="control-label"></label>
-                            <input asp-for="Tipologia" class="form-control" value="@item.Tipologia" />
+                            <label asp-for="Descrizione" class="control-label"></label>
+                            <input asp-for="Descrizione" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label asp-for="Prezzo" class="control-label"></label>
-                            <input asp-for="Prezzo" class="form-control" value="@item.Prezzo" />
+                            <input asp-for="Prezzo" class="form-control" />
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Salva" class="btn btn-primary" />
@@ -72,28 +69,24 @@
         </div>
     </div>
 
-    <!-- Modale Dettagli Camera -->
-    <div class="modal fade" id="detailsCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="detailsCameraModalLabel" aria-hidden="true">
+    <!-- Modale Dettagli Servizio -->
+    <div class="modal fade" id="detailsServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="detailsServizioModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="detailsCameraModalLabel">Dettagli Camera</h5>
+                    <h5 class="modal-title" id="detailsServizioModalLabel">Dettagli Servizio</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label asp-for="Numero" class="control-label"></label>
-                        <input asp-for="Numero" class="form-control" readonly value="@item.Numero" />
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" readonly value="@item.Id" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Descrizione" class="control-label"></label>
                         <input asp-for="Descrizione" class="form-control" readonly value="@item.Descrizione" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tipologia" class="control-label"></label>
-                        <input asp-for="Tipologia" class="form-control" readonly value="@item.Tipologia" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Prezzo" class="control-label"></label>
@@ -104,22 +97,22 @@
         </div>
     </div>
 
-    <!-- Modale Elimina Camera -->
-    <div class="modal fade" id="deleteCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="deleteCameraModalLabel" aria-hidden="true">
+    <!-- Modale Elimina Servizio -->
+    <div class="modal fade" id="deleteServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="deleteServizioModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCameraModalLabel">Elimina Camera</h5>
+                    <h5 class="modal-title" id="deleteServizioModalLabel">Elimina Servizio</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Sei sicuro di voler eliminare questa camera?
+                    Sei sicuro di voler eliminare questo servizio?
                 </div>
                 <div class="modal-footer">
                     <form asp-action="Delete" method="post">
-                        <input type="hidden" name="Numero" value="@item.Numero" />
+                        <input type="hidden" name="Id" value="@item.Id" />
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
                         <input type="submit" value="Elimina" class="btn btn-danger" />
                     </form>
@@ -129,12 +122,12 @@
     </div>
 }
 
-<!-- Modale Crea Camera -->
-<div class="modal fade" id="createCameraModal" tabindex="-1" role="dialog" aria-labelledby="createCameraModalLabel" aria-hidden="true">
+<!-- Modale Crea Servizio -->
+<div class="modal fade" id="createServizioModal" tabindex="-1" role="dialog" aria-labelledby="createServizioModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createCameraModalLabel">Crea Camera</h5>
+                <h5 class="modal-title" id="createServizioModalLabel">Crea Servizio</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -144,10 +137,6 @@
                     <div class="form-group">
                         <label asp-for="Descrizione" class="control-label"></label>
                         <input asp-for="Descrizione" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tipologia" class="control-label"></label>
-                        <input asp-for="Tipologia" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label asp-for="Prezzo" class="control-label"></label>
