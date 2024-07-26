@@ -1,0 +1,255 @@
+﻿@model IEnumerable<Hotel.Models.Prenotazione>
+
+@{
+    ViewData["Title"] = "Gestione Prenotazioni";
+}
+
+<h1>Gestione Prenotazioni</h1>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPrenotazioneModal">+ Aggiungi Prenotazione</button>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Codice Fiscale Cliente</th>
+            <th>Numero Camera</th>
+            <th>Data Prenotazione</th>
+            <th>Numero Progressivo Anno</th>
+            <th>Anno</th>
+            <th>Dal</th>
+            <th>Al</th>
+            <th>Caparra Confirmatoria</th>
+            <th>Tariffa Applicata</th>
+            <th>Trattamento</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prenotazione in Model)
+        {
+            <tr>
+                <td>@prenotazione.Id</td>
+                <td>@prenotazione.CodiceFiscaleCliente</td>
+                <td>@prenotazione.NumeroCamera</td>
+                <td>@prenotazione.DataPrenotazione.ToString("yyyy-MM-dd")</td>
+                <td>@prenotazione.NumeroProgressivoAnno</td>
+                <td>@prenotazione.Anno</td>
+                <td>@prenotazione.Dal.ToString("yyyy-MM-dd")</td>
+                <td>@prenotazione.Al.ToString("yyyy-MM-dd")</td>
+                <td>@prenotazione.CaparraConfirmatoria</td>
+                <td>@prenotazione.TariffaApplicata</td>
+                <td>@prenotazione.Trattamento.Descrizione</td>
+                <td>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editPrenotazioneModal" onclick="loadEditPrenotazioneModal(@prenotazione.Id)">⚙️</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePrenotazioneModal" onclick="loadDeletePrenotazioneModal(@prenotazione.Id)">🗑️</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modale Creazione Prenotazione -->
+<div class="modal fade" id="createPrenotazioneModal" tabindex="-1" aria-labelledby="createPrenotazioneModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createPrenotazioneModalLabel">Aggiungi Prenotazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createPrenotazioneForm">
+                    <div class="mb-3">
+                        <label for="createCodiceFiscaleCliente" class="form-label">Cliente</label>
+                        <select class="form-control" id="createCodiceFiscaleCliente" name="CodiceFiscaleCliente" required>
+                            @foreach (var cliente in ViewBag.Clienti)
+                            {
+                                <option value="@cliente.CodiceFiscale">@cliente.Nome</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createNumeroCamera" class="form-label">Camera</label>
+                        <select class="form-control" id="createNumeroCamera" name="NumeroCamera" required>
+                            @foreach (var camera in ViewBag.Camere)
+                            {
+                                <option value="@camera.Numero">@camera.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createDataPrenotazione" class="form-label">Data Prenotazione</label>
+                        <input type="date" class="form-control" id="createDataPrenotazione" name="DataPrenotazione" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createNumeroProgressivoAnno" class="form-label">Numero Progressivo Anno</label>
+                        <input type="number" class="form-control" id="createNumeroProgressivoAnno" name="NumeroProgressivoAnno" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createAnno" class="form-label">Anno</label>
+                        <input type="number" class="form-control" id="createAnno" name="Anno" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createDal" class="form-label">Dal</label>
+                        <input type="date" class="form-control" id="createDal" name="Dal" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createAl" class="form-label">Al</label>
+                        <input type="date" class="form-control" id="createAl" name="Al" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createCaparraConfirmatoria" class="form-label">Caparra Confirmatoria</label>
+                        <input type="number" step="0.01" class="form-control" id="createCaparraConfirmatoria" name="CaparraConfirmatoria" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createTariffaApplicata" class="form-label">Tariffa Applicata</label>
+                        <input type="number" step="0.01" class="form-control" id="createTariffaApplicata" name="TariffaApplicata" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createTrattamentoId" class="form-label">Trattamento</label>
+                        <select class="form-control" id="createTrattamentoId" name="TrattamentoId" required>
+                            @foreach (var trattamento in ViewBag.Trattamenti)
+                            {
+                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitCreatePrenotazione()">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Modifica Prenotazione -->
+<div class="modal fade" id="editPrenotazioneModal" tabindex="-1" aria-labelledby="editPrenotazioneModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPrenotazioneModalLabel">Modifica Prenotazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPrenotazioneForm">
+                    <input type="hidden" id="editId" name="Id" />
+                    <div class="mb-3">
+                        <label for="editCodiceFiscaleCliente" class="form-label">Cliente</label>
+                        <select class="form-control" id="editCodiceFiscaleCliente" name="CodiceFiscaleCliente" required>
+                            @foreach (var cliente in ViewBag.Clienti)
+                            {
+                                <option value="@cliente.CodiceFiscale">@cliente.Nome</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNumeroCamera" class="form-label">Camera</label>
+                        <select class="form-control" id="editNumeroCamera" name="NumeroCamera" required>
+                            @foreach (var camera in ViewBag.Camere)
+                            {
+                                <option value="@camera.Numero">@camera.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDataPrenotazione" class="form-label">Data Prenotazione</label>
+                        <input type="date" class="form-control" id="editDataPrenotazione" name="DataPrenotazione" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNumeroProgressivoAnno" class="form-label">Numero Progressivo Anno</label>
+                        <input type="number" class="form-control" id="editNumeroProgressivoAnno" name="NumeroProgressivoAnno" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAnno" class="form-label">Anno</label>
+                        <input type="number" class="form-control" id="editAnno" name="Anno" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editDal" class="form-label">Dal</label>
+                        <input type="date" class="form-control" id="editDal" name="Dal" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAl" class="form-label">Al</label>
+                        <input type="date" class="form-control" id="editAl" name="Al" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCaparraConfirmatoria" class="form-label">Caparra Confirmatoria</label>
+                        <input type="number" step="0.01" class="form-control" id="editCaparraConfirmatoria" name="CaparraConfirmatoria" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTariffaApplicata" class="form-label">Tariffa Applicata</label>
+                        <input type="number" step="0.01" class="form-control" id="editTariffaApplicata" name="TariffaApplicata" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTrattamentoId" class="form-label">Trattamento</label>
+                        <select class="form-control" id="editTrattamentoId" name="TrattamentoId" required>
+                            @foreach (var trattamento in ViewBag.Trattamenti)
+                            {
+                                <option value="@trattamento.Id">@trattamento.Descrizione</option>
+                            }
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitEditPrenotazione()">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Elimina Prenotazione -->
+<div class="modal fade" id="deletePrenotazioneModal" tabindex="-1" aria-labelledby="deletePrenotazioneModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletePrenotazioneModalLabel">Elimina Prenotazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler eliminare questa prenotazione?</p>
+                <form id="deletePrenotazioneForm">
+                    <input type="hidden" id="deleteId" name="Id" />
+                    <button type="button" class="btn btn-danger" onclick="submitDeletePrenotazione()">Elimina</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadEditPrenotazioneModal(id) {
+        $.get('/Admin/Prenotazioni/Edit/' + id, function (data) {
+            $('#editId').val(data.id);
+            $('#editCodiceFiscaleCliente').val(data.codiceFiscaleCliente);
+            $('#editNumeroCamera').val(data.numeroCamera);
+            $('#editDataPrenotazione').val(data.dataPrenotazione.substring(0, 10));
+            $('#editNumeroProgressivoAnno').val(data.numeroProgressivoAnno);
+            $('#editAnno').val(data.anno);
+            $('#editDal').val(data.dal.substring(0, 10));
+            $('#editAl').val(data.al.substring(0, 10));
+            $('#editCaparraConfirmatoria').val(data.caparraConfirmatoria);
+            $('#editTariffaApplicata').val(data.tariffaApplicata);
+            $('#editTrattamentoId').val(data.trattamentoId);
+        });
+    }
+
+    function loadDeletePrenotazioneModal(id) {
+        $('#deleteId').val(id);
+    }
+
+    function submitCreatePrenotazione() {
+        var form = $('#createPrenotazioneForm');
+        $.post('/Admin/Prenotazioni/Create', form.serialize(), function (response) {
+            location.reload();
+        });
+    }
+
+    function submitEditPrenotazione() {
+        var form = $('#editPrenotazioneForm');
+        $.post('/Admin/Prenotazioni/Edit', form.serialize(), function (response) {
+            location.reload();
+        });
+    }
+
+    function submitDeletePrenotazione() {
+        var form = $('#deletePrenotazioneForm');
+        $.post('/Admin/Prenotazioni/Delete', form.serialize(), function (response) {
+            location.reload();
+        });
+    }
+</script>

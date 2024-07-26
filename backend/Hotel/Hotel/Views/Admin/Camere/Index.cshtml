@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Hotel.Models.Camera>
+
+@{
+    ViewData["Title"] = "Gestione Camere";
+}
+
+<h1>Gestione Camere</h1>
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCameraModal">+ Aggiungi Camera</button>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Descrizione</th>
+            <th>Tipologia</th>
+            <th>Tariffa Base</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var camera in Model)
+        {
+            <tr>
+                <td>@camera.Numero</td>
+                <td>@camera.Descrizione</td>
+                <td>@camera.Tipologia</td>
+                <td>@camera.TariffaBase</td>
+                <td>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editCameraModal" onclick="loadEditCameraModal(@camera.Numero)">⚙️</button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCameraModal" onclick="loadDeleteCameraModal(@camera.Numero)">🗑️</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modale Creazione Camera -->
+<div class="modal fade" id="createCameraModal" tabindex="-1" aria-labelledby="createCameraModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCameraModalLabel">Aggiungi Camera</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createCameraForm">
+                    <div class="mb-3">
+                        <label for="createNumero" class="form-label">Numero</label>
+                        <input type="number" class="form-control" id="createNumero" name="Numero" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createDescrizione" class="form-label">Descrizione</label>
+                        <input type="text" class="form-control" id="createDescrizione" name="Descrizione" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createTipologia" class="form-label">Tipologia</label>
+                        <input type="text" class="form-control" id="createTipologia" name="Tipologia" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="createTariffaBase" class="form-label">Tariffa Base</label>
+                        <input type="number" step="0.01" class="form-control" id="createTariffaBase" name="TariffaBase" required />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitCreateCamera()">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Modifica Camera -->
+<div class="modal fade" id="editCameraModal" tabindex="-1" aria-labelledby="editCameraModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCameraModalLabel">Modifica Camera</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editCameraForm">
+                    <input type="hidden" id="editNumero" name="Numero" />
+                    <div class="mb-3">
+                        <label for="editDescrizione" class="form-label">Descrizione</label>
+                        <input type="text" class="form-control" id="editDescrizione" name="Descrizione" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTipologia" class="form-label">Tipologia</label>
+                        <input type="text" class="form-control" id="editTipologia" name="Tipologia" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="editTariffaBase" class="form-label">Tariffa Base</label>
+                        <input type="number" step="0.01" class="form-control" id="editTariffaBase" name="TariffaBase" required />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitEditCamera()">Salva</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modale Elimina Camera -->
+<div class="modal fade" id="deleteCameraModal" tabindex="-1" aria-labelledby="deleteCameraModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCameraModalLabel">Elimina Camera</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Sei sicuro di voler eliminare questa camera?</p>
+                <form id="deleteCameraForm">
+                    <input type="hidden" id="deleteNumero" name="Numero" />
+                    <button type="button" class="btn btn-danger" onclick="submitDeleteCamera()">Elimina</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadEditCameraModal(numero) {
+        $.get('/Admin/Camere/Edit/' + numero, function (data) {
+            $('#editNumero').val(data.numero);
+            $('#editDescrizione').val(data.descrizione);
+            $('#editTipologia').val(data.tipologia);
+            $('#editTariffaBase').val(data.tariffaBase);
+        }).fail(function (xhr) {
+            alert("Errore nel caricamento dei dati della camera: " + xhr.responseText);
+        });
+    }
+
+    function loadDeleteCameraModal(numero) {
+        $('#deleteNumero').val(numero);
+    }
+
+    function submitCreateCamera() {
+        var form = $('#createCameraForm');
+        console.log(form.serialize());
+        $.post('/Admin/Camere/Create', form.serialize(), function (response) {
+            location.reload();
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+            alert("Errore durante la creazione della camera: " + xhr.responseText);
+        });
+    }
+
+    function submitEditCamera() {
+        var form = $('#editCameraForm');
+        console.log(form.serialize());
+        $.post('/Admin/Camere/Edit', form.serialize(), function (response) {
+            location.reload();
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+            alert("Errore durante la modifica della camera: " + xhr.responseText);
+        });
+    }
+
+    function submitDeleteCamera() {
+        var form = $('#deleteCameraForm');
+        console.log(form.serialize());
+        $.post('/Admin/Camere/Delete', form.serialize(), function (response) {
+            location.reload();
+        }).fail(function (xhr) {
+            console.log(xhr.responseText);
+            alert("Errore durante l'eliminazione della camera: " + xhr.responseText);
+        });
+    }
+</script>
