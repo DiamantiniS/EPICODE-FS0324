@@ -8,8 +8,8 @@ namespace Hotel.Services
     {
         private readonly List<User> _users = new List<User>
         {
-            new User { Id = 1, Username = "admin", Password = "adminpass", Role = "admin" },
-            new User { Id = 2, Username = "receptionist", Password = "receptionpass", Role = "receptionist" }
+            new User { Id = 1, Username = "admin", Password = "admin", Role = "admin" },
+            new User { Id = 2, Username = "receptionist", Password = "reception", Role = "receptionist" }
         };
 
         public User Login(string username, string password)

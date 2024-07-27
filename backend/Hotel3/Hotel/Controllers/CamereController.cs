@@ -1,14 +1,11 @@
 ﻿using Hotel.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Linq;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Hotel.DAO;
 
 namespace Hotel.Controllers
 {
-    [Authorize(Policy = "AdminPolicy")]//solo l'admin ha accesso al database delle camere e fare le crud
+    [Authorize(Policy = "AdminPolicy")]
     public class CamereController : Controller
     {
         private readonly ICameraDao _cameraDao;
@@ -21,7 +18,7 @@ namespace Hotel.Controllers
         public IActionResult Index()
         {
             var camere = _cameraDao.GetAll();
-            return View(camere);
+            return View("~/Views/Admin/Camere/Index.cshtml", camere);
         }
 
         public IActionResult Details(int id)
@@ -31,13 +28,12 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(camera);
+            return PartialView("_DetailsPartial", camera);
         }
-
 
         public IActionResult Create()
         {
-            return View();
+            return PartialView("_CreatePartial", new Camera());
         }
 
         [HttpPost]
@@ -49,7 +45,7 @@ namespace Hotel.Controllers
                 _cameraDao.Add(camera);
                 return RedirectToAction(nameof(Index));
             }
-            return View(camera);
+            return PartialView("_CreatePartial", camera);
         }
 
         public IActionResult Edit(int id)
@@ -59,7 +55,7 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(camera);
+            return PartialView("_EditPartial", camera);
         }
 
         [HttpPost]
@@ -76,7 +72,7 @@ namespace Hotel.Controllers
                 _cameraDao.Update(camera);
                 return RedirectToAction(nameof(Index));
             }
-            return View(camera);
+            return PartialView("_EditPartial", camera);
         }
 
         [HttpPost]

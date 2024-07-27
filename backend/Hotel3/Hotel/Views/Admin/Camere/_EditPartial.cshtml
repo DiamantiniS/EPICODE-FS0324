@@ -1,0 +1,29 @@
+﻿@model Hotel.Models.Camera
+
+<div class="modal-header">
+    <h5 class="modal-title" id="editModalLabel">Modifica Camera</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form id="editForm" asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Descrizione" class="control-label"></label>
+            <input asp-for="Descrizione" class="form-control" />
+            <span asp-validation-for="Descrizione" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Tipologia" class="control-label"></label>
+            <input asp-for="Tipologia" class="form-control" />
+            <span asp-validation-for="Tipologia" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Prezzo" class="control-label"></label>
+            <input asp-for="Prezzo" class="form-control" />
+            <span asp-validation-for="Prezzo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Salva" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

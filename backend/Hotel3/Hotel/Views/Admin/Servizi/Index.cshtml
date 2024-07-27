@@ -1,20 +1,21 @@
 ﻿@model IEnumerable<Hotel.Models.Servizio>
-
 @{
-    ViewData["Title"] = "Servizi";
+    ViewData["Title"] = "Elenco Servizi";
 }
 
-<h2>Servizi</h2>
+<h2>Elenco Servizi</h2>
 
 <p>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#createServizioModal">Crea nuovo servizio</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <i class="bi bi-plus"></i> Crea nuovo servizio
+    </button>
 </p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Descrizione)</th>
-            <th>@Html.DisplayNameFor(model => model.Prezzo)</th>
+            <th>Descrizione</th>
+            <th>Prezzo</th>
             <th></th>
         </tr>
     </thead>
@@ -22,131 +23,110 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Descrizione)</td>
-                <td>@Html.DisplayFor(modelItem => item.Prezzo)</td>
+                <td>@item.Descrizione</td>
+                <td>@item.Prezzo</td>
                 <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#editServizioModal-@item.Id">Modifica</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsServizioModal-@item.Id">Dettagli</button>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteServizioModal-@item.Id">Elimina</button>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">
+                        <i class="bi bi-gear"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@foreach (var item in Model)
-{
-    <!-- Modale Modifica Servizio -->
-    <div class="modal fade" id="editServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="editServizioModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editServizioModalLabel">Modifica Servizio</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form asp-action="Edit" method="post">
-                        <div class="form-group">
-                            <label asp-for="Id" class="control-label"></label>
-                            <input asp-for="Id" class="form-control" readonly />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Descrizione" class="control-label"></label>
-                            <input asp-for="Descrizione" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Prezzo" class="control-label"></label>
-                            <input asp-for="Prezzo" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Salva" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modale Dettagli Servizio -->
-    <div class="modal fade" id="detailsServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="detailsServizioModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailsServizioModalLabel">Dettagli Servizio</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label asp-for="Id" class="control-label"></label>
-                        <input asp-for="Id" class="form-control" readonly value="@item.Id" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Descrizione" class="control-label"></label>
-                        <input asp-for="Descrizione" class="form-control" readonly value="@item.Descrizione" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Prezzo" class="control-label"></label>
-                        <input asp-for="Prezzo" class="form-control" readonly value="@item.Prezzo" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modale Elimina Servizio -->
-    <div class="modal fade" id="deleteServizioModal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="deleteServizioModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteServizioModalLabel">Elimina Servizio</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Sei sicuro di voler eliminare questo servizio?
-                </div>
-                <div class="modal-footer">
-                    <form asp-action="Delete" method="post">
-                        <input type="hidden" name="Id" value="@item.Id" />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                        <input type="submit" value="Elimina" class="btn btn-danger" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<!-- Modale Crea Servizio -->
-<div class="modal fade" id="createServizioModal" tabindex="-1" role="dialog" aria-labelledby="createServizioModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createServizioModalLabel">Crea Servizio</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="Create" method="post">
-                    <div class="form-group">
-                        <label asp-for="Descrizione" class="control-label"></label>
-                        <input asp-for="Descrizione" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Prezzo" class="control-label"></label>
-                        <input asp-for="Prezzo" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Salva" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+            @Html.Partial("~/Views/Admin/Servizi/_CreatePartial.cshtml", new Hotel.Models.Servizio())
         </div>
     </div>
 </div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="detailsModalBody">
+            <!-- Details will be loaded here via AJAX -->
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="editModalBody">
+            <!-- Edit form will be loaded here via AJAX -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#detailsModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $.get('@Url.Action("Details", "Servizi")', { id: id }, function (data) {
+                    $('#detailsModalBody').html(data);
+                });
+            });
+
+            $('#editModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $.get('@Url.Action("Edit", "Servizi")', { id: id }, function (data) {
+                    $('#editModalBody').html(data);
+                });
+            });
+
+            $('#createForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                $.post(form.attr('action'), form.serialize(), function (data) {
+                    location.reload();
+                });
+            });
+
+            $('#editForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                $.post(form.attr('action'), form.serialize(), function (data) {
+                    location.reload();
+                });
+            });
+        });
+
+        function confirmDelete(id) {
+            if (confirm("Sei sicuro di voler eliminare questo servizio?")) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Servizi")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (result) {
+                        if (result.success) {
+                            alert("Servizio eliminato con successo.");
+                            location.reload();
+                        } else {
+                            alert("Errore durante l'eliminazione del servizio: " + result.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Errore durante l'eliminazione del servizio.");
+                    }
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,29 @@
+﻿@model Hotel.Models.Cliente
+
+<div class="modal-header">
+    <h5 class="modal-title" id="editModalLabel">Modifica Cliente</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <form id="editForm" asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cognome" class="control-label"></label>
+            <input asp-for="Cognome" class="form-control" />
+            <span asp-validation-for="Cognome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Salva" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

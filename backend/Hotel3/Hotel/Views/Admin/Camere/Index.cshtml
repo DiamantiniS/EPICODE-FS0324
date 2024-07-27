@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Hotel.Models.Camera>
-
 @{
     ViewData["Title"] = "Tipologia Camere";
 }
@@ -7,7 +6,9 @@
 <h2>Tipologia Camere</h2>
 
 <p>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#createCameraModal">Crea nuova camera</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <i class="bi bi-plus"></i> Crea nuova camera
+    </button>
 </p>
 
 <table class="table">
@@ -16,7 +17,7 @@
             <th>Descrizione</th>
             <th>Tipologia</th>
             <th>Prezzo</th>
-            <th>Azioni</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -27,137 +28,107 @@
                 <td>@item.Tipologia</td>
                 <td>@item.Prezzo</td>
                 <td>
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#editCameraModal-@item.Numero">Modifica</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#detailsCameraModal-@item.Numero">Dettagli</button>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteCameraModal-@item.Numero">Elimina</button>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">
+                        <i class="bi bi-gear"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@foreach (var item in Model)
-{
-    <!-- Modale Modifica Camera -->
-    <div class="modal fade" id="editCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="editCameraModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editCameraModalLabel">Modifica Camera</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form asp-action="Edit" method="post">
-                        <input type="hidden" asp-for="Numero" value="@item.Numero" />
-                        <div class="form-group">
-                            <label asp-for="Descrizione" class="control-label"></label>
-                            <input asp-for="Descrizione" class="form-control" value="@item.Descrizione" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Tipologia" class="control-label"></label>
-                            <input asp-for="Tipologia" class="form-control" value="@item.Tipologia" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Prezzo" class="control-label"></label>
-                            <input asp-for="Prezzo" class="form-control" value="@item.Prezzo" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Salva" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modale Dettagli Camera -->
-    <div class="modal fade" id="detailsCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="detailsCameraModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailsCameraModalLabel">Dettagli Camera</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label asp-for="Numero" class="control-label"></label>
-                        <input asp-for="Numero" class="form-control" readonly value="@item.Numero" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Descrizione" class="control-label"></label>
-                        <input asp-for="Descrizione" class="form-control" readonly value="@item.Descrizione" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tipologia" class="control-label"></label>
-                        <input asp-for="Tipologia" class="form-control" readonly value="@item.Tipologia" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Prezzo" class="control-label"></label>
-                        <input asp-for="Prezzo" class="form-control" readonly value="@item.Prezzo" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modale Elimina Camera -->
-    <div class="modal fade" id="deleteCameraModal-@item.Numero" tabindex="-1" role="dialog" aria-labelledby="deleteCameraModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCameraModalLabel">Elimina Camera</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Sei sicuro di voler eliminare questa camera?
-                </div>
-                <div class="modal-footer">
-                    <form asp-action="Delete" method="post">
-                        <input type="hidden" name="Numero" value="@item.Numero" />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-                        <input type="submit" value="Elimina" class="btn btn-danger" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<!-- Modale Crea Camera -->
-<div class="modal fade" id="createCameraModal" tabindex="-1" role="dialog" aria-labelledby="createCameraModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createCameraModalLabel">Crea Camera</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form asp-action="Create" method="post">
-                    <div class="form-group">
-                        <label asp-for="Descrizione" class="control-label"></label>
-                        <input asp-for="Descrizione" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Tipologia" class="control-label"></label>
-                        <input asp-for="Tipologia" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Prezzo" class="control-label"></label>
-                        <input asp-for="Prezzo" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Salva" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+            @Html.Partial("~/Views/Admin/Camere/_CreatePartial.cshtml", new Hotel.Models.Camera())
         </div>
     </div>
 </div>
+
+<!-- Details Modal -->
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="detailsModalBody">
+            <!-- Details will be loaded here via AJAX -->
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="editModalBody">
+            <!-- Edit form will be loaded here via AJAX -->
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#detailsModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $.get('@Url.Action("Details", "Camere")', { id: id }, function (data) {
+                    $('#detailsModalBody').html(data);
+                });
+            });
+
+            $('#editModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $.get('@Url.Action("Edit", "Camere")', { id: id }, function (data) {
+                    $('#editModalBody').html(data);
+                });
+            });
+
+            $('#createForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                $.post(form.attr('action'), form.serialize(), function (data) {
+                    location.reload();
+                });
+            });
+
+            $('#editForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                $.post(form.attr('action'), form.serialize(), function (data) {
+                    location.reload();
+                });
+            });
+        });
+
+        function confirmDelete(id) {
+            if (confirm("Sei sicuro di voler eliminare questa camera?")) {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Camere")',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (result) {
+                        if (result.success) {
+                            alert("Camera eliminata con successo.");
+                            location.reload();
+                        } else {
+                            alert("Errore durante l'eliminazione della camera: " + result.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Errore durante l'eliminazione della camera.");
+                    }
+                });
+            }
+        }
+    </script>
+}

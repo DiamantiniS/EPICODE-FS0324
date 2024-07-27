@@ -21,11 +21,10 @@ namespace Hotel.Controllers
             try
             {
                 var servizi = _servizioDao.GetAll();
-                return View(servizi);
+                return View("~/Views/Admin/Servizi/Index.cshtml", servizi);
             }
             catch (Exception ex)
             {
-                
                 return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
@@ -37,12 +36,12 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(servizio);
+            return PartialView("~/Views/Admin/Servizi/_DetailsPartial.cshtml", servizio);
         }
 
         public IActionResult Create()
         {
-            return View();
+            return PartialView("~/Views/Admin/Servizi/_CreatePartial.cshtml", new Servizio());
         }
 
         [HttpPost]
@@ -54,7 +53,7 @@ namespace Hotel.Controllers
                 _servizioDao.Add(servizio);
                 return RedirectToAction(nameof(Index));
             }
-            return View(servizio);
+            return PartialView("~/Views/Admin/Servizi/_CreatePartial.cshtml", servizio);
         }
 
         public IActionResult Edit(int id)
@@ -64,7 +63,7 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(servizio);
+            return PartialView("~/Views/Admin/Servizi/_EditPartial.cshtml", servizio);
         }
 
         [HttpPost]
@@ -81,7 +80,7 @@ namespace Hotel.Controllers
                 _servizioDao.Update(servizio);
                 return RedirectToAction(nameof(Index));
             }
-            return View(servizio);
+            return PartialView("~/Views/Admin/Servizi/_EditPartial.cshtml", servizio);
         }
 
         [HttpPost]
@@ -94,7 +93,6 @@ namespace Hotel.Controllers
             }
             catch (Exception ex)
             {
-                
                 return Json(new { success = false, message = ex.Message });
             }
         }

@@ -1,0 +1,16 @@
+﻿@model Hotel.Models.Servizio
+
+<div class="modal-header">
+    <h5 class="modal-title" id="detailsModalLabel">Dettagli Servizio</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <dl class="row">
+        
+        <dt class="col-sm-3">Descrizione</dt>
+        <dd class="col-sm-9">@Model.Descrizione</dd>
+
+        <dt class="col-sm-3">Prezzo</dt>
+        <dd class="col-sm-9">@Model.Prezzo</dd>
+    </dl>
+</div>

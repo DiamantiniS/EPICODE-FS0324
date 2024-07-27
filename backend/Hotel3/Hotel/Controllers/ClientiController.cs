@@ -1,7 +1,6 @@
 ﻿using Hotel.Models;
 using Hotel.DAO;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 
@@ -22,7 +21,7 @@ namespace Hotel.Controllers
             try
             {
                 var clienti = _clienteDao.GetAll();
-                return View(clienti);
+                return View("~/Views/Admin/Clienti/Index.cshtml", clienti);
             }
             catch (Exception ex)
             {
@@ -38,12 +37,12 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(cliente);
+            return PartialView("~/Views/Admin/Clienti/_DetailsPartial.cshtml", cliente);
         }
 
         public IActionResult Create()
         {
-            return View();
+            return PartialView("~/Views/Admin/Clienti/_CreatePartial.cshtml", new Cliente());
         }
 
         [HttpPost]
@@ -55,7 +54,7 @@ namespace Hotel.Controllers
                 _clienteDao.Add(cliente);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return PartialView("~/Views/Admin/Clienti/_CreatePartial.cshtml", cliente);
         }
 
         public IActionResult Edit(int id)
@@ -65,7 +64,7 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return View(cliente);
+            return PartialView("~/Views/Admin/Clienti/_EditPartial.cshtml", cliente);
         }
 
         [HttpPost]
@@ -82,7 +81,7 @@ namespace Hotel.Controllers
                 _clienteDao.Update(cliente);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return PartialView("~/Views/Admin/Clienti/_EditPartial.cshtml", cliente);
         }
 
         [HttpPost]
