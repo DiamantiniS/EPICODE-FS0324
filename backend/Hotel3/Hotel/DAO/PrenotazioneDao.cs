@@ -1,6 +1,7 @@
 ﻿using Hotel.Models;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
+using System;
 
 namespace Hotel.DAO
 {
@@ -192,7 +193,7 @@ namespace Hotel.DAO
             {
                 conn.Open();
 
-                // Prima eliminiamo i record correlati nella tabella Prenotazioni_Servizi
+                // Prima eliminiamo i record correlati nella tabella Prenotazioni_Servizi,altrimenti mi dava conflitto con l'eliminazione della prenotazione e non me la faceva eliminare
                 var deleteServiziQuery = "DELETE FROM Prenotazioni_Servizi WHERE prenotazione_id = @prenotazione_id";
                 using (var cmd = new SqlCommand(deleteServiziQuery, conn))
                 {
@@ -321,5 +322,6 @@ namespace Hotel.DAO
                 }
             }
         }
+
     }
 }

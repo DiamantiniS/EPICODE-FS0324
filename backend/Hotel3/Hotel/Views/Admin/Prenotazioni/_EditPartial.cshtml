@@ -39,12 +39,12 @@
         </div>
         <div class="form-group">
             <label asp-for="ClienteId" class="control-label">Cliente</label>
-            <select asp-for="ClienteId" class="form-control" asp-items="@(new SelectList(ViewBag.Clienti, "Id", "Cognome"))"></select>
+            <select asp-for="ClienteId" class="form-control" asp-items="@(new SelectList(ViewBag.Clienti ?? new List<Cliente>(), "Id", "Cognome"))"></select>
             <span asp-validation-for="ClienteId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="CameraId" class="control-label">Tipologia Camera</label>
-            <select asp-for="CameraId" class="form-control" asp-items="@(new SelectList(ViewBag.Camere, "Id", "Tipologia"))"></select>
+            <select asp-for="CameraId" class="form-control" asp-items="@(new SelectList(ViewBag.Camere ?? new List<Camera>(), "Id", "Tipologia"))"></select>
             <span asp-validation-for="CameraId" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
             <label class="control-label">Servizi</label>
-            @foreach (var servizio in ViewBag.Servizi)
+            @foreach (var servizio in ViewBag.Servizi ?? new List<Servizio>())
             {
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="@servizio.Id" id="servizio_@servizio.Id" name="ServiziSelezionati" @(Model.ServiziSelezionati.Contains(servizio.Id) ? "checked" : "") />

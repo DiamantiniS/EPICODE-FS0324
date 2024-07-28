@@ -38,12 +38,12 @@
         </div>
         <div class="form-group">
             <label asp-for="ClienteId" class="control-label">Cliente</label>
-            <select asp-for="ClienteId" class="form-control" asp-items="@(new SelectList(ViewBag.Clienti, "Id", "Cognome"))"></select>
+            <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.Clienti"></select>
             <span asp-validation-for="ClienteId" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="CameraId" class="control-label">Tipologia Camera</label>
-            <select asp-for="CameraId" class="form-control" asp-items="@(new SelectList(ViewBag.Camere, "Id", "Tipologia"))"></select>
+            <select asp-for="CameraId" class="form-control" asp-items="ViewBag.Camere"></select>
             <span asp-validation-for="CameraId" class="text-danger"></span>
         </div>
         <div class="form-group">

@@ -6,10 +6,9 @@ using System.Diagnostics;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
-using Hotel.DAO;
-using Hotel.Models;
+using System.Linq;
 
-namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
+namespace Hotel.Controllers
 {
     [Authorize(Policy = "GeneralAccessPolicy")]
     public class PrenotazioniController : Controller
@@ -30,7 +29,7 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
         public IActionResult Index()
         {
             var prenotazioni = _prenotazioneDao.GetAll();
-            return View("~/Views/admin/prenotazioni/index.cshtml", prenotazioni);
+            return View("~/Views/Admin/Prenotazioni/Index.cshtml", prenotazioni);
         }
 
         public IActionResult Details(int id)
@@ -41,7 +40,7 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
                 return NotFound();
             }
             prenotazione.Servizi = _servizioDao.GetByPrenotazioneId(id).ToList();
-            return View("~/Views/admin/prenotazioni/_DetailsPartial.cshtml", prenotazione);
+            return PartialView("~/Views/Admin/Prenotazioni/_DetailsPartial.cshtml", prenotazione);
         }
 
         public IActionResult Create()
@@ -56,7 +55,7 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
                 NumeroProgressivo = _prenotazioneDao.GetLastId() + 1
             };
 
-            return View("~/Views/admin/prenotazioni/_CreatePartial.cshtml",prenotazione);
+            return PartialView("~/Views/Admin/Prenotazioni/_CreatePartial.cshtml", prenotazione);
         }
 
         [HttpPost]
@@ -71,9 +70,8 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
             ViewBag.Clienti = _clienteDao.GetAll();
             ViewBag.Camere = _cameraDao.GetAll();
             ViewBag.Servizi = _servizioDao.GetAll();
-            return View("~/Views/admin/prenotazioni/_CreatePartial.cshtml",prenotazione);
+            return PartialView("~/Views/Admin/Prenotazioni/_CreatePartial.cshtml", prenotazione);
         }
-
 
         public IActionResult Edit(int id)
         {
@@ -87,7 +85,7 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
             ViewBag.Clienti = _clienteDao.GetAll();
             ViewBag.Camere = _cameraDao.GetAll();
             ViewBag.Servizi = _servizioDao.GetAll();
-            return View("~/Views/admin/prenotazioni/_EditPartial.cshtml",prenotazione);
+            return PartialView("~/Views/Admin/Prenotazioni/_EditPartial.cshtml", prenotazione);
         }
 
         [HttpPost]
@@ -107,7 +105,7 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
             ViewBag.Clienti = _clienteDao.GetAll();
             ViewBag.Camere = _cameraDao.GetAll();
             ViewBag.Servizi = _servizioDao.GetAll();
-            return View("~/Views/admin/prenotazioni/_EditPartial.cshtml", prenotazione);
+            return PartialView("~/Views/Admin/Prenotazioni/_EditPartial.cshtml", prenotazione);
         }
 
         [HttpPost]
@@ -150,7 +148,6 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
             var totaleStanza = prenotazione.Tariffa * giorniSoggiorno;
             decimal extraSoggiorno = 0;
 
-           
             switch (prenotazione.TipologiaSoggiorno.ToLower())
             {
                 case "mezza pensione":
@@ -176,10 +173,9 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
                 Totale = totale
             };
 
-            return View("_CheckoutPartial", viewModel);
+            return PartialView("~/Views/Admin/Prenotazioni/_CheckoutPartial.cshtml", viewModel);
         }
 
-     
         public IActionResult DownloadPdf(int id)
         {
             var prenotazione = _prenotazioneDao.GetById(id);
@@ -251,10 +247,5 @@ namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
                 return File(ms.ToArray(), "application/pdf", "Riepilogo_Checkout.pdf");
             }
         }
-
-
-
     }
-
 }
-

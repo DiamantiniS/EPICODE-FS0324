@@ -38,8 +38,9 @@ namespace Hotel.DAO
                 }
             }
 
-            return servizi;
+            return servizi.Any() ? servizi : null;
         }
+
 
         public Servizio GetById(int id)
         {
