@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,11 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 // Aggiungi servizi al contenitore
 builder.Services.AddControllersWithViews();
-builder.Services.AddLogging();
+builder.Services.AddLogging(config =>
+{
+    config.AddConsole();
+    config.AddDebug();
+});
 
 // Aggiungi e configura l'autenticazione
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

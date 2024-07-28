@@ -7,12 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Admin\Ricerca\_PrenotazioniListPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.21" />
     <PackageReference Include="jQuery" Version="3.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.7" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.6.24327.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Admin\Ricerca\_PrenotazioniListPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Admin\Ricerca\_PrenotazioniListPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Admin\Ricerca\_PrenotazioniListPartial.cshtml" />
   </ItemGroup>
 
 </Project>

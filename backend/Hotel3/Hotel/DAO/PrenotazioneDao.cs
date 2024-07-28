@@ -258,11 +258,11 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-                    SELECT p.*, c.cognome, c.nome, cam.descrizione 
-                    FROM Prenotazioni p
-                    JOIN Clienti c ON p.cliente_id = c.id
-                    JOIN Camere cam ON p.camera_id = cam.id
-                    WHERE c.codice_fiscale = @codiceFiscale";
+            SELECT p.*, c.cognome, c.nome, cam.descrizione 
+            FROM Prenotazioni p
+            JOIN Clienti c ON p.cliente_id = c.id
+            JOIN Camere cam ON p.camera_id = cam.id
+            WHERE c.codice_fiscale = @codiceFiscale";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@codiceFiscale", codiceFiscale);
@@ -303,6 +303,7 @@ namespace Hotel.DAO
 
             return prenotazioni;
         }
+
 
         public int GetTotalePrenotazioniPerTipologia(string tipologiaSoggiorno)
         {
