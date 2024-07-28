@@ -1,5 +1,6 @@
 ﻿using Hotel.Models;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace Hotel.DAO
 {
@@ -20,10 +21,10 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-            SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
-            FROM Prenotazioni p
-            JOIN Clienti c ON p.cliente_id = c.id
-            JOIN Camere cam ON p.camera_id = cam.id";
+                    SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
+                    FROM Prenotazioni p
+                    JOIN Clienti c ON p.cliente_id = c.id
+                    JOIN Camere cam ON p.camera_id = cam.id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -74,11 +75,11 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-            SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
-            FROM Prenotazioni p
-            JOIN Clienti c ON p.cliente_id = c.id
-            JOIN Camere cam ON p.camera_id = cam.id
-            WHERE p.id = @id";
+                    SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
+                    FROM Prenotazioni p
+                    JOIN Clienti c ON p.cliente_id = c.id
+                    JOIN Camere cam ON p.camera_id = cam.id
+                    WHERE p.id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
@@ -258,11 +259,11 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-            SELECT p.*, c.cognome, c.nome, cam.descrizione 
-            FROM Prenotazioni p
-            JOIN Clienti c ON p.cliente_id = c.id
-            JOIN Camere cam ON p.camera_id = cam.id
-            WHERE c.codice_fiscale = @codiceFiscale";
+                    SELECT p.*, c.cognome, c.nome, cam.descrizione 
+                    FROM Prenotazioni p
+                    JOIN Clienti c ON p.cliente_id = c.id
+                    JOIN Camere cam ON p.camera_id = cam.id
+                    WHERE c.codice_fiscale = @codiceFiscale";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@codiceFiscale", codiceFiscale);
@@ -303,7 +304,6 @@ namespace Hotel.DAO
 
             return prenotazioni;
         }
-
 
         public int GetTotalePrenotazioniPerTipologia(string tipologiaSoggiorno)
         {

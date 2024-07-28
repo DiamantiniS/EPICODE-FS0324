@@ -28,16 +28,23 @@ namespace Hotel.Controllers
         {
             try
             {
+                _logger.LogInformation("Inizio ricerca prenotazioni per codice fiscale: {CodiceFiscale}", codiceFiscale);
+
                 var prenotazioni = _prenotazioneDao.GetPrenotazioniByCodiceFiscale(codiceFiscale);
-                if (prenotazioni == null)
+
+                if (prenotazioni == null || !prenotazioni.Any())
                 {
+                    _logger.LogWarning("Nessuna prenotazione trovata per il codice fiscale: {CodiceFiscale}", codiceFiscale);
                     return NotFound("Nessuna prenotazione trovata per il codice fiscale specificato.");
                 }
-                return PartialView("_PrenotazioniListPartial", prenotazioni);
+
+                _logger.LogInformation("Trovate {Count} prenotazioni per il codice fiscale: {CodiceFiscale}", prenotazioni.Count(), codiceFiscale);
+
+                return PartialView("~/Views/admin/ricerca/_PrenotazioniListPartial.cshtml", prenotazioni);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Errore durante la ricerca delle prenotazioni per il codice fiscale {CodiceFiscale}", codiceFiscale);
+                _logger.LogError(ex, "Errore durante la ricerca delle prenotazioni per il codice fiscale: {CodiceFiscale}", codiceFiscale);
                 return StatusCode(500, "Si è verificato un errore durante l'elaborazione della richiesta.");
             }
         }

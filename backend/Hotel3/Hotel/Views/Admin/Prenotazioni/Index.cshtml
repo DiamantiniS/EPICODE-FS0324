@@ -6,20 +6,33 @@
 <h2>Prenotazioni</h2>
 
 <p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-        <i class="bi bi-plus"></i> Crea nuova prenotazione
-    </button>
+    <a asp-action="Create" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Crea nuova prenotazione</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Cliente</th>
-            <th>Camera</th>
-            <th>Data Prenotazione</th>
-            <th>Dal</th>
-            <th>Al</th>
-            <th>Tipologia Soggiorno</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Cognome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Camera.Descrizione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPrenotazione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Al)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipologiaSoggiorno)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -27,22 +40,31 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Cliente.Cognome @item.Cliente.Nome</td>
-                <td>@item.Camera.Descrizione</td>
-                <td>@item.DataPrenotazione.ToShortDateString()</td>
-                <td>@item.Dal.ToShortDateString()</td>
-                <td>@item.Al.ToShortDateString()</td>
-                <td>@item.TipologiaSoggiorno</td>
                 <td>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
-                        <i class="bi bi-eye"></i>
-                    </button>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">
-                        <i class="bi bi-gear"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">
-                        <i class="bi bi-trash"></i>
-                    </button>
+                    @Html.DisplayFor(modelItem => item.Cliente.Cognome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Camera.Descrizione)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPrenotazione)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Al)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipologiaSoggiorno)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">Dettagli</button> |
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">Modifica</button> |
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">Elimina</button> |
                     <a asp-action="Checkout" asp-route-id="@item.Id" class="btn btn-success">Check-out</a>
                 </td>
             </tr>

@@ -1,13 +1,15 @@
-﻿using Hotel.Models;
-using Hotel.DAO;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Hotel.DAO;
+using Hotel.Models;
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using iTextSharp.text.pdf;
 using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using Hotel.DAO;
+using Hotel.Models;
 
-namespace Hotel.Controllers
+namespace ProgettoS6GestionaleHotelSabrinaCinque.Controllers
 {
     [Authorize(Policy = "GeneralAccessPolicy")]
     public class PrenotazioniController : Controller
@@ -28,7 +30,7 @@ namespace Hotel.Controllers
         public IActionResult Index()
         {
             var prenotazioni = _prenotazioneDao.GetAll();
-            return View("~/Views/Admin/Prenotazioni/Index.cshtml", prenotazioni);
+            return View("~/Views/admin/prenotazioni/index.cshtml", prenotazioni);
         }
 
         public IActionResult Details(int id)
@@ -39,15 +41,14 @@ namespace Hotel.Controllers
                 return NotFound();
             }
             prenotazione.Servizi = _servizioDao.GetByPrenotazioneId(id).ToList();
-            return PartialView("~/Views/Admin/Prenotazioni/_DetailsPartial.cshtml", prenotazione);
+            return View("~/Views/admin/prenotazioni/_DetailsPartial.cshtml", prenotazione);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Clienti = new SelectList(_clienteDao.GetAll() ?? new List<Cliente>(), "Id", "NomeCompleto");
-            ViewBag.Camere = new SelectList(_cameraDao.GetAll() ?? new List<Camera>(), "Id", "Descrizione");
-            ViewBag.Servizi = new MultiSelectList(_servizioDao.GetAll() ?? new List<Servizio>(), "Id", "Descrizione");
-            ViewBag.TipologiaSoggiorno = new SelectList(new List<string> { "Pernottamento", "Mezza pensione", "Pensione completa", "Pernottamento con prima colazione" });
+            ViewBag.Clienti = _clienteDao.GetAll();
+            ViewBag.Camere = _cameraDao.GetAll();
+            ViewBag.Servizi = _servizioDao.GetAll();
 
             var prenotazione = new Prenotazione
             {
@@ -55,7 +56,7 @@ namespace Hotel.Controllers
                 NumeroProgressivo = _prenotazioneDao.GetLastId() + 1
             };
 
-            return PartialView("~/Views/Admin/Prenotazioni/_CreatePartial.cshtml", prenotazione);
+            return View("~/Views/admin/prenotazioni/_CreatePartial.cshtml",prenotazione);
         }
 
         [HttpPost]
@@ -67,13 +68,12 @@ namespace Hotel.Controllers
                 _prenotazioneDao.Add(prenotazione);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Clienti = new SelectList(_clienteDao.GetAll() ?? new List<Cliente>(), "Id", "NomeCompleto");
-            ViewBag.Camere = new SelectList(_cameraDao.GetAll() ?? new List<Camera>(), "Id", "Descrizione");
-            ViewBag.Servizi = new MultiSelectList(_servizioDao.GetAll() ?? new List<Servizio>(), "Id", "Descrizione");
-            ViewBag.TipologiaSoggiorno = new SelectList(new List<string> { "Pernottamento", "Mezza pensione", "Pensione completa", "Pernottamento con prima colazione" });
-
-            return PartialView("~/Views/Admin/Prenotazioni/_CreatePartial.cshtml", prenotazione);
+            ViewBag.Clienti = _clienteDao.GetAll();
+            ViewBag.Camere = _cameraDao.GetAll();
+            ViewBag.Servizi = _servizioDao.GetAll();
+            return View("~/Views/admin/prenotazioni/_CreatePartial.cshtml",prenotazione);
         }
+
 
         public IActionResult Edit(int id)
         {
@@ -84,12 +84,10 @@ namespace Hotel.Controllers
             }
             prenotazione.ServiziSelezionati = _servizioDao.GetByPrenotazioneId(id).Select(s => s.Id).ToList();
 
-            ViewBag.Clienti = new SelectList(_clienteDao.GetAll() ?? new List<Cliente>(), "Id", "NomeCompleto");
-            ViewBag.Camere = new SelectList(_cameraDao.GetAll() ?? new List<Camera>(), "Id", "Descrizione");
-            ViewBag.Servizi = new MultiSelectList(_servizioDao.GetAll() ?? new List<Servizio>(), "Id", "Descrizione");
-            ViewBag.TipologiaSoggiorno = new SelectList(new List<string> { "Pernottamento", "Mezza pensione", "Pensione completa", "Pernottamento con prima colazione" });
-
-            return PartialView("~/Views/Admin/Prenotazioni/_EditPartial.cshtml", prenotazione);
+            ViewBag.Clienti = _clienteDao.GetAll();
+            ViewBag.Camere = _cameraDao.GetAll();
+            ViewBag.Servizi = _servizioDao.GetAll();
+            return View("~/Views/admin/prenotazioni/_EditPartial.cshtml",prenotazione);
         }
 
         [HttpPost]
@@ -106,12 +104,10 @@ namespace Hotel.Controllers
                 _prenotazioneDao.Update(prenotazione);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Clienti = new SelectList(_clienteDao.GetAll() ?? new List<Cliente>(), "Id", "NomeCompleto");
-            ViewBag.Camere = new SelectList(_cameraDao.GetAll() ?? new List<Camera>(), "Id", "Descrizione");
-            ViewBag.Servizi = new MultiSelectList(_servizioDao.GetAll() ?? new List<Servizio>(), "Id", "Descrizione");
-            ViewBag.TipologiaSoggiorno = new SelectList(new List<string> { "Pernottamento", "Mezza pensione", "Pensione completa", "Pernottamento con prima colazione" });
-
-            return PartialView("~/Views/Admin/Prenotazioni/_EditPartial.cshtml", prenotazione);
+            ViewBag.Clienti = _clienteDao.GetAll();
+            ViewBag.Camere = _cameraDao.GetAll();
+            ViewBag.Servizi = _servizioDao.GetAll();
+            return View("~/Views/admin/prenotazioni/_EditPartial.cshtml", prenotazione);
         }
 
         [HttpPost]
@@ -154,6 +150,7 @@ namespace Hotel.Controllers
             var totaleStanza = prenotazione.Tariffa * giorniSoggiorno;
             decimal extraSoggiorno = 0;
 
+           
             switch (prenotazione.TipologiaSoggiorno.ToLower())
             {
                 case "mezza pensione":
@@ -179,9 +176,10 @@ namespace Hotel.Controllers
                 Totale = totale
             };
 
-            return PartialView("~/Views/Admin/Prenotazioni/_CheckoutPartial.cshtml", viewModel);
+            return View("_CheckoutPartial", viewModel);
         }
 
+     
         public IActionResult DownloadPdf(int id)
         {
             var prenotazione = _prenotazioneDao.GetById(id);
@@ -253,5 +251,10 @@ namespace Hotel.Controllers
                 return File(ms.ToArray(), "application/pdf", "Riepilogo_Checkout.pdf");
             }
         }
+
+
+
     }
+
 }
+
