@@ -28,12 +28,12 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_DetailsPartial", camera);
+            return PartialView("~/Views/Admin/Camere/_DetailsPartial.cshtml", camera);
         }
 
         public IActionResult Create()
         {
-            return PartialView("_CreatePartial", new Camera());
+            return PartialView("~/Views/Admin/Camere/_CreatePartial.cshtml", new Camera());
         }
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace Hotel.Controllers
                 _cameraDao.Add(camera);
                 return RedirectToAction(nameof(Index));
             }
-            return PartialView("_CreatePartial", camera);
+            return PartialView("~/Views/Admin/Camere/_CreatePartial.cshtml", camera);
         }
 
         public IActionResult Edit(int id)
@@ -55,7 +55,7 @@ namespace Hotel.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_EditPartial", camera);
+            return PartialView("~/Views/Admin/Camere/_EditPartial.cshtml", camera);
         }
 
         [HttpPost]
@@ -72,7 +72,7 @@ namespace Hotel.Controllers
                 _cameraDao.Update(camera);
                 return RedirectToAction(nameof(Index));
             }
-            return PartialView("_EditPartial", camera);
+            return PartialView("~/Views/Admin/Camere/_EditPartial.cshtml", camera);
         }
 
         [HttpPost]

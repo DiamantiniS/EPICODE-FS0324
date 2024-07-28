@@ -1,9 +1,5 @@
 ﻿using Hotel.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Hotel.Controllers;
-using Hotel.Services;
-using System.Collections.Generic;
 
 namespace Hotel.DAO
 {
@@ -24,10 +20,10 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-                    SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
-                    FROM Prenotazioni p
-                    JOIN Clienti c ON p.cliente_id = c.id
-                    JOIN Camere cam ON p.camera_id = cam.id";
+            SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
+            FROM Prenotazioni p
+            JOIN Clienti c ON p.cliente_id = c.id
+            JOIN Camere cam ON p.camera_id = cam.id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -78,11 +74,11 @@ namespace Hotel.DAO
             {
                 connection.Open();
                 var query = @"
-                    SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
-                    FROM Prenotazioni p
-                    JOIN Clienti c ON p.cliente_id = c.id
-                    JOIN Camere cam ON p.camera_id = cam.id
-                    WHERE p.id = @id";
+            SELECT p.*, c.id AS cliente_id, c.cognome, c.nome, cam.id AS camera_id, cam.descrizione, cam.prezzo 
+            FROM Prenotazioni p
+            JOIN Clienti c ON p.cliente_id = c.id
+            JOIN Camere cam ON p.camera_id = cam.id
+            WHERE p.id = @id";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
@@ -195,7 +191,7 @@ namespace Hotel.DAO
             {
                 conn.Open();
 
-                // Prima eliminiamo i record correlati nella tabella Prenotazioni_Servizi,altrimenti mi dava conflitto con l'eliminazione della prenotazione e non me la faceva eliminare
+                // Prima eliminiamo i record correlati nella tabella Prenotazioni_Servizi
                 var deleteServiziQuery = "DELETE FROM Prenotazioni_Servizi WHERE prenotazione_id = @prenotazione_id";
                 using (var cmd = new SqlCommand(deleteServiziQuery, conn))
                 {
@@ -324,6 +320,5 @@ namespace Hotel.DAO
                 }
             }
         }
-
     }
 }

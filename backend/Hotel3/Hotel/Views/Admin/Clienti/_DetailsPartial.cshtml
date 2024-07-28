@@ -6,13 +6,28 @@
 </div>
 <div class="modal-body">
     <dl class="row">
+        <dt class="col-sm-3">Codice Fiscale</dt>
+        <dd class="col-sm-9">@Model.CodiceFiscale</dd>
+
         <dt class="col-sm-3">Nome</dt>
         <dd class="col-sm-9">@Model.Nome</dd>
 
         <dt class="col-sm-3">Cognome</dt>
         <dd class="col-sm-9">@Model.Cognome</dd>
+            
+        <dt class="col-sm-3">Città</dt>
+        <dd class="col-sm-9">@Model.Citta</dd>
+
+        <dt class="col-sm-3">Provincia</dt>
+        <dd class="col-sm-9">@Model.Provincia</dd>
 
         <dt class="col-sm-3">Email</dt>
         <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Cellulare</dt>
+        <dd class="col-sm-9">@Model.Cellulare</dd>
     </dl>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
 </div>

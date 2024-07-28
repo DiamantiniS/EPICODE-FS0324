@@ -14,9 +14,10 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Codice Fiscale</th>
             <th>Nome</th>
             <th>Cognome</th>
-            <th>Email</th>
+            <th>Cellulare</th>
             <th></th>
         </tr>
     </thead>
@@ -24,9 +25,10 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>@item.CodiceFiscale</td>
                 <td>@item.Nome</td>
                 <td>@item.Cognome</td>
-                <td>@item.Email</td>
+                <td>@item.Cellulare</td>
                 <td>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
                         <i class="bi bi-eye"></i>
@@ -71,7 +73,6 @@
 </div>
 
 @section Scripts {
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {

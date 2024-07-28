@@ -1,6 +1,7 @@
 ﻿using Hotel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace Hotel.DAO
 {
@@ -147,4 +148,3 @@ namespace Hotel.DAO
         }
     }
 }
-

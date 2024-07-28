@@ -7,72 +7,52 @@
 <div class="modal-body">
     <form id="editForm" asp-action="Edit">
         <input type="hidden" asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="DataPrenotazione" class="control-label"></label>
+        <div class="mb-3">
+            <label asp-for="ClienteId" class="form-label"></label>
+            <select asp-for="ClienteId" class="form-select" asp-items="ViewBag.Clienti"></select>
+            <span asp-validation-for="ClienteId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CameraId" class="form-label"></label>
+            <select asp-for="CameraId" class="form-select" asp-items="ViewBag.Camere"></select>
+            <span asp-validation-for="CameraId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DataPrenotazione" class="form-label"></label>
             <input asp-for="DataPrenotazione" class="form-control" />
             <span asp-validation-for="DataPrenotazione" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="NumeroProgressivo" class="control-label"></label>
-            <input asp-for="NumeroProgressivo" class="form-control" readonly />
-            <span asp-validation-for="NumeroProgressivo" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Anno" class="control-label"></label>
-            <input asp-for="Anno" class="form-control" value="2024" readonly />
-            <span asp-validation-for="Anno" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Dal" class="control-label"></label>
+        <div class="mb-3">
+            <label asp-for="Dal" class="form-label"></label>
             <input asp-for="Dal" class="form-control" />
             <span asp-validation-for="Dal" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="Al" class="control-label"></label>
+        <div class="mb-3">
+            <label asp-for="Al" class="form-label"></label>
             <input asp-for="Al" class="form-control" />
             <span asp-validation-for="Al" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            ```html
-            <label asp-for="Caparra" class="control-label"></label>
+        <div class="mb-3">
+            <label asp-for="Caparra" class="form-label"></label>
             <input asp-for="Caparra" class="form-control" />
             <span asp-validation-for="Caparra" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="ClienteId" class="control-label">Cliente</label>
-            <select asp-for="ClienteId" class="form-control" asp-items="@(new SelectList(ViewBag.Clienti, "Id", "Cognome"))"></select>
-            <span asp-validation-for="ClienteId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="CameraId" class="control-label">Tipologia Camera</label>
-            <select asp-for="CameraId" class="form-control" asp-items="@(new SelectList(ViewBag.Camere, "Id", "Tipologia"))"></select>
-            <span asp-validation-for="CameraId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Tariffa" class="control-label">Tariffa Giornaliera</label>
-            <input asp-for="Tariffa" class="form-control" readonly />
+        <div class="mb-3">
+            <label asp-for="Tariffa" class="form-label"></label>
+            <input asp-for="Tariffa" class="form-control" />
             <span asp-validation-for="Tariffa" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label asp-for="TipologiaSoggiorno" class="control-label"></label>
-            <select asp-for="TipologiaSoggiorno" class="form-control">
-                <option value="mezza pensione">Mezza Pensione</option>
-                <option value="pensione completa">Pensione Completa</option>
-                <option value="pernottamento con prima colazione">Pernottamento con Prima Colazione</option>
-            </select>
+        <div class="mb-3">
+            <label asp-for="TipologiaSoggiorno" class="form-label"></label>
+            <select asp-for="TipologiaSoggiorno" class="form-select" asp-items="ViewBag.TipologiaSoggiorno"></select>
             <span asp-validation-for="TipologiaSoggiorno" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <label class="control-label">Servizi</label>
-            @foreach (var servizio in ViewBag.Servizi)
-            {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="@servizio.Id" id="servizio_@servizio.Id" name="ServiziSelezionati" @(Model.ServiziSelezionati.Contains(servizio.Id) ? "checked" : "") />
-                    <label class="form-check-label" for="servizio_@servizio.Id">@servizio.Descrizione</label>
-                </div>
-            }
+        <div class="mb-3">
+            <label asp-for="ServiziSelezionati" class="form-label"></label>
+            <select asp-for="ServiziSelezionati" class="form-select" asp-items="ViewBag.Servizi" multiple="multiple"></select>
+            <span asp-validation-for="ServiziSelezionati" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             <input type="submit" value="Salva" class="btn btn-primary" />
         </div>
     </form>
