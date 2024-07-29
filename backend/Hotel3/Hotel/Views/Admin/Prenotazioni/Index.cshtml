@@ -6,7 +6,9 @@
 <h2>Prenotazioni</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Crea nuova prenotazione</a>
+    <a asp-action="Create" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <i class="bi bi-plus-circle"></i> Crea nuova prenotazione
+    </a>
 </p>
 
 <table class="table">
@@ -62,10 +64,18 @@
                     @Html.DisplayFor(modelItem => item.TipologiaSoggiorno)
                 </td>
                 <td>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">Dettagli</button> |
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">Modifica</button> |
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">Elimina</button> |
-                    <a asp-action="Checkout" asp-route-id="@item.Id" class="btn btn-success">Check-out</a>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
+                        <i class="bi bi-eye"></i> 
+                    </button> |
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">
+                        <i class="bi bi-pencil"></i> 
+                    </button> |
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">
+                        <i class="bi bi-trash"></i> 
+                    </button> |
+                    <a asp-action="Checkout" asp-route-id="@item.Id" class="btn btn-success">
+                        <i class="bi bi-box-arrow-in-right"></i> 
+                    </a>
                 </td>
             </tr>
         }
