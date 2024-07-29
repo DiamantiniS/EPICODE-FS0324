@@ -27,14 +27,20 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function ricercaPrenotazioni() {
+            var codiceFiscale = $('#codiceFiscale').val();
+            console.log("Codice Fiscale:", codiceFiscale);
             $.ajax({
                 url: '@Url.Action("RicercaPrenotazioniCliente", "Ricerca")',
                 type: 'POST',
-                data: { codiceFiscale: $('#codiceFiscale').val() },
+                data: { codiceFiscale: codiceFiscale },
                 success: function (data) {
+                    console.log("Success:", data);
                     $('#risultatiPrenotazioniCliente').html(data);
                 },
                 error: function (xhr, status, error) {
+                    console.error("Error Status:", status);
+                    console.error("Error Thrown:", error);
+                    console.error("XHR Response Text:", xhr.responseText);
                     alert("Errore durante la ricerca delle prenotazioni.");
                 }
             });
@@ -45,12 +51,18 @@
                 url: '@Url.Action("RicercaNumeroPrenotazioniPensioneCompleta", "Ricerca")',
                 type: 'POST',
                 success: function (data) {
+                    console.log("Success:", data);
                     $('#risultatiNumeroPrenotazioni').html(data);
                 },
                 error: function (xhr, status, error) {
+                    console.error("Error Status:", status);
+                    console.error("Error Thrown:", error);
+                    console.error("XHR Response Text:", xhr.responseText);
                     alert("Errore durante la ricerca del numero di prenotazioni.");
                 }
             });
         }
     </script>
 }
+
+
