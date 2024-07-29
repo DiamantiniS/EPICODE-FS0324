@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Admin\Ricerca\_PrenotazioniListPartial.cshtml" />
+    <None Include="Views\Admin\Prenotazioni\_PrenotazioniListPartial.cshtml" />
   </ItemGroup>
 
 </Project>
