@@ -2,17 +2,89 @@
     ViewData["Title"] = "Homepage";
 }
 
-<body class="text-center">
-    <div class="bg-light bg-opacity-75 m-5">
-        <h1 class="my-5 display-1">Benvenuto<br /> nel gestionale hotel</h1>
-        <h2 class="display-3">Scegli una delle seguenti opzioni:</h2>
-        <ul class="list-unstyled text-center">
-            <li><a asp-controller="Clienti" asp-action="Index" class="display-4">Anagrafica Cliente</a></li>
-            <li><a asp-controller="Camere" asp-action="Index" class="display-4">Tipologia Camere</a></li>
-            <li><a asp-controller="Servizi" asp-action="Index" class="display-4">Servizi</a></li>
-            <li><a asp-controller="Prenotazioni" asp-action="Index" class="display-4">Prenotazioni</a></li>
-            <li><a asp-controller="Ricerca" asp-action="Index" class="display-4">Ricerca</a></li>
-        </ul>
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content text-center">
+        <h1 class="display-1">Welcome to Luxury Hotel</h1>
+        <p class="lead">Experience the ultimate in luxury and comfort</p>
+        <a href="#features" class="btn btn-primary btn-lg">Explore More</a>
     </div>
+</div>
 
-</body>
+<!-- Features Section -->
+<div id="features" class="container mt-5">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.lux-review.com/wp-content/uploads/2019/09/turkish-hotel.jpg" class="d-block w-100" alt="Luxury Hotel">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Experience Luxury</h5>
+                    <p>Immerse yourself in the best that life has to offer.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://www.cvent.com/sites/default/files/image/2021-03/Aerial%20view%20of%20Burj%20Al%20Arab%20luxury%20hotel%20in%20Dubai.jpg" class="d-block w-100" alt="Hotel Room">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Elegance and Comfort</h5>
+                    <p>Our rooms are designed to provide you with the utmost comfort and style.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2017/10/six-senses-zil-payson-seychelles.jpg?fit=1300%2C731&ssl=1" class="d-block w-100" alt="Hotel Pool">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Relax and Unwind</h5>
+                    <p>Enjoy our world-class amenities and services.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Articles Section -->
+<div class="container my-5">
+    <h2 class="text-center">A place to remember</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill"></i> Donec malesuada lorem maximus mauris scelerisque</li>
+                <li><i class="bi bi-check-circle-fill"></i> Malesuada lorem maximus mauris sceler</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Read More</a>
+        </div>
+        <div class="col-md-6">
+            <img src="https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?cs=srgb&dl=pexels-souvenirpixels-1619317.jpg&fm=jpg" class="img-fluid" alt="Hotel Interior">
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h2 class="text-center">Infinity Pool</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb1KvC8RFfst85RJSuI5mufjDNKwGLP94ROw&s" class="img-fluid" alt="Infinity Pool">
+        </div>
+        <div class="col-md-6">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill"></i> Pool Beachbar</li>
+                <li><i class="bi bi-check-circle-fill"></i> Infinity Pool</li>
+                <li><i class="bi bi-check-circle-fill"></i> Sunbeds</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Read More</a>
+        </div>
+    </div>
+</div>

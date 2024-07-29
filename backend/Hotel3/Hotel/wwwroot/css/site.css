@@ -1,27 +1,42 @@
+body {
+    background-color:#534a4a;
+}
 
-/*
+.carousel-item img {
+    height: 70vh;
+    object-fit: cover;
+}
 
-    .sidebar-nav {
-        position: fixed;
-        top: 56px;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background-color: #f8f9fa;
-        padding-top: 20px;
-    }
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
 
-        .sidebar-nav a {
-            display: block;
-            padding: 10px 15px;
-            color: #333;
-        }
+.feature-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
 
-            .sidebar-nav a:hover {
-                background-color: #ddd;
-            }
+.hero {
+    background-image: url('https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2017/10/six-senses-zil-payson-seychelles.jpg?fit=1300%2C731&ssl=1');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+    text-shadow: 2px 2px 4px #000;
+}
 
-    .main-content {
-        margin-left: 220px;
-    }}
-*/
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+}
