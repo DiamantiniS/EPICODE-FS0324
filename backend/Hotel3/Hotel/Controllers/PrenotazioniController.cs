@@ -151,10 +151,10 @@ namespace Hotel.Controllers
             switch (prenotazione.TipologiaSoggiorno.ToLower())
             {
                 case "mezza pensione":
-                    extraSoggiorno = 20 * giorniSoggiorno;
+                    extraSoggiorno = 10 * giorniSoggiorno;
                     break;
                 case "pensione completa":
-                    extraSoggiorno = 30 * giorniSoggiorno;
+                    extraSoggiorno = 20 * giorniSoggiorno;
                     break;
                 case "pernottamento con prima colazione":
                     extraSoggiorno = 5 * giorniSoggiorno;
@@ -193,10 +193,10 @@ namespace Hotel.Controllers
             switch (prenotazione.TipologiaSoggiorno.ToLower())
             {
                 case "mezza pensione":
-                    extraSoggiorno = 20 * giorniSoggiorno;
+                    extraSoggiorno = 10 * giorniSoggiorno;
                     break;
                 case "pensione completa":
-                    extraSoggiorno = 30 * giorniSoggiorno;
+                    extraSoggiorno = 20 * giorniSoggiorno;
                     break;
                 case "pernottamento con prima colazione":
                     extraSoggiorno = 5 * giorniSoggiorno;
