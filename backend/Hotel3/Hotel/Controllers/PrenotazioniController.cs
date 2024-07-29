@@ -134,7 +134,7 @@ namespace Hotel.Controllers
         }
 
         [HttpGet]
-        public IActionResult Checkout(int id)
+        public IActionResult CheckoutPartial(int id)
         {
             var prenotazione = _prenotazioneDao.GetById(id);
             if (prenotazione == null)
@@ -175,6 +175,7 @@ namespace Hotel.Controllers
 
             return PartialView("~/Views/Admin/Prenotazioni/_CheckoutPartial.cshtml", viewModel);
         }
+
 
         public IActionResult DownloadPdf(int id)
         {

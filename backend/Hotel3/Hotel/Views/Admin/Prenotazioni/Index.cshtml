@@ -66,16 +66,16 @@
                 <td>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailsModal" data-id="@item.Id">
                         <i class="bi bi-eye"></i> 
-                    </button> |
+                    </button> 
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal" data-id="@item.Id">
                         <i class="bi bi-pencil"></i> 
-                    </button> |
+                    </button> 
                     <button type="button" class="btn btn-danger" onclick="confirmDelete(@item.Id)">
                         <i class="bi bi-trash"></i> 
-                    </button> |
-                    <a asp-action="Checkout" asp-route-id="@item.Id" class="btn btn-success">
-                        <i class="bi bi-box-arrow-in-right"></i> 
-                    </a>
+                    </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#checkoutModal" data-id="@item.Id">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                    </button>
                 </td>
             </tr>
         }
@@ -113,6 +113,15 @@
     </div>
 </div>
 
+<!-- CHeckout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="checkoutModalContent">
+            <!-- Il contenuto del modal verrà caricato qui tramite AJAX -->
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -138,6 +147,15 @@
             $('#createModal').on('show.bs.modal', function (event) {
                 $.get('@Url.Action("Create", "Prenotazioni")', function (data) {
                     $('#createModalBody').html(data);
+                });
+            });
+
+            $('#checkoutModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $.get('@Url.Action("CheckoutPartial", "Prenotazioni")', { id: id }, function (data) {
+                    $('#checkoutModalContent').html(data);
                 });
             });
         });
