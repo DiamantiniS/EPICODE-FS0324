@@ -24,14 +24,23 @@
             height: 100vh;
         }
 
-        .btn-primary, .btn-danger, .btn-info, .btn-warning, .btn-success {
+        .btn-primary, .btn-danger, .btn-info, .btn-warning, .btn-success, .btn-dark {
             background-color: #000 !important;
-            border-color: #c4a772!important;
+            border-color: #c4a772 !important;
             color: #c4a772 !important;
         }
 
-        
+        .table {
+            background-color: transparent !important;
+            color: #c4a772 !important;
+            border: 1px solid #c4a772 !important;
+        }
 
+            .table th, .table td {
+                background-color: #000 !important;
+                color: #c4a772 !important;
+                border: 1px solid #c4a772 !important;
+            }
     </style>
 </head>
 <body>
@@ -59,6 +68,33 @@
                             </li>
                         }
                     </ul>
+                    <ul class="navbar-nav ms-auto d-md-none">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Clienti" asp-action="Index">
+                                <i class="bi bi-people"></i> Anagrafica Cliente
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Camere" asp-action="Index">
+                                <i class="bi bi-door-open"></i> Tipologia Camere
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Servizi" asp-action="Index">
+                                <i class="bi bi-card-checklist"></i> Servizi
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Prenotazioni" asp-action="Index">
+                                <i class="bi bi-calendar-check"></i> Prenotazioni
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Ricerca" asp-action="Index">
+                                <i class="bi bi-search"></i> Ricerca
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -67,32 +103,32 @@
         <div class="row">
             @if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                <nav id="sidebar" class="col-md-2 col-lg-1 d-md-block bg-dark sidebar">
+                <nav id="sidebar" class="col-md-2 col-lg-1 d-none d-md-block bg-dark sidebar">
                     <div class="position-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" asp-controller="Clienti" asp-action="Index">
-                                    Anagrafica Cliente
+                                    <i class="bi bi-people"></i> Anagrafica Cliente
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Camere" asp-action="Index">
-                                    Tipologia Camere
+                                    <i class="bi bi-door-open"></i> Tipologia Camere
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Servizi" asp-action="Index">
-                                    Servizi
+                                    <i class="bi bi-card-checklist"></i> Servizi
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Prenotazioni" asp-action="Index">
-                                    Prenotazioni
+                                    <i class="bi bi-calendar-check"></i> Prenotazioni
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Ricerca" asp-action="Index">
-                                    Ricerca
+                                    <i class="bi bi-search"></i> Ricerca
                                 </a>
                             </li>
                         </ul>

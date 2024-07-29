@@ -33,17 +33,17 @@ namespace Hotel.Controllers
 
                 if (prenotazioni == null || !prenotazioni.Any())
                 {
-                    _logger.LogWarning("Nessuna prenotazione trovata per il codice fiscale: {CodiceFiscale}", codiceFiscale);
-                    return NotFound("Nessuna prenotazione trovata per il codice fiscale specificato.");
+                    _logger.LogWarning("Nessuna prenotazione trovata per il {CodiceFiscale}", codiceFiscale);
+                    return NotFound("Nessuna prenotazione trovata");
                 }
 
-                _logger.LogInformation("Trovate {Count} prenotazioni per il codice fiscale: {CodiceFiscale}", prenotazioni.Count(), codiceFiscale);
+                _logger.LogInformation("Trovate {Count} prenotazioni per il {CodiceFiscale}", prenotazioni.Count(), codiceFiscale);
 
                 return PartialView("~/Views/Admin/Prenotazioni/_RicercaPartial.cshtml", prenotazioni);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Errore durante la ricerca delle prenotazioni per il codice fiscale: {CodiceFiscale}", codiceFiscale);
+                _logger.LogError(ex, "Errore durante la ricerca delle prenotazioni {CodiceFiscale}", codiceFiscale);
                 return StatusCode(500, "Si è verificato un errore durante l'elaborazione della richiesta.");
             }
         }
@@ -54,11 +54,11 @@ namespace Hotel.Controllers
             try
             {
                 var totalePrenotazioni = _prenotazioneDao.GetTotalePrenotazioniPerTipologia("pensione completa");
-                return Content($"Totale prenotazioni per soggiorni di tipo \"pensione completa\": {totalePrenotazioni}");
+                return Content($"Totale per soggiorni \"pensione completa\": {totalePrenotazioni}");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Errore durante la ricerca del numero di prenotazioni per pensione completa.");
+                _logger.LogError(ex, "Errore durante la ricerca ");
                 return StatusCode(500, "Si è verificato un errore durante l'elaborazione della richiesta.");
             }
         }

@@ -45,3 +45,12 @@
 .bgarticle {
     background-color: white;
 }
+
+.colore {
+    color: #c4a772 !important;
+}
+
+.bgsearch {
+    background-color: black ;
+    border-color: #c4a772 !important;
+}
