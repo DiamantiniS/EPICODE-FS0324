@@ -39,7 +39,7 @@ namespace Hotel.Controllers
 
                 _logger.LogInformation("Trovate {Count} prenotazioni per il codice fiscale: {CodiceFiscale}", prenotazioni.Count(), codiceFiscale);
 
-                return PartialView("~/Views/Admin/Prenotazioni/_PrenotazioniListPartial.cshtml", prenotazioni);
+                return PartialView("~/Views/Admin/Prenotazioni/_RicercaPartial.cshtml", prenotazioni);
             }
             catch (Exception ex)
             {
