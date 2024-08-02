@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging; 
 using Pizzeria.ViewModels;
-
+using System.Threading.Tasks;
 
 namespace Pizzeria.Controllers
 {
@@ -12,11 +11,13 @@ namespace Pizzeria.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<AccountController> _logger; 
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _logger = logger; 
         }
 
         [HttpGet]
@@ -29,24 +30,29 @@ namespace Pizzeria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            _logger.LogInformation("Tentativo di login per {Email}", model.Email);
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    _logger.LogInformation("Login riuscito per {Email}", model.Email);
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     var roles = await _userManager.GetRolesAsync(user);
 
                     if (roles.Contains("Admin"))
                     {
+                        _logger.LogInformation("Redirezione a Index per Admin");
                         return RedirectToAction("Index", "Admin");
                     }
                     else
                     {
+                        _logger.LogInformation("Redirezione a Index per Products");
                         return RedirectToAction("Index", "Products");
                     }
                 }
 
+                _logger.LogWarning("Tentativo di login non valido per {Email}", model.Email);
                 ModelState.AddModelError(string.Empty, "Tentativo di login non valido.");
             }
 

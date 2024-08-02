@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Pizzeria.Data;
 using Pizzeria.Models;
+using Microsoft.Extensions.Logging;
 
- var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-    // Configura la connessione al database
-    var connectionString = builder.Configuration.GetConnectionString("Pizzeria");
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+// Configura la connessione al database
+var connectionString = builder.Configuration.GetConnectionString("Pizzeria");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Configura l'identità
@@ -15,7 +16,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-    builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 // Aggiungi la configurazione della sessione
@@ -26,6 +27,9 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
 var app = builder.Build();
 
@@ -65,33 +69,73 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
-app.Run();
-
-// Creazione dei ruoli e dell'utente admin
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-    // Creazione del ruolo Admin
-    if (!await roleManager.RoleExistsAsync("Admin"))
+    var services = scope.ServiceProvider;
+    try
     {
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        await SeedRolesAndAdminAsync(roleManager, userManager, services.GetRequiredService<ILogger<Program>>());
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while creating roles and admin user.");
+    }
+}
+
+app.Run();
+
+async Task SeedRolesAndAdminAsync(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, ILogger<Program> logger)
+{
+    var roles = new[] { "Admin", "User" };
+
+    foreach (var role in roles)
+    {
+        if (!await roleManager.RoleExistsAsync(role))
+        {
+            var roleResult = await roleManager.CreateAsync(new IdentityRole(role));
+            if (roleResult.Succeeded)
+            {
+                logger.LogInformation("Role {Role} created successfully", role);
+            }
+            else
+            {
+                logger.LogError("Error creating role {Role}: {Errors}", role, string.Join(", ", roleResult.Errors.Select(e => e.Description)));
+            }
+        }
+        else
+        {
+            logger.LogInformation("Role {Role} already exists", role);
+        }
     }
 
-    // Creazione del ruolo User
-    if (!await roleManager.RoleExistsAsync("User"))
-    {
-        await roleManager.CreateAsync(new IdentityRole("User"));
-    }
-
-    // Creazione dell'utente admin
     var adminEmail = "admin@pizzeria.com";
     var adminUser = await userManager.FindByEmailAsync(adminEmail);
     if (adminUser == null)
     {
         adminUser = new IdentityUser { UserName = adminEmail, Email = adminEmail };
-        await userManager.CreateAsync(adminUser, "Admin123!");
-        await userManager.AddToRoleAsync(adminUser, "Admin");
+        var result = await userManager.CreateAsync(adminUser, "Admin123!");
+        if (result.Succeeded)
+        {
+            var addToRoleResult = await userManager.AddToRoleAsync(adminUser, "Admin");
+            if (addToRoleResult.Succeeded)
+            {
+                logger.LogInformation("Admin user created and assigned to role Admin successfully");
+            }
+            else
+            {
+                logger.LogError("Error assigning admin user to role Admin: {Errors}", string.Join(", ", addToRoleResult.Errors.Select(e => e.Description)));
+            }
+        }
+        else
+        {
+            logger.LogError("Error creating admin user: {Errors}", string.Join(", ", result.Errors.Select(e => e.Description)));
+        }
+    }
+    else
+    {
+        logger.LogInformation("Admin user already exists");
     }
 }
