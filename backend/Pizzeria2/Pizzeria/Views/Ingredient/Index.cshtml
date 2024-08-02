@@ -4,30 +4,32 @@
     ViewData["Title"] = "Gestione Ingredienti";
 }
 
-<h2>Gestione Ingredienti</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ingredient in Model)
-        {
+<div class="container mt-5">
+    <h2 class="text-center">Gestione Ingredienti</h2>
+    <table class="table mt-4">
+        <thead>
             <tr>
-                <td>@ingredient.Name</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@ingredient.Id" class="btn btn-warning">Modifica</a>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete(@ingredient.Id)">Elimina</button>
-                </td>
+                <th>Nome</th>
+                <th>Azioni</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Create" class="btn btn-primary">Aggiungi Nuovo Ingrediente</a>
+        </thead>
+        <tbody>
+            @foreach (var ingredient in Model)
+            {
+                <tr>
+                    <td>@ingredient.Name</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@ingredient.Id" class="btn btn-warning">Modifica</a>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete(@ingredient.Id)">Elimina</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-right mt-3">
+        <a asp-action="Create" class="btn btn-primary">Aggiungi Nuovo Ingrediente</a>
+    </div>
+</div>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -58,5 +60,4 @@
             }
         }
     </script>
-}
 }
