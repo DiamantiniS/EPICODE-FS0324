@@ -5,29 +5,59 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <p>Cliente: @Model.Prenotazione.Cliente.Cognome @Model.Prenotazione.Cliente.Nome</p>
-    <p>Camera: @Model.Prenotazione.Camera.Descrizione</p>
-    <p>Dal: @Model.Prenotazione.Dal.ToShortDateString()</p>
-    <p>Al: @Model.Prenotazione.Al.ToShortDateString()</p>
-    <p>Tariffa giornaliera: @Model.Prenotazione.Tariffa.ToString("C")</p>
-    <p>Caparra: @Model.Prenotazione.Caparra.ToString("C")</p>
-    <p>Tipologia Soggiorno giornaliera: @Model.Prenotazione.TipologiaSoggiorno - @Model.ExtraSoggiorno.ToString("C")</p>
-    <h5>Servizi Aggiuntivi:</h5>
-    <ul>
-        @foreach (var servizio in Model.Prenotazione.Servizi)
-        {
-            <li>@servizio.Descrizione - @servizio.Prezzo.ToString("C")</li>
-        }
-    </ul>
-    <h2 class="mt-5 mb-3">Riepilogo Totale:</h2>
-    <h4>Totale Stanza: <span>@Model.TotaleStanza.ToString("C")</span></h4>
-    <h4>+ Totale Servizi Aggiuntivi: <span>@Model.TotaleServizi.ToString("C")</span></h4>
-    <h4>+ Extra Soggiorno (@Model.Prenotazione.TipologiaSoggiorno): <span>@Model.ExtraSoggiorno.ToString("C")</span></h4>
-    <h4>- Caparra Iniziale: <span>@Model.Prenotazione.Caparra.ToString("C")</span></h4>
-    <h1>-----------------------------------------</h1>
-    <h3>Totale Da Saldare: @Model.Totale.ToString("C")</h3>
+    <div class="checkout-summary">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p><strong>Cliente:</strong> @Model.Prenotazione.Cliente.Cognome @Model.Prenotazione.Cliente.Nome</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Camera:</strong> @Model.Prenotazione.Camera.Descrizione</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p><strong>Dal:</strong> @Model.Prenotazione.Dal.ToShortDateString()</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Al:</strong> @Model.Prenotazione.Al.ToShortDateString()</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <p><strong>Tariffa giornaliera:</strong> @Model.Prenotazione.Tariffa.ToString("C")</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Caparra:</strong> @Model.Prenotazione.Caparra.ToString("C")</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <p><strong>Tipologia Soggiorno giornaliera:</strong> @Model.Prenotazione.TipologiaSoggiorno - @Model.ExtraSoggiorno.ToString("C")</p>
+            </div>
+        </div>
+        <h5 class="mb-3">Servizi Aggiuntivi:</h5>
+        <ul class="list-group">
+            @foreach (var servizio in Model.Prenotazione.Servizi)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    @servizio.Descrizione
+                    <span>@servizio.Prezzo.ToString("C")</span>
+                </li>
+            }
+        </ul>
+        <h2 class="mt-5 mb-3">Riepilogo Totale:</h2>
+        <div class="total-summary">
+            <h4>Totale Stanza: <span>@Model.TotaleStanza.ToString("C")</span></h4>
+            <h4>+ Totale Servizi Aggiuntivi: <span>@Model.TotaleServizi.ToString("C")</span></h4>
+            <h4>+ Extra Soggiorno (@Model.Prenotazione.TipologiaSoggiorno): <span>@Model.ExtraSoggiorno.ToString("C")</span></h4>
+            <h4>- Caparra Iniziale: <span>@Model.Prenotazione.Caparra.ToString("C")</span></h4>
+            <h1>-----------------------------------------</h1>
+            <h3>Totale Da Saldare: @Model.Totale.ToString("C")</h3>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
     <a asp-action="DownloadPdf" asp-route-id="@Model.Prenotazione.Id" class="btn btn-success">Scarica PDF</a>
 </div>
+
