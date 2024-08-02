@@ -81,13 +81,13 @@ namespace Pizzeria.Data
 
             // Associazione degli ingredienti ai prodotti
             modelBuilder.Entity<ProductIngredient>().HasData(
-                new ProductIngredient { ProductId = 1, IngredientId = 1 }, // Mozzarella
-                new ProductIngredient { ProductId = 1, IngredientId = 2 }, // Pomodoro
-                new ProductIngredient { ProductId = 1, IngredientId = 3 }, // Basilico
-                new ProductIngredient { ProductId = 2, IngredientId = 1 }, // Mozzarella
-                new ProductIngredient { ProductId = 2, IngredientId = 2 }, // Pomodoro
-                new ProductIngredient { ProductId = 2, IngredientId = 9 }, // Prosciutto
-                new ProductIngredient { ProductId = 2, IngredientId = 10 }  // Funghi
+                new ProductIngredient { ProductId = 1, IngredientId = 1 }, 
+                new ProductIngredient { ProductId = 1, IngredientId = 2 }, 
+                new ProductIngredient { ProductId = 1, IngredientId = 3 }, 
+                new ProductIngredient { ProductId = 2, IngredientId = 1 }, 
+                new ProductIngredient { ProductId = 2, IngredientId = 2 }, 
+                new ProductIngredient { ProductId = 2, IngredientId = 9 }, 
+                new ProductIngredient { ProductId = 2, IngredientId = 10 }  
             );
         }
     }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; 
-using Pizzeria.ViewModels;
+using Microsoft.Extensions.Logging;
+using Pizzeria.Models;
 using System.Threading.Tasks;
 
 namespace Pizzeria.Controllers
