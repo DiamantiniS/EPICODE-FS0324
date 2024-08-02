@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <h2 class="text-center">Prodotti Disponibili</h2>
-    <table class="table mt-4">
+    <table class="table table-striped mt-4">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -22,7 +22,7 @@
                 <tr>
                     <td>@product.Name</td>
                     <td>@product.Price</td>
-                    <td>@product.DeliveryTime</td>
+                    <td>@product.DeliveryTime minuti</td>
                     <td>@string.Join(", ", product.ProductIngredients.Select(pi => pi.Ingredient.Name))</td>
                     <td>
                         <a asp-action="AddToOrder" asp-route-id="@product.Id" class="btn btn-primary">Aggiungi all'Ordine</a>
