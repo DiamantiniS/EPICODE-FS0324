@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BW5.Models.Visit>
+
+@{
+    ViewData["Title"] = "Cronologia Visite";
+}
+
+<h1>Cronologia Visite</h1>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.VisitDate)</th>
+                <th>@Html.DisplayNameFor(model => model.ObjectiveExam)</th>
+                <th>@Html.DisplayNameFor(model => model.PrescribedTreatment)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var visit in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => visit.VisitDate)</td>
+                    <td>@Html.DisplayFor(modelItem => visit.ObjectiveExam)</td>
+                    <td>@Html.DisplayFor(modelItem => visit.PrescribedTreatment)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<div>
+    <a asp-action="Details" asp-controller="Animals" asp-route-id="@ViewBag.AnimalId" class="btn btn-primary">Torna alla Lista Animali</a>
+</div>
